@@ -14,8 +14,8 @@ class TypeOrmConfig {
       password: configService.get('database.password'),
       database: configService.get('database.name'),
       entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: true,
-      logging: true,
+      synchronize: configService.get('database.typeorm.synchronize'),
+      logging: configService.get('database.typeorm.logging'),
     };
   }
 }
