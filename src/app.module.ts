@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { typeormConfig } from './config/typeorm.config';
 import appConfig from './config/app.config';
+import databaseConfig from './config/database.config';
 
 @Module({
   imports: [
@@ -10,8 +13,9 @@ import appConfig from './config/app.config';
       isGlobal: true,
       cache: true,
       expandVariables: true,
-      load: [appConfig],
+      load: [appConfig, databaseConfig],
     }),
+    TypeOrmModule.forRootAsync(typeormConfig),
   ],
   controllers: [AppController], // todo: remove later
   providers: [AppService], // todo: remove later
