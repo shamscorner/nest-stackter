@@ -1,8 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, VERSION_NEUTRAL } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AppService } from './app.service';
 
-@Controller()
+@Controller({
+  version: VERSION_NEUTRAL,
+})
 export class AppController {
   constructor(
     private readonly appService: AppService,
