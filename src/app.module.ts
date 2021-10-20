@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { DatabaseModule } from './database/database.module';
+import { validate } from './env.validation';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import typeormConfig from './config/typeorm.config';
-import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { DatabaseModule } from './database/database.module';
       isGlobal: true,
       cache: true,
       expandVariables: true,
+      validate,
       load: [appConfig, databaseConfig, typeormConfig],
     }),
     DatabaseModule,

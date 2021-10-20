@@ -1,12 +1,5 @@
 import { registerAs } from '@nestjs/config';
 
-const appEnv = (env: string): string => {
-  if (!['production', 'staging', 'local'].includes(env)) {
-    return 'local';
-  }
-  return env;
-};
-
 export default registerAs('app', () => ({
   // API PORT
   port: parseInt(process.env.PORT, 10) || 3000,
@@ -15,7 +8,7 @@ export default registerAs('app', () => ({
   url: process.env.APP_URL || 'localhost',
 
   // API Environment: local | production | staging
-  env: appEnv(process.env.APP_ENV),
+  env: process.env.APP_ENV || 'local',
 
   // API debug mode is enable or not: true | false
   debugMode: process.env.APP_DEBUG === 'false' ? false : true,
