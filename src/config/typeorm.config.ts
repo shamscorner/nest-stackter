@@ -1,4 +1,4 @@
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule, ConfigService, registerAs } from '@nestjs/config';
 import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
@@ -14,16 +14,21 @@ class TypeOrmConfig {
       password: configService.get('database.password'),
       database: configService.get('database.name'),
       entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: configService.get('database.typeorm.synchronize'),
-      logging: configService.get('database.typeorm.logging'),
+      synchronize: configService.get('typeorm.synchronize'),
+      logging: configService.get('typeorm.logging'),
     };
   }
 }
 
-export const typeormConfig: TypeOrmModuleAsyncOptions = {
+export const typeormModuleOptions: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   useFactory: async (
     configService: ConfigService,
   ): Promise<TypeOrmModuleOptions> => TypeOrmConfig.getOrmConfig(configService),
   inject: [ConfigService],
 };
+
+export default registerAs('typeorm', () => ({
+  synchronize: process.env.TYPEORM_SYNCHRONIZE === 'false' ? false : true,
+  logging: process.env.TYPEORM_LOGGING === 'true' ? true : false,
+}));
