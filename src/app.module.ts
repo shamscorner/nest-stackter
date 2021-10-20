@@ -7,6 +7,10 @@ import { validate } from './env.validation';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import typeormConfig from './config/typeorm.config';
+import { AuthenticationModule } from './authentication/authentication.module';
+import { UsersModule } from './users/users.module';
+import { PostsModule } from './posts/posts.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -18,6 +22,10 @@ import typeormConfig from './config/typeorm.config';
       load: [appConfig, databaseConfig, typeormConfig],
     }),
     DatabaseModule,
+    AuthenticationModule,
+    UsersModule,
+    PostsModule,
+    CategoriesModule,
   ],
   controllers: [AppController], // todo: remove later
   providers: [AppService], // todo: remove later
