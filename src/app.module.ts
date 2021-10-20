@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
-import typeormConfig, { typeormModuleOptions } from './config/typeorm.config';
+import typeormConfig from './config/typeorm.config';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -15,7 +15,7 @@ import typeormConfig, { typeormModuleOptions } from './config/typeorm.config';
       expandVariables: true,
       load: [appConfig, databaseConfig, typeormConfig],
     }),
-    TypeOrmModule.forRootAsync(typeormModuleOptions),
+    DatabaseModule,
   ],
   controllers: [AppController], // todo: remove later
   providers: [AppService], // todo: remove later
