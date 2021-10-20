@@ -8,9 +8,9 @@ import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import typeormConfig from './config/typeorm.config';
 import { AuthenticationModule } from './authentication/authentication.module';
-import { UsersModule } from './users/users.module';
-import { PostsModule } from './posts/posts.module';
-import { CategoriesModule } from './categories/categories.module';
+import { UsersModule } from './features/users/users.module';
+import { PostsModule } from './features/posts/posts.module';
+import { CategoriesModule } from './features/categories/categories.module';
 import { APP_FILTER } from '@nestjs/core';
 import { ExceptionsLoggerFilter } from './utils/exceptions-logger.filter';
 

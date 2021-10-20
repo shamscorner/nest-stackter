@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { Expose } from 'class-transformer';
 import { Address } from './address.entity';
-import Post from 'src/posts/entities/post.entity';
+import Post from 'src/features/posts/entities/post.entity';
 
 @Entity()
 export class User {
