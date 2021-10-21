@@ -11,8 +11,6 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { UsersModule } from './features/users/users.module';
 import { PostsModule } from './features/posts/posts.module';
 import { CategoriesModule } from './features/categories/categories.module';
-import { APP_FILTER } from '@nestjs/core';
-import { ExceptionsLoggerFilter } from './utils/exceptions-logger.filter';
 
 @Module({
   imports: [
@@ -31,10 +29,10 @@ import { ExceptionsLoggerFilter } from './utils/exceptions-logger.filter';
   ],
   controllers: [AppController], // todo: remove later
   providers: [
-    {
-      provide: APP_FILTER,
-      useClass: ExceptionsLoggerFilter,
-    },
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: ExceptionsLoggerFilter,
+    // },
     // {
     //   provide: APP_INTERCEPTOR,
     //   useClass: ExcludeNullInterceptor,
