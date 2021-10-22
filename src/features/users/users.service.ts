@@ -1,9 +1,16 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { FileNotFoundException } from '../files/exceptions/file-not-found.exception';
 import { FilesService } from '../files/files.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
+import { UserNotFoundException } from './exceptions/user-not-found.exception';
 
 @Injectable()
 export class UsersService {
@@ -22,10 +29,7 @@ export class UsersService {
     if (user) {
       return user;
     }
-    throw new HttpException(
-      'User with this id does not exist',
-      HttpStatus.NOT_FOUND,
-    );
+    throw new UserNotFoundException(id);
   }
 
   async getByEmail(email: string) {
@@ -58,6 +62,37 @@ export class UsersService {
     return avatar;
   }
 
+  async getPrivateFile(userId: number, fileId: number) {
+    const file = await this.filesService.getPrivateFile(fileId);
+    if (file.info.owner.id === userId) {
+      return file;
+    }
+    throw new UnauthorizedException();
+  }
+
+  async getAllPrivateFiles(userId: number) {
+    const userWithFiles = await this.usersRepository.findOne(
+      { id: userId },
+      { relations: ['files'] },
+    );
+    if (userWithFiles) {
+      return Promise.all(
+        userWithFiles.files.map(async (file) => {
+          const url = await this.filesService.generatePresignedUrl(file.key);
+          return {
+            ...file,
+            url,
+          };
+        }),
+      );
+    }
+    throw new UserNotFoundException(userId);
+  }
+
+  async addPrivateFile(userId: number, imageBuffer: Buffer, filename: string) {
+    return this.filesService.uploadPrivateFile(imageBuffer, userId, filename);
+  }
+
   async deleteAvatar(userId: number) {
     const user = await this.getById(userId);
     const fileId = user.avatar?.id;
@@ -67,6 +102,12 @@ export class UsersService {
         avatar: null,
       });
       await this.filesService.deletePublicFile(fileId);
+    } else {
+      throw new FileNotFoundException(fileId);
     }
+  }
+
+  async deletePrivateFile(userId: number, fileId: number) {
+    await this.filesService.deletePrivateFile(fileId, userId);
   }
 }
