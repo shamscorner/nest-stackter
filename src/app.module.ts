@@ -11,6 +11,8 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { UsersModule } from './features/users/users.module';
 import { PostsModule } from './features/posts/posts.module';
 import { CategoriesModule } from './features/categories/categories.module';
+import { FilesModule } from './features/files/files.module';
+import awsConfig from './config/aws.config';
 
 @Module({
   imports: [
@@ -19,13 +21,14 @@ import { CategoriesModule } from './features/categories/categories.module';
       cache: true,
       expandVariables: true,
       validate,
-      load: [appConfig, databaseConfig, typeormConfig],
+      load: [appConfig, databaseConfig, typeormConfig, awsConfig],
     }),
     DatabaseModule,
     AuthenticationModule,
     UsersModule,
     PostsModule,
     CategoriesModule,
+    FilesModule,
   ],
   controllers: [AppController], // todo: remove later
   providers: [
