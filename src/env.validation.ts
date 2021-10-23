@@ -60,6 +60,14 @@ class EnvironmentVariables {
   @IsBoolean()
   @IsOptional()
   TYPEORM_LOGGING: boolean;
+
+  @IsNumber()
+  @IsOptional()
+  JWT_ACCESS_TOKEN_EXPIRATION_TIME: number;
+
+  @IsNumber()
+  @IsOptional()
+  JWT_REFRESH_TOKEN_EXPIRATION_TIME: number;
 }
 
 export function validate(config: Record<string, unknown>) {

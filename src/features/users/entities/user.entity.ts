@@ -21,6 +21,9 @@ export class User {
   @Expose()
   public email: string;
 
+  @Column({ nullable: true })
+  public currentHashedRefreshToken?: string;
+
   @Column()
   @Expose()
   public name: string;

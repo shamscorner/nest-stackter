@@ -4,15 +4,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { validate } from './env.validation';
-import appConfig from './config/app.config';
-import databaseConfig from './config/database.config';
-import typeormConfig from './config/typeorm.config';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { UsersModule } from './features/users/users.module';
 import { PostsModule } from './features/posts/posts.module';
 import { CategoriesModule } from './features/categories/categories.module';
 import { FilesModule } from './features/files/files.module';
+import appConfig from './config/app.config';
+import databaseConfig from './config/database.config';
+import typeormConfig from './config/typeorm.config';
 import awsConfig from './config/aws.config';
+import jwtConfig from './config/jwt.config';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import awsConfig from './config/aws.config';
       cache: true,
       expandVariables: true,
       validate,
-      load: [appConfig, databaseConfig, typeormConfig, awsConfig],
+      load: [appConfig, databaseConfig, typeormConfig, awsConfig, jwtConfig],
     }),
     DatabaseModule,
     AuthenticationModule,
