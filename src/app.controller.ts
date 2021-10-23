@@ -1,20 +1,14 @@
 import { Controller, Get, VERSION_NEUTRAL } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AppService } from './app.service';
 
 @Controller({
   version: VERSION_NEUTRAL,
 })
 export class AppController {
-  constructor(
-    private readonly appService: AppService,
-    private configService: ConfigService,
-  ) {}
+  constructor(private configService: ConfigService) {}
 
   @Get()
   getHello(): string {
-    // return this.appService.getHello();
-
     // * config variables
     const port = this.configService.get<number>('app.port');
     const appUrl = this.configService.get<string>('app.url');
@@ -29,7 +23,7 @@ export class AppController {
     const debugEnabled = debugMode ? 'yes' : 'no';
 
     return (
-      '<h1>' +
+      '<h1 align="center">' +
       (appUrl +
         ':' +
         port +

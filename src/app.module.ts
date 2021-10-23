@@ -1,7 +1,10 @@
-import { Module } from '@nestjs/common';
+import {
+  ClassSerializerInterceptor,
+  Module,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { validate } from './env.validation';
 import { AuthenticationModule } from './authentication/authentication.module';
@@ -14,6 +17,7 @@ import databaseConfig from './config/database.config';
 import typeormConfig from './config/typeorm.config';
 import awsConfig from './config/aws.config';
 import jwtConfig from './config/jwt.config';
+import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -33,6 +37,14 @@ import jwtConfig from './config/jwt.config';
   ],
   controllers: [AppController], // todo: remove later
   providers: [
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ClassSerializerInterceptor,
+    },
     // {
     //   provide: APP_FILTER,
     //   useClass: ExceptionsLoggerFilter,
@@ -41,7 +53,6 @@ import jwtConfig from './config/jwt.config';
     //   provide: APP_INTERCEPTOR,
     //   useClass: ExcludeNullInterceptor,
     // },
-    AppService,
   ], // todo: remove later
 })
 export class AppModule {}
