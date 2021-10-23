@@ -15,10 +15,6 @@ export class AppController {
     const supportEmail = this.configService.get<string>('app.supportEmail');
     const appEnv = this.configService.get<string>('app.env');
     const debugMode = this.configService.get<boolean>('app.debugMode');
-    console.log(
-      '🚀 ~ file: app.controller.ts ~ line 24 ~ AppController ~ getHello ~ debugMode',
-      debugMode,
-    );
 
     const debugEnabled = debugMode ? 'yes' : 'no';
 

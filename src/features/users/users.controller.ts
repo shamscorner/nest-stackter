@@ -29,7 +29,6 @@ export class UsersController {
   @Get('files')
   @UseGuards(JwtAuthenticationGuard)
   async getAllPrivateFiles(@Req() request: RequestWithUser) {
-    console.log(request.user.id);
     return this.usersService.getAllPrivateFiles(request.user.id);
   }
 
