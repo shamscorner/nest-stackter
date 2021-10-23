@@ -30,6 +30,11 @@ export class PostsController {
     return this.postsService.getPostById(Number(id));
   }
 
+  @Get('paragraphs/:paragraph')
+  getPostsWithParagraph(@Param() paragraph: string) {
+    return this.postsService.getPostsWithParagraph(paragraph);
+  }
+
   @Post()
   @UseGuards(JwtAuthenticationGuard)
   async createPost(

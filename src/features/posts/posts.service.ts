@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../users/entities/user.entity';
 import { Repository } from 'typeorm';
@@ -25,6 +25,17 @@ export class PostsService {
       return post;
     }
     throw new PostNotFoundException(id);
+  }
+
+  async getPostsWithParagraph(paragraph: string) {
+    const posts = await this.postsRepository.query(
+      'SELECT * FROM post WHERE $1 = ANY(paragraphs)',
+      [paragraph],
+    );
+    if (posts) {
+      return posts;
+    }
+    throw new NotFoundException('Post with the paragraph is not found!');
   }
 
   async createPost(post: CreatePostDto, user: User) {

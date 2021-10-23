@@ -21,6 +21,9 @@ class Post {
   @Column()
   public content: string;
 
+  @Column('text', { array: true, nullable: true })
+  public paragraphs?: string[];
+
   @Column({ nullable: true })
   public category?: string;
 
