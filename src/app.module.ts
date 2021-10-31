@@ -18,6 +18,7 @@ import typeormConfig from './config/typeorm.config';
 import awsConfig from './config/aws.config';
 import jwtConfig from './config/jwt.config';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+import { CommentsModule } from './features/comments/comments.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
     PostsModule,
     CategoriesModule,
     FilesModule,
+    CommentsModule,
   ],
   controllers: [AppController], // todo: remove later
   providers: [

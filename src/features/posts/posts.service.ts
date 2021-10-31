@@ -4,7 +4,7 @@ import { User } from '../users/entities/user.entity';
 import { FindManyOptions, MoreThan, Repository } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
-import Post from './entities/post.entity';
+import { Post } from './entities/post.entity';
 import { PostNotFoundException } from './exceptions/post-not-found.exception';
 
 @Injectable()

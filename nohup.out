@@ -1,0 +1,57 @@
+Starting pgAdmin 4. Please navigate to http://0.0.0.0:5050 in your browser.
+ * Tip: There are .env or .flaskenv files present. Do "pip install python-dotenv" to use them.
+ * Serving Flask app "pgadmin" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+2021-10-30 19:37:48,965: ERROR	pgadmin:	Exception when checking for update
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/urllib/request.py", line 1354, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "/usr/lib/python3.8/http/client.py", line 1252, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1298, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1247, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1007, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 947, in send
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 1414, in connect
+    super().connect()
+  File "/usr/lib/python3.8/http/client.py", line 918, in connect
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shamscorner/.pgadmin4/lib/python3.8/site-packages/pgadmin4/pgadmin/browser/__init__.py", line 670, in check_browser_upgrade
+    response = urlopen(url, data, 5)
+  File "/usr/lib/python3.8/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.8/urllib/request.py", line 525, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.8/urllib/request.py", line 542, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+  File "/usr/lib/python3.8/urllib/request.py", line 502, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.8/urllib/request.py", line 1397, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+  File "/usr/lib/python3.8/urllib/request.py", line 1357, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 101] Network is unreachable>
+Starting pgAdmin 4. Please navigate to http://0.0.0.0:5050 in your browser.
+ * Tip: There are .env or .flaskenv files present. Do "pip install python-dotenv" to use them.
+ * Serving Flask app "pgadmin" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+2021-10-30 19:40:03,838: ERROR	pgadmin:	Error starting the app server: (<class 'OSError'>, OSError(98, 'Address already in use'), <traceback object at 0x7fd7765ba4c0>)

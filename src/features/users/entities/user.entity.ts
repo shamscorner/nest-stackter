@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { Expose } from 'class-transformer';
 import { Address } from './address.entity';
-import Post from '../../posts/entities/post.entity';
+import { Post } from '../../posts/entities/post.entity';
 import { PublicFile } from '../../files/entities/public-file.entity';
 import { PrivateFile } from '../../files/entities/private-file.entity';
 

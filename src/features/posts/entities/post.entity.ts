@@ -1,5 +1,6 @@
 import { Category } from '../../categories/entities/category.entity';
 import { User } from '../../users/entities/user.entity';
+import { Comment } from '../../comments/entities/comment.entity';
 import {
   Column,
   Entity,
@@ -7,11 +8,12 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity()
-class Post {
+export class Post {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -34,5 +36,7 @@ class Post {
   @ManyToMany(() => Category, (category: Category) => category.posts)
   @JoinTable()
   public categories: Category[];
+
+  @OneToMany(() => Comment, (comment: Comment) => comment.post)
+  public comments: Comment[];
 }
-export default Post;

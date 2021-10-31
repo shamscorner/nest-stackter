@@ -5,6 +5,7 @@ specifiers:
   '@nestjs/common': ^8.0.0
   '@nestjs/config': ^1.0.2
   '@nestjs/core': ^8.0.0
+  '@nestjs/cqrs': ^8.0.0
   '@nestjs/jwt': ^8.0.0
   '@nestjs/mapped-types': ^1.0.0
   '@nestjs/passport': ^8.0.1
@@ -55,6 +56,7 @@ dependencies:
   '@nestjs/common': 8.1.1_43f93dd897e68fe834a23ddd32fb54cc
   '@nestjs/config': 1.0.2_13adf4c855eac18d5ece2d7b1023f678
   '@nestjs/core': 8.1.1_fd2a30749d40d79b96b1254a3e96f533
+  '@nestjs/cqrs': 8.0.0_af0244db2ad6b4585c302d407cfc4386
   '@nestjs/jwt': 8.0.0_@nestjs+common@8.1.1
   '@nestjs/mapped-types': 1.0.0_69880b072bf1a4e177f038f9fbb7a28e
   '@nestjs/passport': 8.0.1_ffae082f76a0d650160489d0fb86ad44
@@ -860,6 +862,20 @@ packages:
       rxjs: 7.4.0
       tslib: 2.3.1
       uuid: 8.3.2
+    dev: false
+
+  /@nestjs/cqrs/8.0.0_af0244db2ad6b4585c302d407cfc4386:
+    resolution: {integrity: sha512-6Fy0jgUZatRXirfAhDVy3Du2UYoBLrlT7yjK4ZX3L7rBMdfTYPqmn8wE2JH3kXW3yUqLDdnS9PotHf6Y0UzLxw==}
+    peerDependencies:
+      '@nestjs/common': ^8.0.0
+      '@nestjs/core': ^8.0.0
+      reflect-metadata: 0.1.13
+      rxjs: ^7.2.0
+    dependencies:
+      '@nestjs/common': 8.1.1_43f93dd897e68fe834a23ddd32fb54cc
+      '@nestjs/core': 8.1.1_fd2a30749d40d79b96b1254a3e96f533
+      reflect-metadata: 0.1.13
+      rxjs: 7.4.0
     dev: false
 
   /@nestjs/jwt/8.0.0_@nestjs+common@8.1.1:
