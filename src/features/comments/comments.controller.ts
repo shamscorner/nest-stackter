@@ -12,7 +12,6 @@ import { JwtAuthenticationGuard } from '../../authentication/jwt-authentication.
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { GetCommentsDto } from './dto/get-comments.dto';
-import { PaginationDto } from '../../utils/dto/pagination.dto';
 import { PaginatedResultDto } from '../../utils/dto/paginated-result.dto';
 import { Comment } from './entities/comment.entity';
 
@@ -22,10 +21,9 @@ export class CommentsController {
 
   @Get()
   async getComments(
-    @Query() { postId }: GetCommentsDto,
-    @Query() paginationDto: PaginationDto,
+    @Query() { postId, page = 1, limit = 20 }: GetCommentsDto,
   ): Promise<PaginatedResultDto<Comment>> {
-    return this.commentsService.getComments(postId, paginationDto);
+    return this.commentsService.getComments(postId, { page, limit });
   }
 
   @Post()

@@ -9,7 +9,8 @@ export const getPaginationProps = (paginationDto: PaginationDto) => {
     };
   }
 
-  const { page, limit } = paginationDto;
+  const page = Number(paginationDto.page);
+  const limit = Number(paginationDto.limit);
   const skippedItems = (page - 1) * limit;
 
   return {
