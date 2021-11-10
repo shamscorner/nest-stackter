@@ -16,6 +16,7 @@ import { PaginatedResultDto } from '../../utils/dto/paginated-result.dto';
 import { Comment } from './entities/comment.entity';
 
 @Controller('comments')
+@UseGuards(JwtAuthenticationGuard)
 export class CommentsController {
   constructor(private readonly commentsService: CommentsService) {}
 
@@ -27,7 +28,6 @@ export class CommentsController {
   }
 
   @Post()
-  @UseGuards(JwtAuthenticationGuard)
   async createComment(
     @Body() comment: CreateCommentDto,
     @Req() request: RequestWithUser,

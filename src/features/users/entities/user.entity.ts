@@ -11,6 +11,7 @@ import { Address } from './address.entity';
 import { Post } from '../../posts/entities/post.entity';
 import { PublicFile } from '../../files/entities/public-file.entity';
 import { PrivateFile } from '../../files/entities/private-file.entity';
+import { Product } from '../../products/entities/product.entity';
 
 @Entity()
 export class User {
@@ -54,4 +55,7 @@ export class User {
 
   @OneToMany(() => PrivateFile, (file: PrivateFile) => file.owner)
   public files?: PrivateFile[];
+
+  @OneToMany(() => Product, (product: Product) => product.owner)
+  public products?: Product[];
 }

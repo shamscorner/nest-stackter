@@ -12,7 +12,7 @@ export class CreateCommentHandler
     @InjectRepository(Comment) private commentsRepository: Repository<Comment>,
   ) {}
 
-  async execute(command: CreateCommentCommand) {
+  async execute(command: CreateCommentCommand): Promise<Comment> {
     const { comment, author } = command;
     const newComment = await this.commentsRepository.create({
       ...comment,

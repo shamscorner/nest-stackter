@@ -19,6 +19,7 @@ import awsConfig from './config/aws.config';
 import jwtConfig from './config/jwt.config';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { CommentsModule } from './features/comments/comments.module';
+import { ProductsModule } from './features/products/products.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { CommentsModule } from './features/comments/comments.module';
     CategoriesModule,
     FilesModule,
     CommentsModule,
+    ProductsModule,
   ],
   controllers: [AppController], // todo: remove later
   providers: [

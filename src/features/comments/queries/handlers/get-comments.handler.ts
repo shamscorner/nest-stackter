@@ -17,7 +17,6 @@ export class GetCommentsHandler implements IQueryHandler<GetCommentsQuery> {
     paginationDto,
   }: GetCommentsQuery): Promise<PaginatedResultDto<Comment>> {
     const { page, limit, skippedItems } = getPaginationProps(paginationDto);
-    const totalCount = await this.commentsRepository.count();
 
     const where: FindManyOptions<Comment>['where'] = {};
     if (postId) {
@@ -26,15 +25,16 @@ export class GetCommentsHandler implements IQueryHandler<GetCommentsQuery> {
       };
     }
 
-    const comments = await this.commentsRepository.find({
-      where,
-      relations: ['author'],
-      skip: skippedItems,
-      take: limit,
-    });
+    const [comments, commentsCount] =
+      await this.commentsRepository.findAndCount({
+        where,
+        relations: ['author'],
+        skip: skippedItems,
+        take: limit,
+      });
 
     return {
-      totalCount,
+      totalCount: commentsCount,
       page: page,
       limit: limit,
       data: comments,
