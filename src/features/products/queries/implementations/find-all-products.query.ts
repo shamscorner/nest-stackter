@@ -1,6 +1,6 @@
 import { PaginationDto } from '../../../../utils/dto/pagination.dto';
 
-export class GetProductsQuery {
+export class FindAllProductsQuery {
   constructor(
     public readonly ownerId: number,
     public readonly paginationDto: PaginationDto,

@@ -7,13 +7,17 @@ import { CreateProductCommand } from './commands/implementations/create-product.
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
-import { GetProductsQuery } from './queries/implementations/get-products.query';
+import { FindAllProductsQuery } from './queries/implementations/find-all-products.query';
+import { FindProductQuery } from './queries/implementations/find-product.query';
 
 @Injectable()
 export class ProductsService {
   constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
 
-  async create(createProductDto: CreateProductDto, owner: User) {
+  async create(
+    createProductDto: CreateProductDto,
+    owner: User,
+  ): Promise<Product> {
     return this.commandBus.execute(
       new CreateProductCommand(createProductDto, owner),
     );
@@ -23,11 +27,13 @@ export class ProductsService {
     ownerId: number,
     paginationDto: PaginationDto,
   ): Promise<PaginatedResultDto<Product>> {
-    return this.queryBus.execute(new GetProductsQuery(ownerId, paginationDto));
+    return this.queryBus.execute(
+      new FindAllProductsQuery(ownerId, paginationDto),
+    );
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: string): Promise<Product> {
+    return this.queryBus.execute(new FindProductQuery(id));
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {

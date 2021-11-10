@@ -28,7 +28,7 @@ export class ProductsController {
   async create(
     @Body() createProductDto: CreateProductDto,
     @Req() request: RequestWithUser,
-  ) {
+  ): Promise<Product> {
     const user = request.user;
     return this.productsService.create(createProductDto, user);
   }
@@ -41,8 +41,8 @@ export class ProductsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productsService.findOne(+id);
+  findOne(@Param('id') id: string): Promise<Product> {
+    return this.productsService.findOne(id);
   }
 
   @Patch(':id')

@@ -5,11 +5,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
 import { CqrsModule } from '@nestjs/cqrs';
 import { CreateProductHandler } from './commands/handlers/create-product.handler';
-import { GetProductsHandler } from './queries/handlers/get-products.handler';
+import { FindAllProductsHandler } from './queries/handlers/find-all-products.handler';
+import { FindProductHandler } from './queries/handlers/find-product.handler';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Product]), CqrsModule],
   controllers: [ProductsController],
-  providers: [ProductsService, CreateProductHandler, GetProductsHandler],
+  providers: [
+    ProductsService,
+    CreateProductHandler,
+    FindAllProductsHandler,
+    FindProductHandler,
+  ],
 })
 export class ProductsModule {}
