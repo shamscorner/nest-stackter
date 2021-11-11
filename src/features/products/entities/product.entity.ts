@@ -13,8 +13,9 @@ export class Product {
 
   @Column({
     type: 'jsonb',
+    nullable: true,
   })
-  public properties: CarProperties | BookProperties;
+  public properties?: CarProperties | BookProperties;
 
   @ManyToOne(() => User, (owner: User) => owner.products)
   public owner: User;

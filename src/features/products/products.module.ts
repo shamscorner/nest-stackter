@@ -7,6 +7,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { CreateProductHandler } from './commands/handlers/create-product.handler';
 import { FindAllProductsHandler } from './queries/handlers/find-all-products.handler';
 import { FindProductHandler } from './queries/handlers/find-product.handler';
+import { UpdateProductHandler } from './commands/handlers/update-product.handler';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Product]), CqrsModule],
@@ -16,6 +17,7 @@ import { FindProductHandler } from './queries/handlers/find-product.handler';
     CreateProductHandler,
     FindAllProductsHandler,
     FindProductHandler,
+    UpdateProductHandler,
   ],
 })
 export class ProductsModule {}

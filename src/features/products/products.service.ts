@@ -4,6 +4,7 @@ import { PaginatedResultDto } from '../../utils/dto/paginated-result.dto';
 import { PaginationDto } from '../../utils/dto/pagination.dto';
 import { User } from '../users/entities/user.entity';
 import { CreateProductCommand } from './commands/implementations/create-product.command';
+import { UpdateProductCommand } from './commands/implementations/update-product.command';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
@@ -36,8 +37,10 @@ export class ProductsService {
     return this.queryBus.execute(new FindProductQuery(id));
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(id: string, updateProductDto: UpdateProductDto, owner: User) {
+    return this.commandBus.execute(
+      new UpdateProductCommand(id, updateProductDto, owner),
+    );
   }
 
   remove(id: number) {
