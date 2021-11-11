@@ -9,6 +9,7 @@ import {
   UseGuards,
   Req,
   Query,
+  HttpCode,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -56,7 +57,9 @@ export class ProductsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productsService.remove(+id);
+  @HttpCode(204)
+  remove(@Param('id') id: string, @Req() request: RequestWithUser) {
+    const user = request.user;
+    return this.productsService.remove(id, user);
   }
 }

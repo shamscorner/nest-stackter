@@ -4,30 +4,28 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from '../../entities/product.entity';
 import { ProductNotFoundException } from '../../exceptions/file-not-found.exception';
-import { UpdateProductCommand } from '../implementations/update-product.command';
+import { DeleteProductCommand } from '../implementations/delete-product.command';
 
-@CommandHandler(UpdateProductCommand)
-export class UpdateProductHandler
-  implements ICommandHandler<UpdateProductCommand>
+@CommandHandler(DeleteProductCommand)
+export class DeleteProductHandler
+  implements ICommandHandler<DeleteProductCommand>
 {
   constructor(
     @InjectRepository(Product) private productsRepository: Repository<Product>,
   ) {}
 
-  async execute(command: UpdateProductCommand): Promise<Product> {
-    const { id, product, owner } = command;
+  async execute(command: DeleteProductCommand): Promise<void> {
+    const { id, owner } = command;
     const oldProduct = await this.productsRepository.findOne(id, {
       relations: ['owner'],
     });
     if (oldProduct) {
       if (oldProduct.owner && oldProduct.owner.id === owner.id) {
-        await this.productsRepository.update(id, product);
-        const updatedProduct = await this.productsRepository.findOne(id, {
-          relations: ['owner'],
-        });
-        if (updatedProduct) {
-          return updatedProduct;
+        const deleteResponse = await this.productsRepository.delete(id);
+        if (!deleteResponse.affected) {
+          throw new ProductNotFoundException(id);
         }
+        return;
       } else {
         throw new UnauthorizedException();
       }

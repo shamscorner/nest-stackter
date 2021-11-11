@@ -4,6 +4,7 @@ import { PaginatedResultDto } from '../../utils/dto/paginated-result.dto';
 import { PaginationDto } from '../../utils/dto/pagination.dto';
 import { User } from '../users/entities/user.entity';
 import { CreateProductCommand } from './commands/implementations/create-product.command';
+import { DeleteProductCommand } from './commands/implementations/delete-product.command';
 import { UpdateProductCommand } from './commands/implementations/update-product.command';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -43,7 +44,7 @@ export class ProductsService {
     );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  remove(id: string, owner: User) {
+    return this.commandBus.execute(new DeleteProductCommand(id, owner));
   }
 }

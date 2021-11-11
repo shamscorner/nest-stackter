@@ -8,6 +8,7 @@ import { CreateProductHandler } from './commands/handlers/create-product.handler
 import { FindAllProductsHandler } from './queries/handlers/find-all-products.handler';
 import { FindProductHandler } from './queries/handlers/find-product.handler';
 import { UpdateProductHandler } from './commands/handlers/update-product.handler';
+import { DeleteProductHandler } from './commands/handlers/delete-product.handler';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Product]), CqrsModule],
@@ -18,6 +19,7 @@ import { UpdateProductHandler } from './commands/handlers/update-product.handler
     FindAllProductsHandler,
     FindProductHandler,
     UpdateProductHandler,
+    DeleteProductHandler,
   ],
 })
 export class ProductsModule {}

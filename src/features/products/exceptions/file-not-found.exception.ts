@@ -1,6 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 
-export class FileNotFoundException extends NotFoundException {
+export class ProductNotFoundException extends NotFoundException {
   constructor(fileId: string) {
     super(`Product with id ${fileId} not found`);
   }
