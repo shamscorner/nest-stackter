@@ -9,6 +9,7 @@
 - custom pagination (page, limit) - check the `src/features/comments` module
 - [CQRS](https://docs.nestjs.com/recipes/cqrs) - check the `src/features/comments` module
 - file upload feature module to Amazon S3 (both private and public)
+- [CQRS](https://docs.nestjs.com/recipes/cqrs) + pagination - a complete module => `src/features/products`
 
 ## Installation
 
