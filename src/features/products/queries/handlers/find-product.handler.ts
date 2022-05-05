@@ -10,7 +10,10 @@ export class FindProductHandler implements IQueryHandler<FindProductQuery> {
     @InjectRepository(Product) private productsRepository: Repository<Product>,
   ) {}
   execute({ productId }: FindProductQuery): Promise<Product> {
-    return this.productsRepository.findOne(productId, {
+    return this.productsRepository.findOne({
+      where: {
+        id: productId,
+      },
       relations: ['owner'],
     });
   }

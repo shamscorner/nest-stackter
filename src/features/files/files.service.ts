@@ -20,10 +20,12 @@ export class FilesService {
 
   public async getPrivateFile(fileId: number) {
     const s3 = new S3();
-    const fileInfo = await this.privateFilesRepository.findOne(
-      { id: fileId },
-      { relations: ['owner'] },
-    );
+    const fileInfo = await this.privateFilesRepository.findOne({
+      where: {
+        id: fileId,
+      },
+      relations: ['owner'],
+    });
     if (fileInfo) {
       const stream = await s3
         .getObject({
@@ -89,7 +91,9 @@ export class FilesService {
 
   async deletePublicFile(fileId: number) {
     const s3 = new S3();
-    const file = await this.publicFilesRepository.findOne({ id: fileId });
+    const file = await this.publicFilesRepository.findOne({
+      where: { id: fileId },
+    });
     await s3
       .deleteObject({
         Bucket: this.configService.get('aws.publicBucketName'),
@@ -101,12 +105,12 @@ export class FilesService {
 
   async deletePrivateFile(fileId: number, ownerId: number) {
     const s3 = new S3();
-    const file = await this.privateFilesRepository.findOne(
-      {
+    const file = await this.privateFilesRepository.findOne({
+      where: {
         id: fileId,
       },
-      { relations: ['owner'] },
-    );
+      relations: ['owner'],
+    });
     if (file) {
       if (file.owner && file.owner.id === ownerId) {
         await s3

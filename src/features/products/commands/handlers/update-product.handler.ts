@@ -16,13 +16,19 @@ export class UpdateProductHandler
 
   async execute(command: UpdateProductCommand): Promise<Product> {
     const { id, product, owner } = command;
-    const oldProduct = await this.productsRepository.findOne(id, {
+    const oldProduct = await this.productsRepository.findOne({
+      where: {
+        id,
+      },
       relations: ['owner'],
     });
     if (oldProduct) {
       if (oldProduct.owner && oldProduct.owner.id === owner.id) {
         await this.productsRepository.update(id, product);
-        const updatedProduct = await this.productsRepository.findOne(id, {
+        const updatedProduct = await this.productsRepository.findOne({
+          where: {
+            id,
+          },
           relations: ['owner'],
         });
         if (updatedProduct) {

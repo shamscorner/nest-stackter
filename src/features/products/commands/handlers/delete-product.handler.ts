@@ -16,7 +16,10 @@ export class DeleteProductHandler
 
   async execute(command: DeleteProductCommand): Promise<void> {
     const { id, owner } = command;
-    const oldProduct = await this.productsRepository.findOne(id, {
+    const oldProduct = await this.productsRepository.findOne({
+      where: {
+        id,
+      },
       relations: ['owner'],
     });
     if (oldProduct) {

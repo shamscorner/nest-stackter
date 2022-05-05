@@ -26,7 +26,10 @@ export class CategoriesService {
   }
 
   async findOne(id: number) {
-    const category = await this.categoryRepository.findOne(id, {
+    const category = await this.categoryRepository.findOne({
+      where: {
+        id,
+      },
       relations: ['posts'],
     });
     if (category) {
@@ -37,7 +40,10 @@ export class CategoriesService {
 
   async update(id: number, category: UpdateCategoryDto) {
     await this.categoryRepository.update(id, category);
-    const updatedCategory = await this.categoryRepository.findOne(id, {
+    const updatedCategory = await this.categoryRepository.findOne({
+      where: {
+        id,
+      },
       relations: ['posts'],
     });
     if (updatedCategory) {
