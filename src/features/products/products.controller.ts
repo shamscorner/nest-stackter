@@ -19,8 +19,10 @@ import { RequestWithUser } from '../../authentication/request-with-user.interfac
 import { GetProductDto } from './dto/get-product.dto';
 import { PaginatedResultDto } from '../../utils/dto/paginated-result.dto';
 import { Product } from './entities/product.entity';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('products')
+@ApiTags('products')
 @UseGuards(JwtAuthenticationGuard)
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}

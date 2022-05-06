@@ -29,6 +29,7 @@
     "@nestjs/mapped-types": "^1.0.1",
     "@nestjs/passport": "^8.2.1",
     "@nestjs/platform-express": "^8.4.4",
+    "@nestjs/swagger": "^5.2.1",
     "@nestjs/typeorm": "^8.0.3",
     "aws-sdk": "^2.1128.0",
     "bcrypt": "^5.0.1",
@@ -42,6 +43,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.5",
+    "swagger-ui-express": "^4.3.0",
     "typeorm": "^0.3.6",
     "uuid": "^8.3.2"
   },

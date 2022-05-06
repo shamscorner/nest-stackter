@@ -9,6 +9,7 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthenticationGuard } from '../../authentication/jwt-authentication.guard';
 import { RequestWithUser } from '../../authentication/request-with-user.interface';
 import { FindOneParams } from '../../utils/find-one-params';
@@ -17,6 +18,7 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { PostsService } from './posts.service';
 
 @Controller('posts')
+@ApiTags('posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 

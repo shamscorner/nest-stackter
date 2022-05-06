@@ -8,8 +8,10 @@ import {
   SerializeOptions,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { UsersService } from '../features/users/users.service';
 import { AuthenticationService } from './authentication.service';
+import { LogInDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { JwtAuthenticationGuard } from './jwt-authentication.guard';
 import { JwtRefreshGuard } from './jwt-refresh.guard';
@@ -17,6 +19,7 @@ import { LocalAuthenticationGuard } from './local-authentication.guard';
 import { RequestWithUser } from './request-with-user.interface';
 
 @Controller('authentication')
+@ApiTags('authentication')
 @SerializeOptions({
   strategy: 'excludeAll',
 })
@@ -51,6 +54,7 @@ export class AuthenticationController {
   @HttpCode(200)
   @UseGuards(LocalAuthenticationGuard)
   @Post('login')
+  @ApiBody({ type: LogInDto })
   async login(@Req() request: RequestWithUser) {
     const { user } = request;
     const accessTokenCookie =
