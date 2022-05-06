@@ -24,6 +24,7 @@ import {
   ApiOkResponse,
   ApiParam,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { FileUploadDto } from './dto/file-upload.dto';
 import { User } from './entities/user.entity';
@@ -51,6 +52,7 @@ export class UsersController {
       'All the private files of the user have been fetched successfully!',
     type: [FileResponseDto],
   })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @UseGuards(JwtAuthenticationGuard)
   async getAllPrivateFiles(@Req() request: RequestWithUser) {
     return this.usersService.getAllPrivateFiles(request.user.id);
@@ -75,6 +77,12 @@ export class UsersController {
   }
 
   @Get('files/:id')
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'Should be an id of a file that exists in the database',
+    type: String,
+  })
   @ApiOkResponse({
     description: 'A private file of the user has been fetched successfully!',
     type: FileResponseDto,
@@ -82,6 +90,7 @@ export class UsersController {
   @ApiNotFoundResponse({
     description: 'A file with given id does not exist.',
   })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @UseGuards(JwtAuthenticationGuard)
   async getPrivateFile(
     @Req() request: RequestWithUser,
@@ -105,6 +114,7 @@ export class UsersController {
     description: 'An avatar of the user has been added successfully!',
     type: PublicFile,
   })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @UseGuards(JwtAuthenticationGuard)
   @UseInterceptors(FileInterceptor('file'))
   addAvatar(
@@ -128,6 +138,7 @@ export class UsersController {
     description: 'A private file for this user has been uploaded successfully!',
     type: PrivateFile,
   })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @UseGuards(JwtAuthenticationGuard)
   @UseInterceptors(FileInterceptor('file'))
   addPrivateFile(
@@ -145,12 +156,26 @@ export class UsersController {
   @ApiOkResponse({
     description: 'Avatar for this user has been deleted successfully!',
   })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @UseGuards(JwtAuthenticationGuard)
   deleteAvatar(@Req() request: RequestWithUser) {
     return this.usersService.deleteAvatar(request.user.id);
   }
 
   @Delete('files/:id')
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'Should be an id of a product that exists in the database',
+    type: String,
+  })
+  @ApiOkResponse({
+    description: 'A private file of the user has been deleted successfully!',
+  })
+  @ApiNotFoundResponse({
+    description: 'A file with given id does not exist.',
+  })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @UseGuards(JwtAuthenticationGuard)
   deletePrivateFile(
     @Req() request: RequestWithUser,
