@@ -14,10 +14,11 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 import { GetCommentsDto } from './dto/get-comments.dto';
 import { PaginatedResultDto } from '../../utils/dto/paginated-result.dto';
 import { Comment } from './entities/comment.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiExtraModels, ApiTags } from '@nestjs/swagger';
 
 @Controller('comments')
 @ApiTags('comments')
+@ApiExtraModels(PaginatedResultDto)
 @UseGuards(JwtAuthenticationGuard)
 export class CommentsController {
   constructor(private readonly commentsService: CommentsService) {}
