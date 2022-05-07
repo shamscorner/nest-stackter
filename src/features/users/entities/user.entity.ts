@@ -9,9 +9,9 @@ import {
 import { Expose } from 'class-transformer';
 import { Address } from './address.entity';
 import { Post } from '../../posts/entities/post.entity';
-import { PublicFile } from '../../files/entities/public-file.entity';
 import { PrivateFile } from '../../files/entities/private-file.entity';
 import { Product } from '../../products/entities/product.entity';
+import { DatabaseFile } from '../../database-files/entities/database-file.entity';
 
 @Entity()
 export class User {
@@ -46,12 +46,24 @@ export class User {
   @OneToMany(() => Post, (post: Post) => post.author)
   public posts?: Post[];
 
-  @OneToOne(() => PublicFile, {
-    eager: true,
+  // use Amazon S3 to store avatar publicly
+  // @OneToOne(() => PublicFile, {
+  //   eager: true,
+  //   nullable: true,
+  // })
+  // @JoinColumn()
+  // public avatar?: PublicFile;
+
+  // store file directly to postgres database
+  @JoinColumn({ name: 'avatarId' })
+  @OneToOne(() => DatabaseFile, {
     nullable: true,
   })
-  @JoinColumn()
-  public avatar?: PublicFile;
+  public avatar?: DatabaseFile;
+
+  // this field is necessary only for storing files to postgres database
+  @Column({ nullable: true })
+  public avatarId?: number;
 
   @OneToMany(() => PrivateFile, (file: PrivateFile) => file.owner)
   public files?: PrivateFile[];

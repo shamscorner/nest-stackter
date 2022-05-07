@@ -2,22 +2,26 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
+  InternalServerErrorException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Connection, Repository } from 'typeorm';
 import { FileNotFoundException } from '../files/exceptions/file-not-found.exception';
 import { FilesService } from '../files/files.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { UserNotFoundException } from './exceptions/user-not-found.exception';
 import * as bcrypt from 'bcrypt';
+import { DatabaseFilesService } from '../database-files/database-files.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
     private readonly filesService: FilesService,
+    private readonly databaseFilesService: DatabaseFilesService,
+    private connection: Connection,
   ) {}
 
   async setCurrentRefreshToken(refreshToken: string, userId: number) {
@@ -82,7 +86,12 @@ export class UsersService {
     return newUser;
   }
 
-  async addAvatar(userId: number, imageBuffer: Buffer, filename: string) {
+  // Upload files to Amazon S3
+  async addAvatarUsingAmazonS3(
+    userId: number,
+    imageBuffer: Buffer,
+    filename: string,
+  ) {
     const avatar = await this.filesService.uploadPublicFile(
       imageBuffer,
       filename,
@@ -93,6 +102,48 @@ export class UsersService {
       avatar,
     });
     return avatar;
+  }
+
+  // Upload files to Postgres database directly
+  async addAvatar(userId: number, imageBuffer: Buffer, filename: string) {
+    const queryRunner = this.connection.createQueryRunner();
+
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      const user = await queryRunner.manager.findOne(User, {
+        where: {
+          id: userId,
+        },
+      });
+      const currentAvatarId = user.avatarId;
+      const avatar =
+        await this.databaseFilesService.uploadDatabaseFileWithQueryRunner(
+          imageBuffer,
+          filename,
+          queryRunner,
+        );
+
+      await queryRunner.manager.update(User, userId, {
+        avatarId: avatar.id,
+      });
+
+      if (currentAvatarId) {
+        await this.databaseFilesService.deleteFileWithQueryRunner(
+          currentAvatarId,
+          queryRunner,
+        );
+      }
+
+      await queryRunner.commitTransaction();
+      return avatar;
+    } catch {
+      await queryRunner.rollbackTransaction();
+      throw new InternalServerErrorException();
+    } finally {
+      await queryRunner.release();
+    }
   }
 
   async getPrivateFile(userId: number, fileId: number) {

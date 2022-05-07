@@ -20,6 +20,7 @@ import jwtConfig from './config/jwt.config';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { CommentsModule } from './features/comments/comments.module';
 import { ProductsModule } from './features/products/products.module';
+import { DatabaseFilesModule } from './features/database-files/database-files.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { ProductsModule } from './features/products/products.module';
     FilesModule,
     CommentsModule,
     ProductsModule,
+    DatabaseFilesModule,
   ],
   controllers: [AppController], // todo: remove later
   providers: [
