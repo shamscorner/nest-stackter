@@ -21,6 +21,7 @@ import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { CommentsModule } from './features/comments/comments.module';
 import { ProductsModule } from './features/products/products.module';
 import { DatabaseFilesModule } from './features/database-files/database-files.module';
+import { LocalFilesModule } from './features/local-files/local-files.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { DatabaseFilesModule } from './features/database-files/database-files.mo
     CommentsModule,
     ProductsModule,
     DatabaseFilesModule,
+    LocalFilesModule,
   ],
   controllers: [AppController], // todo: remove later
   providers: [

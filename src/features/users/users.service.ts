@@ -14,6 +14,8 @@ import { User } from './entities/user.entity';
 import { UserNotFoundException } from './exceptions/user-not-found.exception';
 import * as bcrypt from 'bcrypt';
 import { DatabaseFilesService } from '../database-files/database-files.service';
+import { LocalFileDto } from '../local-files/dto/local-file.dto';
+import { LocalFilesService } from '../local-files/local-files.service';
 
 @Injectable()
 export class UsersService {
@@ -21,6 +23,7 @@ export class UsersService {
     @InjectRepository(User) private usersRepository: Repository<User>,
     private readonly filesService: FilesService,
     private readonly databaseFilesService: DatabaseFilesService,
+    private readonly localFilesService: LocalFilesService,
     private connection: Connection,
   ) {}
 
@@ -105,7 +108,11 @@ export class UsersService {
   }
 
   // Upload files to Postgres database directly
-  async addAvatar(userId: number, imageBuffer: Buffer, filename: string) {
+  async addAvatarInPGsql(
+    userId: number,
+    imageBuffer: Buffer,
+    filename: string,
+  ) {
     const queryRunner = this.connection.createQueryRunner();
 
     await queryRunner.connect();
@@ -144,6 +151,13 @@ export class UsersService {
     } finally {
       await queryRunner.release();
     }
+  }
+
+  async addAvatar(userId: number, fileData: LocalFileDto) {
+    const avatar = await this.localFilesService.saveLocalFileData(fileData);
+    await this.usersRepository.update(userId, {
+      avatarId: avatar.id,
+    });
   }
 
   async getPrivateFile(userId: number, fileId: number) {

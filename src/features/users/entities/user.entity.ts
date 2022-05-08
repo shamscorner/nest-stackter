@@ -11,7 +11,7 @@ import { Address } from './address.entity';
 import { Post } from '../../posts/entities/post.entity';
 import { PrivateFile } from '../../files/entities/private-file.entity';
 import { Product } from '../../products/entities/product.entity';
-import { DatabaseFile } from '../../database-files/entities/database-file.entity';
+import { LocalFile } from 'src/features/local-files/entities/local-file.entity';
 
 @Entity()
 export class User {
@@ -55,11 +55,17 @@ export class User {
   // public avatar?: PublicFile;
 
   // store file directly to postgres database
+  // @JoinColumn({ name: 'avatarId' })
+  // @OneToOne(() => DatabaseFile, {
+  //   nullable: true,
+  // })
+  // public avatar?: DatabaseFile;
+
   @JoinColumn({ name: 'avatarId' })
-  @OneToOne(() => DatabaseFile, {
+  @OneToOne(() => LocalFile, {
     nullable: true,
   })
-  public avatar?: DatabaseFile;
+  public avatar?: LocalFile;
 
   // this field is necessary only for storing files to postgres database
   @Column({ nullable: true })

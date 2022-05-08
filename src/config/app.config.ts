@@ -15,4 +15,7 @@ export default registerAs('app', () => ({
 
   // API support email address
   supportEmail: process.env.SUPPORT_EMAIL || 'support@localhost',
+
+  // Server file upload destination
+  fileDestination: process.env.UPLOADED_FILES_DESTINATION || './uploadedFiles',
 }));

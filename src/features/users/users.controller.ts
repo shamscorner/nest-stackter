@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Controller,
   Delete,
   Get,
@@ -31,6 +32,7 @@ import { User } from './entities/user.entity';
 import { FileResponseDto } from './dto/file-response.dto';
 import { PublicFile } from '../files/entities/public-file.entity';
 import { PrivateFile } from '../files/entities/private-file.entity';
+import { LocalFilesInterceptor } from '../local-files/local-files.interceptor';
 
 @Controller('users')
 @ApiTags('users')
@@ -104,7 +106,7 @@ export class UsersController {
     file.stream.pipe(response);
   }
 
-  @Post('avatar')
+  @Post('avatar/amazonS3')
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     description: 'A new avatar for the user',
@@ -117,15 +119,80 @@ export class UsersController {
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @UseGuards(JwtAuthenticationGuard)
   @UseInterceptors(FileInterceptor('file'))
-  addAvatar(
+  addAvatarOnAmazonS3(
     @Req() request: RequestWithUser,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    return this.usersService.addAvatar(
+    return this.usersService.addAvatarUsingAmazonS3(
       request.user.id,
       file.buffer,
       file.originalname,
     );
+  }
+
+  @Post('avatar/postgres')
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'A new avatar for the user',
+    type: FileUploadDto,
+  })
+  @ApiCreatedResponse({
+    description: 'An avatar of the user has been added successfully!',
+    type: PublicFile,
+  })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
+  @UseGuards(JwtAuthenticationGuard)
+  @UseInterceptors(FileInterceptor('file'))
+  addAvatarOnPostgres(
+    @Req() request: RequestWithUser,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.usersService.addAvatarInPGsql(
+      request.user.id,
+      file.buffer,
+      file.originalname,
+    );
+  }
+
+  @Post('avatar')
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'A new avatar for the user',
+    type: FileUploadDto,
+  })
+  @ApiCreatedResponse({
+    description: 'An avatar of the user has been added successfully!',
+    type: PublicFile,
+  })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
+  @UseGuards(JwtAuthenticationGuard)
+  @UseInterceptors(
+    LocalFilesInterceptor({
+      fieldName: 'file',
+      path: '/avatars',
+      fileFilter: (request, file, callback) => {
+        if (!file.mimetype.includes('image')) {
+          return callback(
+            new BadRequestException('Provide a valid image'),
+            false,
+          );
+        }
+        callback(null, true);
+      },
+      limits: {
+        fileSize: Math.pow(1024, 2), // 1 MB
+      },
+    }),
+  )
+  addAvatar(
+    @Req() request: RequestWithUser,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.usersService.addAvatar(request.user.id, {
+      path: file.path,
+      filename: file.originalname,
+      mimetype: file.mimetype,
+    });
   }
 
   @Post('files')
