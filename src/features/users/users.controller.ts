@@ -16,7 +16,7 @@ import { UsersService } from './users.service';
 import { Express, Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtAuthenticationGuard } from '../../authentication/jwt-authentication.guard';
-import { FindOneParams } from '../../utils/find-one-params';
+import { FindOneParams } from '../../utils/dto/find-one-params.dto';
 import {
   ApiBody,
   ApiConsumes,

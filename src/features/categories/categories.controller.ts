@@ -7,14 +7,15 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import { FindOneParams } from '../../utils/find-one-params';
+import { ApiExtraModels, ApiTags } from '@nestjs/swagger';
+import { FindOneParams } from '../../utils/dto/find-one-params.dto';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Controller('categories')
 @ApiTags('categories')
+@ApiExtraModels(FindOneParams)
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
@@ -26,6 +27,11 @@ export class CategoriesController {
   @Get()
   findAll() {
     return this.categoriesService.findAll();
+  }
+
+  @Get('/with-deleted')
+  findAllWithDeleted() {
+    return this.categoriesService.findAllWithDeleted();
   }
 
   @Get(':id')
@@ -41,5 +47,10 @@ export class CategoriesController {
   @Delete(':id')
   remove(@Param() { id }: FindOneParams) {
     return this.categoriesService.remove(+id);
+  }
+
+  @Post(':id/restore')
+  restoreDeleted(@Param() { id }: FindOneParams) {
+    return this.categoriesService.restoreDeleted(+id);
   }
 }

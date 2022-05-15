@@ -25,6 +25,13 @@ export class CategoriesService {
     });
   }
 
+  findAllWithDeleted() {
+    return this.categoryRepository.find({
+      relations: ['posts'],
+      withDeleted: true,
+    });
+  }
+
   async findOne(id: number) {
     const category = await this.categoryRepository.findOne({
       where: {
@@ -53,8 +60,15 @@ export class CategoriesService {
   }
 
   async remove(id: number) {
-    const deleteResponse = await this.categoryRepository.delete(id);
+    const deleteResponse = await this.categoryRepository.softDelete(id);
     if (!deleteResponse.affected) {
+      throw new CategoryNotFoundException(id);
+    }
+  }
+
+  async restoreDeleted(id: number) {
+    const restoreResponse = await this.categoryRepository.restore(id);
+    if (!restoreResponse.affected) {
       throw new CategoryNotFoundException(id);
     }
   }
