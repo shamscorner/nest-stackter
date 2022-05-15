@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { QueryRunner, Repository } from 'typeorm';
 import { LocalFileDto } from './dto/local-file.dto';
 import { LocalFile } from './entities/local-file.entity';
 
@@ -27,5 +27,12 @@ export class LocalFilesService {
       throw new NotFoundException();
     }
     return file;
+  }
+
+  async deleteLocalFileWithQueryRunner(
+    fileId: number,
+    queryRunner: QueryRunner,
+  ) {
+    await queryRunner.manager.delete(LocalFile, fileId);
   }
 }

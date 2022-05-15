@@ -194,14 +194,30 @@ export class UsersService {
   }
 
   async deleteAvatar(userId: number) {
+    const queryRunner = this.connection.createQueryRunner();
+
     const user = await this.getById(userId);
-    const fileId = user.avatar?.id;
+    const fileId = user.avatarId;
     if (fileId) {
-      await this.usersRepository.update(userId, {
-        ...user,
-        avatar: null,
-      });
-      await this.filesService.deletePublicFile(fileId);
+      await queryRunner.connect();
+      await queryRunner.startTransaction();
+
+      try {
+        await queryRunner.manager.update(User, userId, {
+          ...user,
+          avatarId: null,
+        });
+        await this.localFilesService.deleteLocalFileWithQueryRunner(
+          fileId,
+          queryRunner,
+        );
+        await queryRunner.commitTransaction();
+      } catch (error) {
+        await queryRunner.rollbackTransaction();
+        throw new InternalServerErrorException();
+      } finally {
+        await queryRunner.release();
+      }
     } else {
       throw new FileNotFoundException(fileId);
     }
