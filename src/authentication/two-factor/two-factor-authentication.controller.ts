@@ -7,7 +7,6 @@ import {
   Body,
   UnauthorizedException,
   HttpCode,
-  SerializeOptions,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
@@ -20,9 +19,6 @@ import { TwoFactorAuthenticationService } from './two-factor-authentication.serv
 
 @Controller('2fa')
 @ApiTags('authentication-2fa')
-@SerializeOptions({
-  strategy: 'excludeAll',
-})
 export class TwoFactorAuthenticationController {
   constructor(
     private readonly twoFactorAuthenticationService: TwoFactorAuthenticationService,

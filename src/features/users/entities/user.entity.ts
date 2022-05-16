@@ -6,7 +6,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Expose } from 'class-transformer';
+import { Exclude } from 'class-transformer';
 import { Address } from './address.entity';
 import { Post } from '../../posts/entities/post.entity';
 import { PrivateFile } from '../../files/entities/private-file.entity';
@@ -18,25 +18,13 @@ export class User {
   @PrimaryGeneratedColumn()
   public id?: number;
 
-  @Column({ nullable: true })
-  public twoFactorAuthenticationSecret?: string;
-
   @Column({ unique: true })
-  @Expose()
   public email: string;
 
-  @Column({ nullable: true })
-  public currentHashedRefreshToken?: string;
-
   @Column()
-  @Expose()
   public name: string;
 
-  @Column()
-  public password: string;
-
   @Column({ nullable: true })
-  @Expose()
   public phoneNumber?: string;
 
   @OneToOne(() => Address, {
@@ -45,6 +33,14 @@ export class User {
   })
   @JoinColumn()
   public address?: Address;
+
+  @Column()
+  @Exclude()
+  public password: string;
+
+  @Column({ nullable: true })
+  @Exclude()
+  public currentHashedRefreshToken?: string;
 
   @OneToMany(() => Post, (post: Post) => post.author)
   public posts?: Post[];
@@ -79,6 +75,10 @@ export class User {
 
   @OneToMany(() => Product, (product: Product) => product.owner)
   public products?: Product[];
+
+  @Column({ nullable: true })
+  @Exclude()
+  public twoFactorAuthenticationSecret?: string;
 
   @Column({ default: false })
   public isTwoFactorAuthenticationEnabled: boolean;

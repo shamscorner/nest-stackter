@@ -5,7 +5,6 @@ import {
   HttpCode,
   Post,
   Req,
-  SerializeOptions,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
@@ -20,9 +19,6 @@ import { RequestWithUser } from './request-with-user.interface';
 
 @Controller('authentication')
 @ApiTags('authentication')
-@SerializeOptions({
-  strategy: 'excludeAll',
-})
 export class AuthenticationController {
   constructor(
     private readonly authenticationService: AuthenticationService,
