@@ -18,4 +18,8 @@ export default registerAs('app', () => ({
 
   // Server file upload destination
   fileDestination: process.env.UPLOADED_FILES_DESTINATION || './uploadedFiles',
+
+  // two factor authentication app name
+  twoFactorAuthAppName:
+    process.env.TWO_FACTOR_AUTHENTICATION_APP_NAME || 'Nest_Starter_Template',
 }));

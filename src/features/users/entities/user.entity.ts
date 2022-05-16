@@ -18,6 +18,9 @@ export class User {
   @PrimaryGeneratedColumn()
   public id?: number;
 
+  @Column({ nullable: true })
+  public twoFactorAuthenticationSecret?: string;
+
   @Column({ unique: true })
   @Expose()
   public email: string;
@@ -76,4 +79,7 @@ export class User {
 
   @OneToMany(() => Product, (product: Product) => product.owner)
   public products?: Product[];
+
+  @Column({ default: false })
+  public isTwoFactorAuthenticationEnabled: boolean;
 }

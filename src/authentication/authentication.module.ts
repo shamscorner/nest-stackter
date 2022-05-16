@@ -8,6 +8,9 @@ import { AuthenticationService } from './authentication.service';
 import { JwtRefreshTokenStrategy } from './jwt-refresh-token.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
+import { JwtTwoFactorStrategy } from './two-factor/jwt-two-factor.strategy';
+import { TwoFactorAuthenticationController } from './two-factor/two-factor-authentication.controller';
+import { TwoFactorAuthenticationService } from './two-factor/two-factor-authentication.service';
 
 @Module({
   imports: [
@@ -30,7 +33,10 @@ import { LocalStrategy } from './local.strategy';
     LocalStrategy,
     JwtStrategy,
     JwtRefreshTokenStrategy,
+    TwoFactorAuthenticationService,
+    JwtTwoFactorStrategy,
   ],
-  controllers: [AuthenticationController],
+  controllers: [AuthenticationController, TwoFactorAuthenticationController],
+  exports: [AuthenticationService],
 })
 export class AuthenticationModule {}

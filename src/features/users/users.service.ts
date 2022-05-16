@@ -51,6 +51,24 @@ export class UsersService {
     });
   }
 
+  async setTwoFactorAuthenticationSecret(secret: string, userId: number) {
+    return this.usersRepository.update(userId, {
+      twoFactorAuthenticationSecret: secret,
+    });
+  }
+
+  async turnOnTwoFactorAuthentication(userId: number) {
+    return this.usersRepository.update(userId, {
+      isTwoFactorAuthenticationEnabled: true,
+    });
+  }
+
+  async turnOffTwoFactorAuthentication(userId: number) {
+    return this.usersRepository.update(userId, {
+      isTwoFactorAuthenticationEnabled: false,
+    });
+  }
+
   async getAllUsers() {
     const users = await this.usersRepository.find();
     return users;
@@ -160,6 +178,36 @@ export class UsersService {
     });
   }
 
+  async deleteAvatar(userId: number) {
+    const queryRunner = this.connection.createQueryRunner();
+
+    const user = await this.getById(userId);
+    const fileId = user.avatarId;
+    if (fileId) {
+      await queryRunner.connect();
+      await queryRunner.startTransaction();
+
+      try {
+        await queryRunner.manager.update(User, userId, {
+          ...user,
+          avatarId: null,
+        });
+        await this.localFilesService.deleteLocalFileWithQueryRunner(
+          fileId,
+          queryRunner,
+        );
+        await queryRunner.commitTransaction();
+      } catch (error) {
+        await queryRunner.rollbackTransaction();
+        throw new InternalServerErrorException();
+      } finally {
+        await queryRunner.release();
+      }
+    } else {
+      throw new FileNotFoundException(fileId);
+    }
+  }
+
   async getPrivateFile(userId: number, fileId: number) {
     const file = await this.filesService.getPrivateFile(fileId);
     if (file.info.owner.id === userId) {
@@ -191,36 +239,6 @@ export class UsersService {
 
   async addPrivateFile(userId: number, imageBuffer: Buffer, filename: string) {
     return this.filesService.uploadPrivateFile(imageBuffer, userId, filename);
-  }
-
-  async deleteAvatar(userId: number) {
-    const queryRunner = this.connection.createQueryRunner();
-
-    const user = await this.getById(userId);
-    const fileId = user.avatarId;
-    if (fileId) {
-      await queryRunner.connect();
-      await queryRunner.startTransaction();
-
-      try {
-        await queryRunner.manager.update(User, userId, {
-          ...user,
-          avatarId: null,
-        });
-        await this.localFilesService.deleteLocalFileWithQueryRunner(
-          fileId,
-          queryRunner,
-        );
-        await queryRunner.commitTransaction();
-      } catch (error) {
-        await queryRunner.rollbackTransaction();
-        throw new InternalServerErrorException();
-      } finally {
-        await queryRunner.release();
-      }
-    } else {
-      throw new FileNotFoundException(fileId);
-    }
   }
 
   async deletePrivateFile(userId: number, fileId: number) {

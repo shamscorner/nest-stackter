@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { JwtAuthenticationGuard } from '../../authentication/jwt-authentication.guard';
+import { JwtTwoFactorGuard } from '../../authentication/two-factor/jwt-two-factor.guard';
 import { RequestWithUser } from '../../authentication/request-with-user.interface';
 import { FindOneParams } from '../../utils/dto/find-one-params.dto';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -38,7 +38,7 @@ export class PostsController {
   }
 
   @Post()
-  @UseGuards(JwtAuthenticationGuard)
+  @UseGuards(JwtTwoFactorGuard)
   async createPost(
     @Body() post: CreatePostDto,
     @Req() request: RequestWithUser,
@@ -47,7 +47,7 @@ export class PostsController {
   }
 
   @Patch(':id')
-  @UseGuards(JwtAuthenticationGuard)
+  @UseGuards(JwtTwoFactorGuard)
   async updatePost(
     @Param() { id }: FindOneParams,
     @Body() post: UpdatePostDto,
@@ -56,7 +56,7 @@ export class PostsController {
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthenticationGuard)
+  @UseGuards(JwtTwoFactorGuard)
   async deletePost(@Param() { id }: FindOneParams) {
     return this.postsService.deletePost(Number(id));
   }
