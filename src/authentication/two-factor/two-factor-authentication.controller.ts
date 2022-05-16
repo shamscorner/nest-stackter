@@ -1,14 +1,13 @@
 import {
-  ClassSerializerInterceptor,
   Controller,
   Post,
-  UseInterceptors,
   Res,
   UseGuards,
   Req,
   Body,
   UnauthorizedException,
   HttpCode,
+  SerializeOptions,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
@@ -21,7 +20,9 @@ import { TwoFactorAuthenticationService } from './two-factor-authentication.serv
 
 @Controller('2fa')
 @ApiTags('authentication-2fa')
-@UseInterceptors(ClassSerializerInterceptor)
+@SerializeOptions({
+  strategy: 'excludeAll',
+})
 export class TwoFactorAuthenticationController {
   constructor(
     private readonly twoFactorAuthenticationService: TwoFactorAuthenticationService,
@@ -36,6 +37,8 @@ export class TwoFactorAuthenticationController {
       await this.twoFactorAuthenticationService.generateTwoFactorAuthenticationSecret(
         request.user,
       );
+
+    response.setHeader('content-type', 'image/png');
 
     return this.twoFactorAuthenticationService.pipeQrCodeStream(
       response,
