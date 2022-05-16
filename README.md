@@ -20,7 +20,7 @@
 - Swagger Open API specification setup out of the box - check the `src/features/users/users.controller.ts` for examples
 - PostgreSQL database file storing support - check the avatar upload of `users.services.ts` and `src/features/database-files`
 - Soft Delete example - check the `src/features/categories` module
-- Two factor authentication setup out of the box
+- Two factor authentication setup out of the box - use `JwtTwoFactorGuard` when some specific endpoints need 2FA
 
 ## Installation
 
