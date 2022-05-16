@@ -21,6 +21,7 @@
 - PostgreSQL database file storing support - check the avatar upload of `users.services.ts` and `src/features/database-files`
 - Soft Delete example - check the `src/features/categories` module
 - Two factor authentication setup out of the box - use `JwtTwoFactorGuard` when some specific endpoints need 2FA
+- Logging with built-in logger and TypeORM is configurable through `.env` - `TYPEORM_LOGGING=true` - specify false to disable database logging
 
 ## Installation
 

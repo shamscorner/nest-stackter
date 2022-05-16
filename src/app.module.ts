@@ -1,5 +1,6 @@
 import {
   ClassSerializerInterceptor,
+  MiddlewareConsumer,
   Module,
   ValidationPipe,
 } from '@nestjs/common';
@@ -22,6 +23,8 @@ import { CommentsModule } from './features/comments/comments.module';
 import { ProductsModule } from './features/products/products.module';
 import { DatabaseFilesModule } from './features/database-files/database-files.module';
 import { LocalFilesModule } from './features/local-files/local-files.module';
+import { LoggerModule } from './logger/logger.module';
+import { LogsMiddleware } from './utils/logs.middleware';
 
 @Module({
   imports: [
@@ -42,8 +45,9 @@ import { LocalFilesModule } from './features/local-files/local-files.module';
     ProductsModule,
     DatabaseFilesModule,
     LocalFilesModule,
+    LoggerModule,
   ],
-  controllers: [AppController], // todo: remove later
+  controllers: [AppController],
   providers: [
     {
       provide: APP_PIPE,
@@ -61,6 +65,10 @@ import { LocalFilesModule } from './features/local-files/local-files.module';
     //   provide: APP_INTERCEPTOR,
     //   useClass: ExcludeNullInterceptor,
     // },
-  ], // todo: remove later
+  ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LogsMiddleware).forRoutes('*');
+  }
+}

@@ -3,10 +3,11 @@ import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
+import { DatabaseLogger } from '../database/database-logger';
 
 class TypeOrmConfig {
   static getOrmConfig(configService: ConfigService): TypeOrmModuleOptions {
-    return {
+    const options: TypeOrmModuleOptions = {
       type: 'postgres',
       host: configService.get('database.host'),
       port: configService.get('database.port'),
@@ -15,7 +16,16 @@ class TypeOrmConfig {
       database: configService.get('database.name'),
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: configService.get('typeorm.synchronize'),
-      logging: configService.get('typeorm.logging'),
+    };
+
+    const isLogging = configService.get('typeorm.logging') || false;
+    if (!isLogging) {
+      return options;
+    }
+
+    return {
+      ...options,
+      logger: new DatabaseLogger(),
     };
   }
 }
