@@ -91,7 +91,15 @@ class EnvironmentVariables {
 
   @IsString()
   @IsNotEmpty()
-  EMAIL_SERVICE: string;
+  EMAIL_HOST: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  EMAIL_PORT: number;
+
+  @IsBoolean()
+  @IsOptional()
+  EMAIL_IS_SECURE: boolean;
 
   @IsString()
   @IsNotEmpty()

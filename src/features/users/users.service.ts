@@ -69,6 +69,15 @@ export class UsersService {
     });
   }
 
+  async markEmailAsConfirmed(email: string) {
+    return this.usersRepository.update(
+      { email },
+      {
+        isEmailConfirmed: true,
+      },
+    );
+  }
+
   async getAllUsers() {
     const users = await this.usersRepository.find();
     return users;

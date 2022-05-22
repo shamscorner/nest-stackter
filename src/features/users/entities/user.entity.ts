@@ -22,7 +22,7 @@ export class User {
   public email: string;
 
   @Column({ default: false })
-  public isEmailConfirmed: boolean;
+  public isEmailConfirmed?: boolean;
 
   @Column()
   public name: string;

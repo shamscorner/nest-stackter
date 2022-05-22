@@ -30,6 +30,7 @@ import { HealthModule } from './health/health.module';
 import { EmailModule } from './email/email.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { EmailSchedulingModule } from './features/email-scheduling/email-scheduling.module';
+import { EmailConfirmationModule } from './features/email-confirmation/email-confirmation.module';
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { EmailSchedulingModule } from './features/email-scheduling/email-schedul
     HealthModule,
     EmailModule,
     EmailSchedulingModule,
+    EmailConfirmationModule,
   ],
   controllers: [AppController],
   providers: [

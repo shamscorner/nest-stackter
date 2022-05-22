@@ -8,6 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { EmailConfirmationService } from '../features/email-confirmation/email-confirmation.service';
 import { UsersService } from '../features/users/users.service';
 import { AuthenticationService } from './authentication.service';
 import { LogInDto } from './dto/login.dto';
@@ -23,6 +24,7 @@ export class AuthenticationController {
   constructor(
     private readonly authenticationService: AuthenticationService,
     private readonly usersService: UsersService,
+    private readonly emailConfirmationService: EmailConfirmationService,
   ) {}
 
   @UseGuards(JwtAuthenticationGuard)
@@ -44,7 +46,9 @@ export class AuthenticationController {
 
   @Post('register')
   async register(@Body() registrationData: RegisterDto) {
-    return this.authenticationService.register(registrationData);
+    const user = await this.authenticationService.register(registrationData);
+    await this.emailConfirmationService.sendVerificationLink(registrationData);
+    return user;
   }
 
   @HttpCode(200)
