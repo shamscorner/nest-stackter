@@ -88,6 +88,18 @@ class EnvironmentVariables {
   @IsBoolean()
   @IsOptional()
   TYPEORM_LOGGING: boolean;
+
+  @IsString()
+  @IsNotEmpty()
+  EMAIL_SERVICE: string;
+
+  @IsString()
+  @IsNotEmpty()
+  EMAIL_USER: string;
+
+  @IsString()
+  @IsNotEmpty()
+  EMAIL_PASSWORD: string;
 }
 
 export function validate(config: Record<string, unknown>) {

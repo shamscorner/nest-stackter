@@ -18,6 +18,7 @@ import databaseConfig from './config/database.config';
 import typeormConfig from './config/typeorm.config';
 import awsConfig from './config/aws.config';
 import jwtConfig from './config/jwt.config';
+import emailConfig from './config/email.config';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { CommentsModule } from './features/comments/comments.module';
 import { ProductsModule } from './features/products/products.module';
@@ -26,6 +27,9 @@ import { LocalFilesModule } from './features/local-files/local-files.module';
 import { LoggerModule } from './logger/logger.module';
 import { LogsMiddleware } from './utils/logs.middleware';
 import { HealthModule } from './health/health.module';
+import { EmailModule } from './email/email.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { EmailSchedulingModule } from './features/email-scheduling/email-scheduling.module';
 
 @Module({
   imports: [
@@ -34,8 +38,16 @@ import { HealthModule } from './health/health.module';
       cache: true,
       expandVariables: true,
       validate,
-      load: [appConfig, databaseConfig, typeormConfig, awsConfig, jwtConfig],
+      load: [
+        appConfig,
+        databaseConfig,
+        typeormConfig,
+        awsConfig,
+        jwtConfig,
+        emailConfig,
+      ],
     }),
+    ScheduleModule.forRoot(),
     DatabaseModule,
     AuthenticationModule,
     UsersModule,
@@ -48,6 +60,8 @@ import { HealthModule } from './health/health.module';
     LocalFilesModule,
     LoggerModule,
     HealthModule,
+    EmailModule,
+    EmailSchedulingModule,
   ],
   controllers: [AppController],
   providers: [
