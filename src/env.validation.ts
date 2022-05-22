@@ -68,6 +68,18 @@ class EnvironmentVariables {
   @IsNumber()
   @IsOptional()
   JWT_REFRESH_TOKEN_EXPIRATION_TIME: number;
+
+  @IsString()
+  @IsNotEmpty()
+  EMAIL_SERVICE: string;
+
+  @IsString()
+  @IsNotEmpty()
+  EMAIL_USER: string;
+
+  @IsString()
+  @IsNotEmpty()
+  EMAIL_PASSWORD: string;
 }
 
 export function validate(config: Record<string, unknown>) {

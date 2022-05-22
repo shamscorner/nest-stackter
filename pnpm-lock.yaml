@@ -22,6 +22,7 @@ specifiers:
   '@types/jest': ^27.5.0
   '@types/multer': ^1.4.7
   '@types/node': ^17.0.31
+  '@types/nodemailer': ^6.4.4
   '@types/passport-jwt': ^3.0.6
   '@types/passport-local': ^1.0.34
   '@types/supertest': ^2.0.12
@@ -37,6 +38,7 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-prettier: ^4.0.0
   jest: ^28.0.3
+  nodemailer: ^6.7.5
   otplib: ^12.0.1
   passport: ^0.5.2
   passport-jwt: ^4.0.0
@@ -70,11 +72,13 @@ dependencies:
   '@nestjs/swagger': 5.2.1_bubfdbyexfeae5f3hjn7okamgm
   '@nestjs/terminus': 8.0.6_eqolnjailvrsgpjwojmchkclhe
   '@nestjs/typeorm': 8.0.3_s6kf2wxaqx7c7ghapepprqoxna
+  '@types/nodemailer': 6.4.4
   aws-sdk: 2.1128.0
   bcrypt: 5.0.1
   class-transformer: 0.5.1
   class-validator: 0.13.2
   cookie-parser: 1.4.6
+  nodemailer: 6.7.5
   otplib: 12.0.1
   passport: 0.5.2
   passport-jwt: 4.0.0
@@ -2467,6 +2471,12 @@ packages:
 
   /@types/node/17.0.31:
     resolution: {integrity: sha512-AR0x5HbXGqkEx9CadRH3EBYx/VkiUgZIhP4wvPn/+5KIsgpNoyFaRlVe0Zlx9gRtg8fA06a9tskE2MSN7TcG4Q==}
+
+  /@types/nodemailer/6.4.4:
+    resolution: {integrity: sha512-Ksw4t7iliXeYGvIQcSIgWQ5BLuC/mljIEbjf615svhZL10PE9t+ei8O9gDaD3FPCasUJn9KTLwz2JFJyiiyuqw==}
+    dependencies:
+      '@types/node': 17.0.31
+    dev: false
 
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
@@ -6149,6 +6159,11 @@ packages:
   /node-releases/2.0.4:
     resolution: {integrity: sha512-gbMzqQtTtDz/00jQzZ21PQzdI9PyLYqUSvD0p3naOhX4odFji0ZxYdnVwPTxmSwkmxhcFImpozceidSG+AgoPQ==}
     dev: true
+
+  /nodemailer/6.7.5:
+    resolution: {integrity: sha512-6VtMpwhsrixq1HDYSBBHvW0GwiWawE75dS3oal48VqRhUvKJNnKnJo2RI/bCVQubj1vgrgscMNW4DHaD6xtMCg==}
+    engines: {node: '>=6.0.0'}
+    dev: false
 
   /nopt/5.0.0:
     resolution: {integrity: sha512-Tbj67rffqceeLpcRXrT7vKAN8CwfPeIBgM7E6iBkmKLV7bEMwpGgYLGv0jACUsECaa/vuxP0IjEont6umdMgtQ==}
