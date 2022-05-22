@@ -35,6 +35,34 @@ class EnvironmentVariables {
 
   @IsString()
   @IsNotEmpty()
+  JWT_ACCESS_TOKEN_SECRET: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  JWT_ACCESS_TOKEN_EXPIRATION_TIME: number;
+
+  @IsString()
+  @IsNotEmpty()
+  JWT_REFRESH_TOKEN_SECRET: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  JWT_REFRESH_TOKEN_EXPIRATION_TIME: number;
+
+  @IsString()
+  @IsNotEmpty()
+  JWT_VERIFICATION_TOKEN_SECRET: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  JWT_VERIFICATION_TOKEN_EXPIRATION_TIME: number;
+
+  @IsString()
+  @IsNotEmpty()
+  EMAIL_CONFIRMATION_URL: string;
+
+  @IsString()
+  @IsNotEmpty()
   DATABASE_HOST: string;
 
   @IsNumber()
@@ -60,14 +88,6 @@ class EnvironmentVariables {
   @IsBoolean()
   @IsOptional()
   TYPEORM_LOGGING: boolean;
-
-  @IsNumber()
-  @IsOptional()
-  JWT_ACCESS_TOKEN_EXPIRATION_TIME: number;
-
-  @IsNumber()
-  @IsOptional()
-  JWT_REFRESH_TOKEN_EXPIRATION_TIME: number;
 }
 
 export function validate(config: Record<string, unknown>) {

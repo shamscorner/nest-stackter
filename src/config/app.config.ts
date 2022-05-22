@@ -22,4 +22,9 @@ export default registerAs('app', () => ({
   // two factor authentication app name
   twoFactorAuthAppName:
     process.env.TWO_FACTOR_AUTHENTICATION_APP_NAME || 'Nest_Starter_Template',
+
+  // email confirmation link
+  emailConfirmationLink:
+    process.env.EMAIL_CONFIRMATION_URL ||
+    'EMAIL_CONFIRMATION_URL=https://my-app.com/confirm-email',
 }));
