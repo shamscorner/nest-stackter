@@ -24,7 +24,7 @@ export class AuthenticationService {
         password: hashedPassword,
       });
       return createdUser;
-    } catch (error) {
+    } catch (error: any) {
       if (error?.code === PostgresErrorCode.UniqueViolation) {
         throw new HttpException(
           'User with that email already exists',

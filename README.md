@@ -23,6 +23,7 @@
 - Two factor authentication setup out of the box - use `JwtTwoFactorGuard` when some specific endpoints need 2FA
 - Logging with built-in logger and TypeORM is configurable through `.env` - `TYPEORM_LOGGING=true` - specify false to disable database logging
 - `Health` module
+- Documentation with Compodoc and JSDoc - take a look on the `src/features/files/files.service.ts` for a detailed example. And for the generation command, run `pnpm run documentation:serve`. Or to customize it, check the `package.json`.
 
 ## Installation
 

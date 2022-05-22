@@ -7,6 +7,7 @@ import { PrivateFile } from './entities/private-file.entity';
 import { S3 } from 'aws-sdk';
 import { v4 as uuid } from 'uuid';
 import { FileNotFoundException } from './exceptions/file-not-found.exception';
+import internal from 'stream';
 
 @Injectable()
 export class FilesService {
@@ -18,7 +19,14 @@ export class FilesService {
     private readonly configService: ConfigService,
   ) {}
 
-  public async getPrivateFile(fileId: number) {
+  /**
+   * @param fileId An id of a file. A file with this id should exist in the database
+   * @returns A promise with the file and its information
+   */
+  public async getPrivateFile(fileId: number): Promise<{
+    stream: internal.Readable;
+    info: PrivateFile;
+  }> {
     const s3 = new S3();
     const fileInfo = await this.privateFilesRepository.findOne({
       where: {
@@ -41,7 +49,11 @@ export class FilesService {
     throw new FileNotFoundException(fileId);
   }
 
-  public async generatePresignedUrl(key: string) {
+  /**
+   * @param key AWS object key
+   * @returns A promise with a url
+   */
+  public async generatePresignedUrl(key: string): Promise<string> {
     const s3 = new S3();
     return s3.getSignedUrlPromise('getObject', {
       Bucket: this.configService.get('aws.publicBucketName'),
@@ -49,7 +61,15 @@ export class FilesService {
     });
   }
 
-  async uploadPublicFile(dataBuffer: Buffer, filename: string) {
+  /**
+   * @param dataBuffer The file buffer of the uploaded content
+   * @param filename A file name
+   * @returns A promise with the public version of the uploaded file
+   */
+  async uploadPublicFile(
+    dataBuffer: Buffer,
+    filename: string,
+  ): Promise<PublicFile> {
     const s3 = new S3();
     const uploadResult = await s3
       .upload({
@@ -66,11 +86,17 @@ export class FilesService {
     return newFile;
   }
 
+  /**
+   * @param dataBuffer The file buffer of the uploaded content
+   * @param ownerId An id of the user who uploaded the file. A user with this id should exist on the database
+   * @param filename A file name
+   * @returns A promise with the public version of the uploaded file
+   */
   async uploadPrivateFile(
     dataBuffer: Buffer,
     ownerId: number,
     filename: string,
-  ) {
+  ): Promise<PrivateFile> {
     const s3 = new S3();
     const uploadResult = await s3
       .upload({
@@ -89,7 +115,10 @@ export class FilesService {
     return newFile;
   }
 
-  async deletePublicFile(fileId: number) {
+  /**
+   * @param fileId An id of a file. A file with this id should exist in the database
+   */
+  async deletePublicFile(fileId: number): Promise<void> {
     const s3 = new S3();
     const file = await this.publicFilesRepository.findOne({
       where: { id: fileId },
@@ -103,7 +132,11 @@ export class FilesService {
     await this.publicFilesRepository.delete(fileId);
   }
 
-  async deletePrivateFile(fileId: number, ownerId: number) {
+  /**
+   * @param fileId An id of a file. A file with this id should exist in the database
+   * @param ownerId An id of the user who uploaded the file. A user with this id should exist on the database
+   */
+  async deletePrivateFile(fileId: number, ownerId: number): Promise<void> {
     const s3 = new S3();
     const file = await this.privateFilesRepository.findOne({
       where: {
