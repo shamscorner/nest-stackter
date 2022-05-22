@@ -11,6 +11,7 @@ specifiers:
   '@nestjs/mapped-types': ^1.0.1
   '@nestjs/passport': ^8.2.1
   '@nestjs/platform-express': ^8.4.4
+  '@nestjs/schedule': ^2.0.1
   '@nestjs/schematics': ^8.0.11
   '@nestjs/swagger': ^5.2.1
   '@nestjs/terminus': ^8.0.6
@@ -18,6 +19,7 @@ specifiers:
   '@nestjs/typeorm': ^8.0.3
   '@types/bcrypt': ^5.0.0
   '@types/cookie-parser': ^1.4.3
+  '@types/cron': ^2.0.0
   '@types/express': ^4.17.13
   '@types/jest': ^27.5.0
   '@types/multer': ^1.4.7
@@ -69,6 +71,7 @@ dependencies:
   '@nestjs/mapped-types': 1.0.1_ljefuz3wxtsl6oghlkx5pszvaq
   '@nestjs/passport': 8.2.1_tys52mabdspwpuru4mnhbd7smy
   '@nestjs/platform-express': 8.4.4_u6bxr3c7htwmhq2t5wi3k6ht4y
+  '@nestjs/schedule': 2.0.1_ri7uarpfhib2ateqzcw7uno7zy
   '@nestjs/swagger': 5.2.1_bubfdbyexfeae5f3hjn7okamgm
   '@nestjs/terminus': 8.0.6_eqolnjailvrsgpjwojmchkclhe
   '@nestjs/typeorm': 8.0.3_s6kf2wxaqx7c7ghapepprqoxna
@@ -99,6 +102,7 @@ devDependencies:
   '@nestjs/testing': 8.4.4_loutjh2c633gtj2hgeppyprxme
   '@types/bcrypt': 5.0.0
   '@types/cookie-parser': 1.4.3
+  '@types/cron': 2.0.0
   '@types/express': 4.17.13
   '@types/jest': 27.5.0
   '@types/multer': 1.4.7
@@ -2098,6 +2102,20 @@ packages:
       tslib: 2.3.1
     dev: false
 
+  /@nestjs/schedule/2.0.1_ri7uarpfhib2ateqzcw7uno7zy:
+    resolution: {integrity: sha512-NqiCk3P7HDMw55kpefNIzAAQEsP+6dDIXUt4/KQANtAZ+opdLzo8rkzI0j8vDqgYeTh+PKq+V6zwSRjR61xPAQ==}
+    peerDependencies:
+      '@nestjs/common': ^6.10.11 || ^7.0.0 || ^8.0.0
+      '@nestjs/core': ^7.0.0 || ^8.0.0
+      reflect-metadata: ^0.1.12
+    dependencies:
+      '@nestjs/common': 8.4.4_kgmvgmqc4iohdboj3f7yqhrie4
+      '@nestjs/core': 8.4.4_wy6cne2gpevj2v6pvodnemcq2i
+      cron: 2.0.0
+      reflect-metadata: 0.1.13
+      uuid: 8.3.2
+    dev: false
+
   /@nestjs/schematics/8.0.11_ezuyfu3uj65g35wdjb6342atpm:
     resolution: {integrity: sha512-W/WzaxgH5aE01AiIErE9QrQJ73VR/M/8p8pq0LZmjmNcjZqU5kQyOWUxZg13WYfSpJdOa62t6TZRtFDmgZPoIg==}
     peerDependencies:
@@ -2375,6 +2393,13 @@ packages:
     resolution: {integrity: sha512-t73xJJrvdTjXrn4jLS9VSGRbz0nUY3cl2DMGDU48lKl+HR9dbbjW2A9r3g40VA++mQpy6uuHg33gy7du2BKpog==}
     dev: true
 
+  /@types/cron/2.0.0:
+    resolution: {integrity: sha512-xZM08fqvwIXgghtPVkSPKNgC+JoMQ2OHazEvyTKnNf7aWu1aB6/4lBbQFrb03Td2cUGG7ITzMv3mFYnMu6xRaQ==}
+    dependencies:
+      '@types/luxon': 2.3.2
+      '@types/node': 17.0.31
+    dev: true
+
   /@types/eslint-scope/3.7.3:
     resolution: {integrity: sha512-PB3ldyrcnAicT35TWPs5IcwKD8S333HMaa2VVv4+wdvebJkjWuW/xESoB8IwRcog8HYVYamb1g/R31Qv5Bx03g==}
     dependencies:
@@ -2457,6 +2482,10 @@ packages:
     resolution: {integrity: sha512-zm6xBQpFDIDM6o9r6HSgDeIcLy82TKWctCXEPbJJcXb5AKmi5BNNdLXneixK4lplX3PqIVcwLBCGE/kAGnlD4A==}
     dependencies:
       '@types/node': 17.0.31
+    dev: true
+
+  /@types/luxon/2.3.2:
+    resolution: {integrity: sha512-WOehptuhKIXukSUUkRgGbj2c997Uv/iUgYgII8U7XLJqq9W2oF0kQ6frEznRQbdurioz+L/cdaIm4GutTQfgmA==}
     dev: true
 
   /@types/mime/1.3.2:
@@ -3765,6 +3794,12 @@ packages:
   /create-require/1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
     dev: true
+
+  /cron/2.0.0:
+    resolution: {integrity: sha512-RPeRunBCFr/WEo7WLp8Jnm45F/ziGJiHVvVQEBSDTSGu6uHW49b2FOP2O14DcXlGJRLhwE7TIoDzHHK4KmlL6g==}
+    dependencies:
+      luxon: 1.28.0
+    dev: false
 
   /cross-spawn/7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -5920,6 +5955,10 @@ packages:
   /lunr/2.3.9:
     resolution: {integrity: sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow==}
     dev: true
+
+  /luxon/1.28.0:
+    resolution: {integrity: sha512-TfTiyvZhwBYM/7QdAVDh+7dBTBA29v4ik0Ce9zda3Mnf8on1S5KJI8P2jKFZ8+5C0jhmr0KwJEO/Wdpm0VeWJQ==}
+    dev: false
 
   /macos-release/2.5.0:
     resolution: {integrity: sha512-EIgv+QZ9r+814gjJj0Bt5vSLJLzswGmSUbUpbi9AIr/fsN2IWFBl2NucV9PAiek+U1STK468tEkxmVYUtuAN3g==}

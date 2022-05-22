@@ -28,6 +28,8 @@ import { LoggerModule } from './logger/logger.module';
 import { LogsMiddleware } from './utils/logs.middleware';
 import { HealthModule } from './health/health.module';
 import { EmailModule } from './email/email.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { EmailSchedulingModule } from './features/email-scheduling/email-scheduling.module';
 
 @Module({
   imports: [
@@ -45,6 +47,7 @@ import { EmailModule } from './email/email.module';
         emailConfig,
       ],
     }),
+    ScheduleModule.forRoot(),
     DatabaseModule,
     AuthenticationModule,
     UsersModule,
@@ -58,6 +61,7 @@ import { EmailModule } from './email/email.module';
     LoggerModule,
     HealthModule,
     EmailModule,
+    EmailSchedulingModule,
   ],
   controllers: [AppController],
   providers: [
