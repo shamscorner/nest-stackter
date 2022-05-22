@@ -30,6 +30,7 @@
     "@nestjs/passport": "^8.2.1",
     "@nestjs/platform-express": "^8.4.4",
     "@nestjs/swagger": "^5.2.1",
+    "@nestjs/terminus": "^8.0.6",
     "@nestjs/typeorm": "^8.0.3",
     "aws-sdk": "^2.1128.0",
     "bcrypt": "^5.0.1",

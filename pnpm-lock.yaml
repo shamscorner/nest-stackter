@@ -12,6 +12,7 @@ specifiers:
   '@nestjs/platform-express': ^8.4.4
   '@nestjs/schematics': ^8.0.11
   '@nestjs/swagger': ^5.2.1
+  '@nestjs/terminus': ^8.0.6
   '@nestjs/testing': ^8.4.4
   '@nestjs/typeorm': ^8.0.3
   '@types/bcrypt': ^5.0.0
@@ -66,6 +67,7 @@ dependencies:
   '@nestjs/passport': 8.2.1_tys52mabdspwpuru4mnhbd7smy
   '@nestjs/platform-express': 8.4.4_u6bxr3c7htwmhq2t5wi3k6ht4y
   '@nestjs/swagger': 5.2.1_bubfdbyexfeae5f3hjn7okamgm
+  '@nestjs/terminus': 8.0.6_eqolnjailvrsgpjwojmchkclhe
   '@nestjs/typeorm': 8.0.3_s6kf2wxaqx7c7ghapepprqoxna
   aws-sdk: 2.1128.0
   bcrypt: 5.0.1
@@ -1100,6 +1102,21 @@ packages:
     transitivePeerDependencies:
       - class-transformer
       - class-validator
+    dev: false
+
+  /@nestjs/terminus/8.0.6_eqolnjailvrsgpjwojmchkclhe:
+    resolution: {integrity: sha512-HevQNlJzIkiZ5S1Yb+ll4pwiqg8qB5M6G+2LD0hIkUHzWFvVdCAZDIhLhtwjjRGJ76dwC8BFE/YyUC/4reGAzQ==}
+    peerDependencies:
+      '@nestjs/common': 8.x
+      '@nestjs/core': 8.x
+      reflect-metadata: 0.1.x
+      rxjs: 7.x
+    dependencies:
+      '@nestjs/common': 8.4.4_kgmvgmqc4iohdboj3f7yqhrie4
+      '@nestjs/core': 8.4.4_wy6cne2gpevj2v6pvodnemcq2i
+      check-disk-space: 3.3.0
+      reflect-metadata: 0.1.13
+      rxjs: 7.5.5
     dev: false
 
   /@nestjs/testing/8.4.4_loutjh2c633gtj2hgeppyprxme:
@@ -2201,6 +2218,11 @@ packages:
   /chardet/0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
     dev: true
+
+  /check-disk-space/3.3.0:
+    resolution: {integrity: sha512-Hvr+Nr01xSSvuCpXvJ8oZ2iXjIu4XT3uHbw3g7F/Uiw6O5xk8c/Ot7ZGFDaTRDf2Bz8AdWA4DvpAgCJVKt8arw==}
+    engines: {node: '>=12'}
+    dev: false
 
   /chokidar/3.5.3:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}

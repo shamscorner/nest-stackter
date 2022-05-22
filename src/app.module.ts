@@ -25,6 +25,7 @@ import { DatabaseFilesModule } from './features/database-files/database-files.mo
 import { LocalFilesModule } from './features/local-files/local-files.module';
 import { LoggerModule } from './logger/logger.module';
 import { LogsMiddleware } from './utils/logs.middleware';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { LogsMiddleware } from './utils/logs.middleware';
     DatabaseFilesModule,
     LocalFilesModule,
     LoggerModule,
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [
