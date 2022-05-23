@@ -10,8 +10,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     bufferLogs: true,
   });
-  app.useLogger(app.get(CustomLogger));
+
   const configService = app.get(ConfigService);
+
+  app.useLogger(app.get(CustomLogger));
 
   app.setGlobalPrefix('/api');
 

@@ -3,6 +3,7 @@ import {
   HttpStatus,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -16,6 +17,9 @@ import * as bcrypt from 'bcrypt';
 import { DatabaseFilesService } from '../database-files/database-files.service';
 import { LocalFileDto } from '../local-files/dto/local-file.dto';
 import { LocalFilesService } from '../local-files/local-files.service';
+import { join } from 'path';
+import * as util from 'util';
+import * as filesystem from 'fs';
 
 @Injectable()
 export class UsersService {
@@ -189,6 +193,26 @@ export class UsersService {
     } finally {
       await queryRunner.release();
     }
+  }
+
+  async getAvatar(userId: number) {
+    const user = await this.getById(userId);
+    const fileId = user.avatarId;
+    if (!fileId) {
+      throw new NotFoundException();
+    }
+    const fileMetadata = await this.localFilesService.getFileById(
+      user.avatarId,
+    );
+
+    const pathOnDisk = join(process.cwd(), fileMetadata.path);
+
+    const file = await util.promisify(filesystem.readFile)(pathOnDisk);
+
+    return {
+      file,
+      fileMetadata,
+    };
   }
 
   async addAvatar(userId: number, fileData: LocalFileDto) {

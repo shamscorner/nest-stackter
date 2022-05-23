@@ -4,16 +4,18 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Req,
   Res,
+  StreamableFile,
   UploadedFile,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { RequestWithUser } from '../../authentication/request-with-user.interface';
 import { UsersService } from './users.service';
-import { Express, Response } from 'express';
+import { Express, Response, Request } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtAuthenticationGuard } from '../../authentication/jwt-authentication.guard';
 import { FindOneParams } from '../../utils/dto/find-one-params.dto';
@@ -48,18 +50,6 @@ export class UsersController {
     return this.usersService.getAllUsers();
   }
 
-  @Get('files')
-  @ApiOkResponse({
-    description:
-      'All the private files of the user have been fetched successfully!',
-    type: [FileResponseDto],
-  })
-  @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
-  @UseGuards(JwtAuthenticationGuard)
-  async getAllPrivateFiles(@Req() request: RequestWithUser) {
-    return this.usersService.getAllPrivateFiles(request.user.id);
-  }
-
   @Get(':email')
   @ApiParam({
     name: 'email',
@@ -78,32 +68,79 @@ export class UsersController {
     return this.usersService.getByEmail(email);
   }
 
-  @Get('files/:id')
-  @ApiParam({
-    name: 'id',
-    required: true,
-    description: 'Should be an id of a file that exists in the database',
-    type: String,
+  @Get(':userId/avatar')
+  async getAvatar(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Res({ passthrough: true }) response: Response,
+    @Req() request: Request,
+  ) {
+    const { file, fileMetadata } = await this.usersService.getAvatar(userId);
+
+    const tag = `W/"file-id-${fileMetadata.id}"`;
+
+    response.set({
+      'Content-Disposition': `inline; filename="${fileMetadata.filename}"`,
+      'Content-Type': fileMetadata.mimetype,
+      ETag: tag,
+    });
+
+    if (request.headers['if-none-match'] === tag) {
+      response.status(304);
+      return;
+    }
+
+    return new StreamableFile(file);
+  }
+
+  @Post('avatar')
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'A new avatar for the user',
+    type: FileUploadDto,
   })
-  @ApiOkResponse({
-    description: 'A private file of the user has been fetched successfully!',
-    type: FileResponseDto,
-  })
-  @ApiNotFoundResponse({
-    description: 'A file with given id does not exist.',
+  @ApiCreatedResponse({
+    description: 'An avatar of the user has been added successfully!',
+    type: PublicFile,
   })
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @UseGuards(JwtAuthenticationGuard)
-  async getPrivateFile(
+  @UseInterceptors(
+    LocalFilesInterceptor({
+      fieldName: 'file',
+      path: '/avatars',
+      fileFilter: (request, file, callback) => {
+        if (!file.mimetype.includes('image')) {
+          return callback(
+            new BadRequestException('Provide a valid image'),
+            false,
+          );
+        }
+        callback(null, true);
+      },
+      limits: {
+        fileSize: Math.pow(1024, 2), // 1 MB
+      },
+    }),
+  )
+  addAvatar(
     @Req() request: RequestWithUser,
-    @Param() { id }: FindOneParams,
-    @Res() response: Response,
+    @UploadedFile() file: Express.Multer.File,
   ) {
-    const file = await this.usersService.getPrivateFile(
-      request.user.id,
-      Number(id),
-    );
-    file.stream.pipe(response);
+    return this.usersService.addAvatar(request.user.id, {
+      path: file.path,
+      filename: file.originalname,
+      mimetype: file.mimetype,
+    });
+  }
+
+  @Delete('avatar')
+  @ApiOkResponse({
+    description: 'Avatar for this user has been deleted successfully!',
+  })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
+  @UseGuards(JwtAuthenticationGuard)
+  deleteAvatar(@Req() request: RequestWithUser) {
+    return this.usersService.deleteAvatar(request.user.id);
   }
 
   @Post('avatar/amazonS3')
@@ -154,45 +191,44 @@ export class UsersController {
     );
   }
 
-  @Post('avatar')
-  @ApiConsumes('multipart/form-data')
-  @ApiBody({
-    description: 'A new avatar for the user',
-    type: FileUploadDto,
-  })
-  @ApiCreatedResponse({
-    description: 'An avatar of the user has been added successfully!',
-    type: PublicFile,
+  @Get('files')
+  @ApiOkResponse({
+    description:
+      'All the private files of the user have been fetched successfully!',
+    type: [FileResponseDto],
   })
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @UseGuards(JwtAuthenticationGuard)
-  @UseInterceptors(
-    LocalFilesInterceptor({
-      fieldName: 'file',
-      path: '/avatars',
-      fileFilter: (request, file, callback) => {
-        if (!file.mimetype.includes('image')) {
-          return callback(
-            new BadRequestException('Provide a valid image'),
-            false,
-          );
-        }
-        callback(null, true);
-      },
-      limits: {
-        fileSize: Math.pow(1024, 2), // 1 MB
-      },
-    }),
-  )
-  addAvatar(
+  async getAllPrivateFiles(@Req() request: RequestWithUser) {
+    return this.usersService.getAllPrivateFiles(request.user.id);
+  }
+
+  @Get('files/:id')
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'Should be an id of a file that exists in the database',
+    type: String,
+  })
+  @ApiOkResponse({
+    description: 'A private file of the user has been fetched successfully!',
+    type: FileResponseDto,
+  })
+  @ApiNotFoundResponse({
+    description: 'A file with given id does not exist.',
+  })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
+  @UseGuards(JwtAuthenticationGuard)
+  async getPrivateFile(
     @Req() request: RequestWithUser,
-    @UploadedFile() file: Express.Multer.File,
+    @Param() { id }: FindOneParams,
+    @Res() response: Response,
   ) {
-    return this.usersService.addAvatar(request.user.id, {
-      path: file.path,
-      filename: file.originalname,
-      mimetype: file.mimetype,
-    });
+    const file = await this.usersService.getPrivateFile(
+      request.user.id,
+      Number(id),
+    );
+    file.stream.pipe(response);
   }
 
   @Post('files')
@@ -217,16 +253,6 @@ export class UsersController {
       file.buffer,
       file.originalname,
     );
-  }
-
-  @Delete('avatar')
-  @ApiOkResponse({
-    description: 'Avatar for this user has been deleted successfully!',
-  })
-  @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
-  @UseGuards(JwtAuthenticationGuard)
-  deleteAvatar(@Req() request: RequestWithUser) {
-    return this.usersService.deleteAvatar(request.user.id);
   }
 
   @Delete('files/:id')
