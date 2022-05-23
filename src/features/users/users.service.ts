@@ -78,6 +78,17 @@ export class UsersService {
     );
   }
 
+  async createWithGoogle(email: string, name: string) {
+    const newUser = await this.usersRepository.create({
+      email,
+      name,
+      isRegisteredWithGoogle: true,
+    });
+
+    await this.usersRepository.save(newUser);
+    return newUser;
+  }
+
   async getAllUsers() {
     const users = await this.usersRepository.find();
     return users;

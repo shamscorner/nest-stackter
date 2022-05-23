@@ -85,4 +85,7 @@ export class User {
 
   @Column({ default: false })
   public isTwoFactorAuthenticationEnabled: boolean;
+
+  @Column({ default: false })
+  public isRegisteredWithGoogle?: boolean;
 }

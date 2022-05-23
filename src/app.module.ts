@@ -19,6 +19,7 @@ import typeormConfig from './config/typeorm.config';
 import awsConfig from './config/aws.config';
 import jwtConfig from './config/jwt.config';
 import emailConfig from './config/email.config';
+import googleConfig from './config/google.config';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { CommentsModule } from './features/comments/comments.module';
 import { ProductsModule } from './features/products/products.module';
@@ -31,6 +32,7 @@ import { EmailModule } from './email/email.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { EmailSchedulingModule } from './features/email-scheduling/email-scheduling.module';
 import { EmailConfirmationModule } from './features/email-confirmation/email-confirmation.module';
+import { GoogleAuthenticationModule } from './features/google-authentication/google-authentication.module';
 
 @Module({
   imports: [
@@ -46,6 +48,7 @@ import { EmailConfirmationModule } from './features/email-confirmation/email-con
         awsConfig,
         jwtConfig,
         emailConfig,
+        googleConfig,
       ],
     }),
     ScheduleModule.forRoot(),
@@ -64,6 +67,7 @@ import { EmailConfirmationModule } from './features/email-confirmation/email-con
     EmailModule,
     EmailSchedulingModule,
     EmailConfirmationModule,
+    GoogleAuthenticationModule,
   ],
   controllers: [AppController],
   providers: [
