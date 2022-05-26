@@ -33,6 +33,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { EmailSchedulingModule } from './features/email-scheduling/email-scheduling.module';
 import { EmailConfirmationModule } from './features/email-confirmation/email-confirmation.module';
 import { GoogleAuthenticationModule } from './features/google-authentication/google-authentication.module';
+import { AuthorizationModule } from './authorization/authorization.module';
 
 @Module({
   imports: [
@@ -68,6 +69,7 @@ import { GoogleAuthenticationModule } from './features/google-authentication/goo
     EmailSchedulingModule,
     EmailConfirmationModule,
     GoogleAuthenticationModule,
+    AuthorizationModule,
   ],
   controllers: [AppController],
   providers: [

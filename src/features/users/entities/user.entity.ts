@@ -12,6 +12,7 @@ import { Post } from '../../posts/entities/post.entity';
 import { PrivateFile } from '../../files/entities/private-file.entity';
 import { Product } from '../../products/entities/product.entity';
 import { LocalFile } from 'src/features/local-files/entities/local-file.entity';
+import { Role } from '../../../authorization/role.enum';
 
 @Entity()
 export class User {
@@ -23,6 +24,13 @@ export class User {
 
   @Column({ default: false })
   public isEmailConfirmed?: boolean;
+
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: Role.User,
+  })
+  public roles?: Role;
 
   @Column()
   public name: string;
