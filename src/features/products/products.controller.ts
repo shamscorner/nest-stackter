@@ -20,6 +20,8 @@ import { GetProductDto } from './dto/get-product.dto';
 import { PaginatedResultDto } from '../../utils/dto/paginated-result.dto';
 import { Product } from './entities/product.entity';
 import { ApiExtraModels, ApiTags } from '@nestjs/swagger';
+import { PermissionGuard } from '../../authorization/permission.guard';
+import { Permission } from '../../authorization/types/permission.type';
 
 @Controller('products')
 @ApiTags('products')
@@ -29,6 +31,7 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
+  @UseGuards(PermissionGuard(Permission.CreateProduct))
   async create(
     @Body() createProductDto: CreateProductDto,
     @Req() request: RequestWithUser,
@@ -60,6 +63,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
+  @UseGuards(PermissionGuard(Permission.DeleteProduct))
   @HttpCode(204)
   remove(@Param('id') id: string, @Req() request: RequestWithUser) {
     const user = request.user;

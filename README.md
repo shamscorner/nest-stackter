@@ -26,6 +26,7 @@
 - Documentation with Compodoc and JSDoc - take a look on the `src/features/files/files.service.ts` for a detailed example. And for the generation command, run `pnpm run documentation:serve`. Or to customize it, check the `package.json`.
 - Sending scheduled emails with cron and Nodemailer - `src/features/email-scheduling` and check the email service in `src/email`
 - Out of the box Google authentication module - check out the `src/features/google-authentication` module
+- Roles and Permissions based authorization setup - check out the `src/authorization` module. For implementation, check the `src/features/categories` and `src/features/products` modules
 
 ## Installation
 

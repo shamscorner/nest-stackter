@@ -11,8 +11,9 @@ import { Address } from './address.entity';
 import { Post } from '../../posts/entities/post.entity';
 import { PrivateFile } from '../../files/entities/private-file.entity';
 import { Product } from '../../products/entities/product.entity';
-import { LocalFile } from 'src/features/local-files/entities/local-file.entity';
+import { LocalFile } from '../../../features/local-files/entities/local-file.entity';
 import { Role } from '../../../authorization/role.enum';
+import { Permission } from '../../../authorization/types/permission.type';
 
 @Entity()
 export class User {
@@ -30,7 +31,15 @@ export class User {
     enum: Role,
     default: Role.User,
   })
-  public roles?: Role;
+  public role?: Role;
+
+  @Column({
+    type: 'enum',
+    enum: Permission,
+    array: true,
+    default: [],
+  })
+  public permissions?: Permission[];
 
   @Column()
   public name: string;
