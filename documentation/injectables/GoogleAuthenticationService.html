@@ -28,16 +28,19 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content controller">
+               <div class="content injectable">
                    <div class="content-data">
 
 
 
 
 
+
+
+
 <ol class="breadcrumb">
-  <li>Controllers</li>
-  <li >AuthenticationController</li>
+  <li>Injectables</li>
+  <li >GoogleAuthenticationService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -55,16 +58,8 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/authentication/authentication.controller.ts</code>
+            <code>src/features/google-authentication/google-authentication.service.ts</code>
         </p>
-
-            <p class="comment">
-                <h3>Prefix</h3>
-            </p>
-            <p class="comment">
-                <code>authentication</code>
-            </p>
-
 
 
 
@@ -74,6 +69,20 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#oauthClient" >oauthClient</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -84,22 +93,24 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#authenticate" >authenticate</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#login" >login</a>
+                                <a href="#getCookiesForUser" >getCookiesForUser</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#logOut" >logOut</a>
-                            </li>
-                            <li>
-                                <a href="#refresh" >refresh</a>
+                                <a href="#getUserData" >getUserData</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#register" >register</a>
+                                <a href="#handleRegisteredUser" >handleRegisteredUser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#registerUser" >registerUser</a>
                             </li>
                         </ul>
                     </td>
@@ -114,6 +125,79 @@
 </section>
 
             <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(usersService: <a href="../injectables/UsersService.html" target="_self">UsersService</a>, configService: ConfigService, authenticationService: <a href="../injectables/AuthenticationService.html" target="_self">AuthenticationService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/features/google-authentication/google-authentication.service.ts:10</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>usersService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UsersService.html" target="_self" >UsersService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ConfigService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authenticationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthenticationService.html" target="_self" >AuthenticationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
     
     <h3 id="methods">
         Methods
@@ -124,6 +208,7 @@
                 <td class="col-md-4">
                     <a name="authenticate"></a>
                     <span class="name">
+                        <span class="modifier">Async</span>
                         <span ><b>authenticate</b></span>
                         <a href="#authenticate"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -131,100 +216,16 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>authenticate(request: <a href="../interfaces/RequestWithUser.html" target="_self">RequestWithUser</a>)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@UseGuards(JwtAuthenticationGuard)<br />@Get()<br /></code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:32</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>request</td>
-                                    <td>
-                                                <code><a href="../interfaces/RequestWithUser.html" target="_self" >RequestWithUser</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="login"></a>
-                    <span class="name">
-                        <span class="modifier">Async</span>
-                        <span ><b>login</b></span>
-                        <a href="#login"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>login(request: <a href="../interfaces/RequestWithUser.html" target="_self">RequestWithUser</a>)</code>
+                    <code>authenticate(token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@HttpCode(200)<br />@UseGuards(LocalAuthenticationGuard)<br />@Post(&#x27;login&#x27;)<br />@ApiBody({type: LogInDto})<br /></code>
-                </td>
-            </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="58"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:58</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">src/features/google-authentication/google-authentication.service.ts:75</a></div>
                 </td>
             </tr>
 
@@ -245,9 +246,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>request</td>
+                                    <td>token</td>
                                     <td>
-                                                <code><a href="../interfaces/RequestWithUser.html" target="_self" >RequestWithUser</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
 
                                     <td>
@@ -276,33 +277,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="logOut"></a>
+                    <a name="getCookiesForUser"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
-                        <span ><b>logOut</b></span>
-                        <a href="#logOut"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getCookiesForUser</b></span>
+                        <a href="#getCookiesForUser"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>logOut(request: <a href="../interfaces/RequestWithUser.html" target="_self">RequestWithUser</a>)</code>
+                    <code>getCookiesForUser(user: <a href="../entitys/User.html" target="_self">User</a>)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@UseGuards(JwtAuthenticationGuard)<br />@Post(&#x27;logout&#x27;)<br />@HttpCode(200)<br /></code>
-                </td>
-            </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="82"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:82</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/features/google-authentication/google-authentication.service.ts:37</a></div>
                 </td>
             </tr>
 
@@ -323,163 +317,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>request</td>
+                                    <td>user</td>
                                     <td>
-                                                <code><a href="../interfaces/RequestWithUser.html" target="_self" >RequestWithUser</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="refresh"></a>
-                    <span class="name">
-                        <span ><b>refresh</b></span>
-                        <a href="#refresh"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>refresh(request: <a href="../interfaces/RequestWithUser.html" target="_self">RequestWithUser</a>)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@UseGuards(JwtRefreshGuard)<br />@Get(&#x27;refresh&#x27;)<br /></code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="39"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:39</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>request</td>
-                                    <td>
-                                                <code><a href="../interfaces/RequestWithUser.html" target="_self" >RequestWithUser</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="register"></a>
-                    <span class="name">
-                        <span class="modifier">Async</span>
-                        <span ><b>register</b></span>
-                        <a href="#register"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>register(registrationData: <a href="../classes/RegisterDto.html" target="_self">RegisterDto</a>)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Post(&#x27;register&#x27;)<br /></code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:48</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>registrationData</td>
-                                    <td>
-                                                <code><a href="../classes/RegisterDto.html" target="_self" >RegisterDto</a></code>
+                                                <code><a href="../entitys/User.html" target="_self" >User</a></code>
                                     </td>
 
                                     <td>
@@ -504,69 +344,306 @@
             </tr>
         </tbody>
     </table>
-</section>    </div>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUserData"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getUserData</b></span>
+                        <a href="#getUserData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getUserData(token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/features/google-authentication/google-authentication.service.ts:23</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleRegisteredUser"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>handleRegisteredUser</b></span>
+                        <a href="#handleRegisteredUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleRegisteredUser(user: <a href="../entitys/User.html" target="_self">User</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">src/features/google-authentication/google-authentication.service.ts:51</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../entitys/User.html" target="_self" >User</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerUser"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>registerUser</b></span>
+                        <a href="#registerUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registerUser(token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="66"
+                            class="link-to-prism">src/features/google-authentication/google-authentication.service.ts:66</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>email</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="oauthClient"></a>
+                    <span class="name">
+                        <span ><b>oauthClient</b></span>
+                        <a href="#oauthClient"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Auth.OAuth2Client</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/features/google-authentication/google-authentication.service.ts:10</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  Post,
-  Req,
-  UseGuards,
-} from &#x27;@nestjs/common&#x27;;
-import { ApiBody, ApiTags } from &#x27;@nestjs/swagger&#x27;;
-import { EmailConfirmationService } from &#x27;../features/email-confirmation/email-confirmation.service&#x27;;
-import { UsersService } from &#x27;../features/users/users.service&#x27;;
-import { AuthenticationService } from &#x27;./authentication.service&#x27;;
-import { LogInDto } from &#x27;./dto/login.dto&#x27;;
-import { RegisterDto } from &#x27;./dto/register.dto&#x27;;
-import { JwtAuthenticationGuard } from &#x27;./jwt-authentication.guard&#x27;;
-import { JwtRefreshGuard } from &#x27;./jwt-refresh.guard&#x27;;
-import { LocalAuthenticationGuard } from &#x27;./local-authentication.guard&#x27;;
-import { RequestWithUser } from &#x27;./request-with-user.interface&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, UnauthorizedException } from &#x27;@nestjs/common&#x27;;
+import { ConfigService } from &#x27;@nestjs/config&#x27;;
+import { Auth, google } from &#x27;googleapis&#x27;;
+import { AuthenticationService } from &#x27;../../authentication/authentication.service&#x27;;
+import { User } from &#x27;../users/entities/user.entity&#x27;;
+import { UsersService } from &#x27;../users/users.service&#x27;;
 
-@Controller(&#x27;authentication&#x27;)
-@ApiTags(&#x27;authentication&#x27;)
-export class AuthenticationController {
+@Injectable()
+export class GoogleAuthenticationService {
+  oauthClient: Auth.OAuth2Client;
+
   constructor(
-    private readonly authenticationService: AuthenticationService,
     private readonly usersService: UsersService,
-    private readonly emailConfirmationService: EmailConfirmationService,
-  ) {}
+    private readonly configService: ConfigService,
+    private readonly authenticationService: AuthenticationService,
+  ) {
+    const clientID &#x3D; this.configService.get(&#x27;google.auth.clientId&#x27;);
+    const clientSecret &#x3D; this.configService.get(&#x27;google.auth.clientSecret&#x27;);
 
-  @UseGuards(JwtAuthenticationGuard)
-  @Get()
-  authenticate(@Req() request: RequestWithUser) {
-    const user &#x3D; request.user;
-    return user;
+    this.oauthClient &#x3D; new google.auth.OAuth2(clientID, clientSecret);
   }
 
-  @UseGuards(JwtRefreshGuard)
-  @Get(&#x27;refresh&#x27;)
-  refresh(@Req() request: RequestWithUser) {
-    const accessTokenCookie &#x3D;
-      this.authenticationService.getCookieWithJwtAccessToken(request.user.id);
+  async getUserData(token: string) {
+    const userInfoClient &#x3D; google.oauth2(&#x27;v2&#x27;).userinfo;
 
-    request.res.setHeader(&#x27;Set-Cookie&#x27;, accessTokenCookie);
-    return request.user;
+    this.oauthClient.setCredentials({
+      access_token: token,
+    });
+
+    const userInfoResponse &#x3D; await userInfoClient.get({
+      auth: this.oauthClient,
+    });
+
+    return userInfoResponse.data;
   }
 
-  @Post(&#x27;register&#x27;)
-  async register(@Body() registrationData: RegisterDto) {
-    const user &#x3D; await this.authenticationService.register(registrationData);
-    await this.emailConfirmationService.sendVerificationLink(registrationData);
-    return user;
-  }
-
-  @HttpCode(200)
-  @UseGuards(LocalAuthenticationGuard)
-  @Post(&#x27;login&#x27;)
-  @ApiBody({ type: LogInDto })
-  async login(@Req() request: RequestWithUser) {
-    const { user } &#x3D; request;
+  async getCookiesForUser(user: User) {
     const accessTokenCookie &#x3D;
       this.authenticationService.getCookieWithJwtAccessToken(user.id);
     const { cookie: refreshTokenCookie, token: refreshToken } &#x3D;
@@ -574,35 +651,58 @@ export class AuthenticationController {
 
     await this.usersService.setCurrentRefreshToken(refreshToken, user.id);
 
-    request.res.setHeader(&#x27;Set-Cookie&#x27;, [
+    return {
       accessTokenCookie,
       refreshTokenCookie,
-    ]);
-
-    if (user.isTwoFactorAuthenticationEnabled) {
-      return;
-    }
-
-    return user;
+    };
   }
 
-  @UseGuards(JwtAuthenticationGuard)
-  @Post(&#x27;logout&#x27;)
-  @HttpCode(200)
-  async logOut(@Req() request: RequestWithUser) {
-    await this.usersService.removeRefreshToken(request.user.id);
-    request.res.setHeader(
-      &#x27;Set-Cookie&#x27;,
-      this.authenticationService.getCookiesForLogOut(),
-    );
+  async handleRegisteredUser(user: User) {
+    if (!user.isRegisteredWithGoogle) {
+      throw new UnauthorizedException();
+    }
+
+    const { accessTokenCookie, refreshTokenCookie } &#x3D;
+      await this.getCookiesForUser(user);
+
+    return {
+      accessTokenCookie,
+      refreshTokenCookie,
+      user,
+    };
+  }
+
+  async registerUser(token: string, email: string) {
+    const userData &#x3D; await this.getUserData(token);
+    const name &#x3D; userData.name;
+
+    const user &#x3D; await this.usersService.createWithGoogle(email, name);
+
+    return this.handleRegisteredUser(user);
+  }
+
+  async authenticate(token: string) {
+    const tokenInfo &#x3D; await this.oauthClient.getTokenInfo(token);
+
+    const email &#x3D; tokenInfo.email;
+
+    try {
+      const user &#x3D; await this.usersService.getByEmail(email);
+
+      return this.handleRegisteredUser(user);
+    } catch (error: any) {
+      if (error.status !&#x3D;&#x3D; 404) {
+        throw new error();
+      }
+
+      return this.registerUser(token, email);
+    }
   }
 }
 </code></pre>
     </div>
+
 </div>
-
-
-
 
 
 
@@ -641,8 +741,8 @@ export class AuthenticationController {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
-            var COMPODOC_CURRENT_PAGE_URL = 'AuthenticationController.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'GoogleAuthenticationService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -73,6 +73,15 @@
                             <a href="#mockedUser" title="src/authentication/tests/user.mock.ts" ><b>mockedUser</b>&nbsp;&nbsp;&nbsp;(src/.../user.mock.ts)</a>
                         </li>
                         <li>
+                            <a href="#Permission" title="src/authorization/types/permission.type.ts" ><b>Permission</b>&nbsp;&nbsp;&nbsp;(src/.../permission.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PermissionGuard" title="src/authorization/permission.guard.ts" ><b>PermissionGuard</b>&nbsp;&nbsp;&nbsp;(src/.../permission.guard.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RoleGuard" title="src/authorization/role.guard.ts" ><b>RoleGuard</b>&nbsp;&nbsp;&nbsp;(src/.../role.guard.ts)</a>
+                        </li>
+                        <li>
                             <a href="#typeormModuleOptions" title="src/config/typeorm.config.ts" ><b>typeormModuleOptions</b>&nbsp;&nbsp;&nbsp;(src/.../typeorm.config.ts)</a>
                         </li>
                     </ul>
@@ -223,6 +232,110 @@
     country: &#x27;countryName&#x27;,
   },
   isTwoFactorAuthenticationEnabled: false,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/authorization/types/permission.type.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Permission"></a>
+                    <span class="name">
+                        <span ><b>Permission</b></span>
+                        <a href="#Permission"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  ...ProductsPermission,
+  ...CategoriesPermission,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/authorization/permission.guard.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="PermissionGuard"></a>
+                    <span class="name">
+                        <span ><b>PermissionGuard</b></span>
+                        <a href="#PermissionGuard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(permission: Permission): Type&lt;CanActivate&gt; &#x3D;&gt; {
+  class PermissionGuardMixin extends JwtAuthenticationGuard {
+    async canActivate(context: ExecutionContext) {
+      await super.canActivate(context);
+
+      const request &#x3D; context.switchToHttp().getRequest&lt;RequestWithUser&gt;();
+      const user &#x3D; request.user;
+
+      return user?.permissions.includes(permission);
+    }
+  }
+
+  return mixin(PermissionGuardMixin);
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/authorization/role.guard.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RoleGuard"></a>
+                    <span class="name">
+                        <span ><b>RoleGuard</b></span>
+                        <a href="#RoleGuard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(role: Role): Type&lt;CanActivate&gt; &#x3D;&gt; {
+  class RoleGuardMixin extends JwtAuthenticationGuard {
+    async canActivate(context: ExecutionContext) {
+      await super.canActivate(context);
+
+      const request &#x3D; context.switchToHttp().getRequest&lt;RequestWithUser&gt;();
+      const user &#x3D; request.user;
+
+      return user?.role &#x3D;&#x3D;&#x3D; role;
+    }
+  }
+
+  return mixin(RoleGuardMixin);
 }</code>
                     </td>
                 </tr>

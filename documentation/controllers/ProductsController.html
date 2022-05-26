@@ -140,14 +140,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post()<br /></code>
+                    <code>@Post()<br />@UseGuards(undefined)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/features/products/products.controller.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">src/features/products/products.controller.ts:35</a></div>
                 </td>
             </tr>
 
@@ -236,8 +236,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">src/features/products/products.controller.ts:41</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="44"
+                            class="link-to-prism">src/features/products/products.controller.ts:44</a></div>
                 </td>
             </tr>
 
@@ -311,8 +311,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/features/products/products.controller.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">src/features/products/products.controller.ts:51</a></div>
                 </td>
             </tr>
 
@@ -381,14 +381,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;:id&#x27;)<br />@HttpCode(204)<br /></code>
+                    <code>@Delete(&#x27;:id&#x27;)<br />@UseGuards(undefined)<br />@HttpCode(204)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="64"
-                            class="link-to-prism">src/features/products/products.controller.ts:64</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="68"
+                            class="link-to-prism">src/features/products/products.controller.ts:68</a></div>
                 </td>
             </tr>
 
@@ -475,8 +475,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="53"
-                            class="link-to-prism">src/features/products/products.controller.ts:53</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/features/products/products.controller.ts:56</a></div>
                 </td>
             </tr>
 
@@ -574,6 +574,8 @@ import { GetProductDto } from &#x27;./dto/get-product.dto&#x27;;
 import { PaginatedResultDto } from &#x27;../../utils/dto/paginated-result.dto&#x27;;
 import { Product } from &#x27;./entities/product.entity&#x27;;
 import { ApiExtraModels, ApiTags } from &#x27;@nestjs/swagger&#x27;;
+import { PermissionGuard } from &#x27;../../authorization/permission.guard&#x27;;
+import { Permission } from &#x27;../../authorization/types/permission.type&#x27;;
 
 @Controller(&#x27;products&#x27;)
 @ApiTags(&#x27;products&#x27;)
@@ -583,6 +585,7 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
+  @UseGuards(PermissionGuard(Permission.CreateProduct))
   async create(
     @Body() createProductDto: CreateProductDto,
     @Req() request: RequestWithUser,
@@ -614,6 +617,7 @@ export class ProductsController {
   }
 
   @Delete(&#x27;:id&#x27;)
+  @UseGuards(PermissionGuard(Permission.DeleteProduct))
   @HttpCode(204)
   remove(@Param(&#x27;id&#x27;) id: string, @Req() request: RequestWithUser) {
     const user &#x3D; request.user;

@@ -56,6 +56,10 @@
 <li>Two factor authentication setup out of the box - use <code>JwtTwoFactorGuard</code> when some specific endpoints need 2FA</li>
 <li>Logging with built-in logger and TypeORM is configurable through <code>.env</code> - <code>TYPEORM_LOGGING=true</code> - specify false to disable database logging</li>
 <li><code>Health</code> module</li>
+<li>Documentation with Compodoc and JSDoc - take a look on the <code>src/features/files/files.service.ts</code> for a detailed example. And for the generation command, run <code>pnpm run documentation:serve</code>. Or to customize it, check the <code>package.json</code>.</li>
+<li>Sending scheduled emails with cron and Nodemailer - <code>src/features/email-scheduling</code> and check the email service in <code>src/email</code></li>
+<li>Out of the box Google authentication module - check out the <code>src/features/google-authentication</code> module</li>
+<li>Roles and Permissions based authorization setup - check out the <code>src/authorization</code> module. For implementation, check the <code>src/features/categories</code> and <code>src/features/products</code> modules</li>
 </ul>
 <h2 id="installation">Installation</h2>
 <div><pre class="line-numbers"><code class="language-bash">$ npm install</code></pre></div><h2 id="running-the-app">Running the app</h2>

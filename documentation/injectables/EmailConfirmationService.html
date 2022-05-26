@@ -28,16 +28,19 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content controller">
+               <div class="content injectable">
                    <div class="content-data">
 
 
 
 
 
+
+
+
 <ol class="breadcrumb">
-  <li>Controllers</li>
-  <li >AuthenticationController</li>
+  <li>Injectables</li>
+  <li >EmailConfirmationService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -55,16 +58,8 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/authentication/authentication.controller.ts</code>
+            <code>src/features/email-confirmation/email-confirmation.service.ts</code>
         </p>
-
-            <p class="comment">
-                <h3>Prefix</h3>
-            </p>
-            <p class="comment">
-                <code>authentication</code>
-            </p>
-
 
 
 
@@ -84,22 +79,23 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#authenticate" >authenticate</a>
-                            </li>
-                            <li>
+                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#login" >login</a>
+                                <a href="#confirmEmail" >confirmEmail</a>
                             </li>
                             <li>
+                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#logOut" >logOut</a>
+                                <a href="#decodeConfirmationToken" >decodeConfirmationToken</a>
                             </li>
                             <li>
-                                <a href="#refresh" >refresh</a>
-                            </li>
-                            <li>
+                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#register" >register</a>
+                                <a href="#resendConfirmationLink" >resendConfirmationLink</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#sendVerificationLink" >sendVerificationLink</a>
                             </li>
                         </ul>
                     </td>
@@ -114,6 +110,91 @@
 </section>
 
             <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(jwtService: JwtService, configService: ConfigService, emailService: <a href="../injectables/EmailService.html" target="_self">EmailService</a>, usersService: <a href="../injectables/UsersService.html" target="_self">UsersService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/features/email-confirmation/email-confirmation.service.ts:10</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>jwtService</td>
+                                                  
+                                                        <td>
+                                                                    <code>JwtService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ConfigService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>emailService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/EmailService.html" target="_self" >EmailService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>usersService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UsersService.html" target="_self" >UsersService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
     
     <h3 id="methods">
         Methods
@@ -122,31 +203,27 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="authenticate"></a>
+                    <a name="confirmEmail"></a>
                     <span class="name">
-                        <span ><b>authenticate</b></span>
-                        <a href="#authenticate"><span class="icon ion-ios-link"></span></a>
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>confirmEmail</b></span>
+                        <a href="#confirmEmail"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>authenticate(request: <a href="../interfaces/RequestWithUser.html" target="_self">RequestWithUser</a>)</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>confirmEmail(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@UseGuards(JwtAuthenticationGuard)<br />@Get()<br /></code>
-                </td>
-            </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="52"
+                            class="link-to-prism">src/features/email-confirmation/email-confirmation.service.ts:52</a></div>
                 </td>
             </tr>
 
@@ -167,9 +244,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>request</td>
+                                    <td>email</td>
                                     <td>
-                                                <code><a href="../interfaces/RequestWithUser.html" target="_self" >RequestWithUser</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
 
                                     <td>
@@ -198,33 +275,27 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="login"></a>
+                    <a name="decodeConfirmationToken"></a>
                     <span class="name">
+                        <span class="modifier">Public</span>
                         <span class="modifier">Async</span>
-                        <span ><b>login</b></span>
-                        <a href="#login"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>decodeConfirmationToken</b></span>
+                        <a href="#decodeConfirmationToken"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>login(request: <a href="../interfaces/RequestWithUser.html" target="_self">RequestWithUser</a>)</code>
+                    <code>decodeConfirmationToken(token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@HttpCode(200)<br />@UseGuards(LocalAuthenticationGuard)<br />@Post(&#x27;login&#x27;)<br />@ApiBody({type: LogInDto})<br /></code>
-                </td>
-            </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="58"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:58</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">src/features/email-confirmation/email-confirmation.service.ts:62</a></div>
                 </td>
             </tr>
 
@@ -245,9 +316,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>request</td>
+                                    <td>token</td>
                                     <td>
-                                                <code><a href="../interfaces/RequestWithUser.html" target="_self" >RequestWithUser</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
 
                                     <td>
@@ -276,33 +347,27 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="logOut"></a>
+                    <a name="resendConfirmationLink"></a>
                     <span class="name">
+                        <span class="modifier">Public</span>
                         <span class="modifier">Async</span>
-                        <span ><b>logOut</b></span>
-                        <a href="#logOut"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>resendConfirmationLink</b></span>
+                        <a href="#resendConfirmationLink"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>logOut(request: <a href="../interfaces/RequestWithUser.html" target="_self">RequestWithUser</a>)</code>
+                    <code>resendConfirmationLink(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@UseGuards(JwtAuthenticationGuard)<br />@Post(&#x27;logout&#x27;)<br />@HttpCode(200)<br /></code>
-                </td>
-            </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="82"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:82</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">src/features/email-confirmation/email-confirmation.service.ts:42</a></div>
                 </td>
             </tr>
 
@@ -323,9 +388,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>request</td>
+                                    <td>userId</td>
                                     <td>
-                                                <code><a href="../interfaces/RequestWithUser.html" target="_self" >RequestWithUser</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
                                     </td>
 
                                     <td>
@@ -354,109 +419,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="refresh"></a>
+                    <a name="sendVerificationLink"></a>
                     <span class="name">
-                        <span ><b>refresh</b></span>
-                        <a href="#refresh"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>refresh(request: <a href="../interfaces/RequestWithUser.html" target="_self">RequestWithUser</a>)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@UseGuards(JwtRefreshGuard)<br />@Get(&#x27;refresh&#x27;)<br /></code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="39"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:39</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>request</td>
-                                    <td>
-                                                <code><a href="../interfaces/RequestWithUser.html" target="_self" >RequestWithUser</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="register"></a>
-                    <span class="name">
-                        <span class="modifier">Async</span>
-                        <span ><b>register</b></span>
-                        <a href="#register"><span class="icon ion-ios-link"></span></a>
+                        <span class="modifier">Public</span>
+                        <span ><b>sendVerificationLink</b></span>
+                        <a href="#sendVerificationLink"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>register(registrationData: <a href="../classes/RegisterDto.html" target="_self">RegisterDto</a>)</code>
+                    <code>sendVerificationLink(undefined: <a href="../classes/RegisterDto.html" target="_self">RegisterDto</a>)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Post(&#x27;register&#x27;)<br /></code>
-                </td>
-            </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="18"
+                            class="link-to-prism">src/features/email-confirmation/email-confirmation.service.ts:18</a></div>
                 </td>
             </tr>
 
@@ -477,7 +459,6 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>registrationData</td>
                                     <td>
                                                 <code><a href="../classes/RegisterDto.html" target="_self" >RegisterDto</a></code>
                                     </td>
@@ -494,7 +475,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>unknown</code>
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                     </div>
                     <div class="io-description">
@@ -504,105 +485,97 @@
             </tr>
         </tbody>
     </table>
-</section>    </div>
+</section>
+
+    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  Post,
-  Req,
-  UseGuards,
-} from &#x27;@nestjs/common&#x27;;
-import { ApiBody, ApiTags } from &#x27;@nestjs/swagger&#x27;;
-import { EmailConfirmationService } from &#x27;../features/email-confirmation/email-confirmation.service&#x27;;
-import { UsersService } from &#x27;../features/users/users.service&#x27;;
-import { AuthenticationService } from &#x27;./authentication.service&#x27;;
-import { LogInDto } from &#x27;./dto/login.dto&#x27;;
-import { RegisterDto } from &#x27;./dto/register.dto&#x27;;
-import { JwtAuthenticationGuard } from &#x27;./jwt-authentication.guard&#x27;;
-import { JwtRefreshGuard } from &#x27;./jwt-refresh.guard&#x27;;
-import { LocalAuthenticationGuard } from &#x27;./local-authentication.guard&#x27;;
-import { RequestWithUser } from &#x27;./request-with-user.interface&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { BadRequestException, Injectable } from &#x27;@nestjs/common&#x27;;
+import { ConfigService } from &#x27;@nestjs/config&#x27;;
+import { JwtService } from &#x27;@nestjs/jwt&#x27;;
+import { RegisterDto } from &#x27;../../authentication/dto/register.dto&#x27;;
+import { EmailService } from &#x27;../../email/email.service&#x27;;
+import { UsersService } from &#x27;../users/users.service&#x27;;
+import { VerificationTokenPayload } from &#x27;./verification-token-payload.interface&#x27;;
 
-@Controller(&#x27;authentication&#x27;)
-@ApiTags(&#x27;authentication&#x27;)
-export class AuthenticationController {
+@Injectable()
+export class EmailConfirmationService {
   constructor(
-    private readonly authenticationService: AuthenticationService,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
+    private readonly emailService: EmailService,
     private readonly usersService: UsersService,
-    private readonly emailConfirmationService: EmailConfirmationService,
   ) {}
 
-  @UseGuards(JwtAuthenticationGuard)
-  @Get()
-  authenticate(@Req() request: RequestWithUser) {
-    const user &#x3D; request.user;
-    return user;
+  public sendVerificationLink({ email, name }: RegisterDto) {
+    const payload: VerificationTokenPayload &#x3D; { email };
+
+    const token &#x3D; this.jwtService.sign(payload, {
+      secret: this.configService.get(&#x27;jwt.verificationTokenSecret&#x27;),
+      expiresIn: &#x60;${this.configService.get(
+        &#x27;jwt.verificationTokenExpirationTime&#x27;,
+      )}s&#x60;,
+    });
+
+    const url &#x3D; &#x60;${this.configService.get(
+      &#x27;email.confirmationLink&#x27;,
+    )}?token&#x3D;${token}&#x60;;
+
+    const text &#x3D; &#x60;Welcome to the application. To confirm the email address, click here:&lt;br&gt;&lt;a href&#x3D;&quot;${url}&quot;&gt;${url}&lt;/a&gt;&#x60;;
+
+    return this.emailService.sendMail({
+      from: this.configService.get(&#x27;email.from&#x27;),
+      to: email,
+      subject: &#x27;Email confirmation&#x27;,
+      html: &#x60;&lt;h2 style&#x3D;&quot;color:#ff6600;&quot;&gt;Hello ${name}!&lt;/h2&gt;&lt;p&gt;${text}&lt;/p&gt;&#x60;,
+    });
   }
 
-  @UseGuards(JwtRefreshGuard)
-  @Get(&#x27;refresh&#x27;)
-  refresh(@Req() request: RequestWithUser) {
-    const accessTokenCookie &#x3D;
-      this.authenticationService.getCookieWithJwtAccessToken(request.user.id);
+  public async resendConfirmationLink(userId: number) {
+    const user &#x3D; await this.usersService.getById(userId);
 
-    request.res.setHeader(&#x27;Set-Cookie&#x27;, accessTokenCookie);
-    return request.user;
-  }
-
-  @Post(&#x27;register&#x27;)
-  async register(@Body() registrationData: RegisterDto) {
-    const user &#x3D; await this.authenticationService.register(registrationData);
-    await this.emailConfirmationService.sendVerificationLink(registrationData);
-    return user;
-  }
-
-  @HttpCode(200)
-  @UseGuards(LocalAuthenticationGuard)
-  @Post(&#x27;login&#x27;)
-  @ApiBody({ type: LogInDto })
-  async login(@Req() request: RequestWithUser) {
-    const { user } &#x3D; request;
-    const accessTokenCookie &#x3D;
-      this.authenticationService.getCookieWithJwtAccessToken(user.id);
-    const { cookie: refreshTokenCookie, token: refreshToken } &#x3D;
-      this.authenticationService.getCookieWithJwtRefreshToken(user.id);
-
-    await this.usersService.setCurrentRefreshToken(refreshToken, user.id);
-
-    request.res.setHeader(&#x27;Set-Cookie&#x27;, [
-      accessTokenCookie,
-      refreshTokenCookie,
-    ]);
-
-    if (user.isTwoFactorAuthenticationEnabled) {
-      return;
+    if (user.isEmailConfirmed) {
+      throw new BadRequestException(&#x27;Email already confirmed&#x27;);
     }
 
-    return user;
+    await this.sendVerificationLink(user);
   }
 
-  @UseGuards(JwtAuthenticationGuard)
-  @Post(&#x27;logout&#x27;)
-  @HttpCode(200)
-  async logOut(@Req() request: RequestWithUser) {
-    await this.usersService.removeRefreshToken(request.user.id);
-    request.res.setHeader(
-      &#x27;Set-Cookie&#x27;,
-      this.authenticationService.getCookiesForLogOut(),
-    );
+  public async confirmEmail(email: string) {
+    const user &#x3D; await this.usersService.getByEmail(email);
+
+    if (user.isEmailConfirmed) {
+      throw new BadRequestException(&#x27;Email already confirmed&#x27;);
+    }
+
+    await this.usersService.markEmailAsConfirmed(email);
+  }
+
+  public async decodeConfirmationToken(token: string) {
+    try {
+      const payload &#x3D; await this.jwtService.verify(token, {
+        secret: this.configService.get(&#x27;jwt.verificationTokenSecret&#x27;),
+      });
+
+      if (typeof payload &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp; &#x27;email&#x27; in payload) {
+        return payload.email;
+      }
+
+      throw new BadRequestException();
+    } catch (error: any) {
+      if (error.name &#x3D;&#x3D;&#x3D; &#x27;TokenExpiredError&#x27;) {
+        throw new BadRequestException(&#x27;Email confirmation token expired&#x27;);
+      }
+
+      throw new BadRequestException(&#x27;Bad confirmation token&#x27;);
+    }
   }
 }
 </code></pre>
     </div>
+
 </div>
-
-
-
 
 
 
@@ -641,8 +614,8 @@ export class AuthenticationController {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
-            var COMPODOC_CURRENT_PAGE_URL = 'AuthenticationController.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'EmailConfirmationService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

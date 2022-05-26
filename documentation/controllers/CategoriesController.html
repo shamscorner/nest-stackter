@@ -142,14 +142,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post()<br /></code>
+                    <code>@Post()<br />@UseGuards(undefined)<br />@UseGuards(undefined)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/features/categories/categories.controller.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">src/features/categories/categories.controller.ts:33</a></div>
                 </td>
             </tr>
 
@@ -224,8 +224,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/features/categories/categories.controller.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/features/categories/categories.controller.ts:38</a></div>
                 </td>
             </tr>
 
@@ -268,8 +268,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">src/features/categories/categories.controller.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/features/categories/categories.controller.ts:43</a></div>
                 </td>
             </tr>
 
@@ -312,8 +312,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="38"
-                            class="link-to-prism">src/features/categories/categories.controller.ts:38</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="48"
+                            class="link-to-prism">src/features/categories/categories.controller.ts:48</a></div>
                 </td>
             </tr>
 
@@ -381,14 +381,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;:id&#x27;)<br /></code>
+                    <code>@Delete(&#x27;:id&#x27;)<br />@UseGuards(undefined)<br />@UseGuards(undefined)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/features/categories/categories.controller.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">src/features/categories/categories.controller.ts:62</a></div>
                 </td>
             </tr>
 
@@ -456,14 +456,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post(&#x27;:id/restore&#x27;)<br /></code>
+                    <code>@Post(&#x27;:id/restore&#x27;)<br />@UseGuards(undefined)<br />@UseGuards(undefined)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="53"
-                            class="link-to-prism">src/features/categories/categories.controller.ts:53</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="69"
+                            class="link-to-prism">src/features/categories/categories.controller.ts:69</a></div>
                 </td>
             </tr>
 
@@ -531,14 +531,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Patch(&#x27;:id&#x27;)<br /></code>
+                    <code>@Patch(&#x27;:id&#x27;)<br />@UseGuards(undefined)<br />@UseGuards(undefined)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">src/features/categories/categories.controller.ts:43</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/features/categories/categories.controller.ts:55</a></div>
                 </td>
             </tr>
 
@@ -609,8 +609,15 @@
   Patch,
   Param,
   Delete,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+  UseGuards,
 } from &#x27;@nestjs/common&#x27;;
 import { ApiExtraModels, ApiTags } from &#x27;@nestjs/swagger&#x27;;
+import { PermissionGuard } from &#x27;../../authorization/permission.guard&#x27;;
+import { Permission } from &#x27;../../authorization/types/permission.type&#x27;;
+import { Role } from &#x27;../../authorization/role.enum&#x27;;
+import { RoleGuard } from &#x27;../../authorization/role.guard&#x27;;
 import { FindOneParams } from &#x27;../../utils/dto/find-one-params.dto&#x27;;
 import { CategoriesService } from &#x27;./categories.service&#x27;;
 import { CreateCategoryDto } from &#x27;./dto/create-category.dto&#x27;;
@@ -619,10 +626,13 @@ import { UpdateCategoryDto } from &#x27;./dto/update-category.dto&#x27;;
 @Controller(&#x27;categories&#x27;)
 @ApiTags(&#x27;categories&#x27;)
 @ApiExtraModels(FindOneParams)
+@UseInterceptors(ClassSerializerInterceptor)
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Post()
+  @UseGuards(PermissionGuard(Permission.CreateCategory))
+  @UseGuards(RoleGuard(Role.Admin))
   create(@Body() category: CreateCategoryDto) {
     return this.categoriesService.create(category);
   }
@@ -643,16 +653,22 @@ export class CategoriesController {
   }
 
   @Patch(&#x27;:id&#x27;)
+  @UseGuards(PermissionGuard(Permission.UpdateCategory))
+  @UseGuards(RoleGuard(Role.Admin))
   update(@Param() { id }: FindOneParams, @Body() category: UpdateCategoryDto) {
     return this.categoriesService.update(+id, category);
   }
 
   @Delete(&#x27;:id&#x27;)
+  @UseGuards(PermissionGuard(Permission.DeleteCategory))
+  @UseGuards(RoleGuard(Role.Admin))
   remove(@Param() { id }: FindOneParams) {
     return this.categoriesService.remove(+id);
   }
 
   @Post(&#x27;:id/restore&#x27;)
+  @UseGuards(PermissionGuard(Permission.RestoreCategory))
+  @UseGuards(RoleGuard(Role.Admin))
   restoreDeleted(@Param() { id }: FindOneParams) {
     return this.categoriesService.restoreDeleted(+id);
   }
