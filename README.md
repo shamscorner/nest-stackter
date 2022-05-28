@@ -27,6 +27,7 @@
 - Sending scheduled emails with cron and Nodemailer - `src/features/email-scheduling` and check the email service in `src/email`
 - Out of the box Google authentication module - check out the `src/features/google-authentication` module
 - Roles and Permissions based authorization setup - check out the `src/authorization` module. For implementation, check the `src/features/categories` and `src/features/products` modules
+- In memory cache - check the `src/features/categories` module
 
 ## Installation
 

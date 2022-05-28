@@ -9,6 +9,7 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
   UseGuards,
+  CacheInterceptor,
 } from '@nestjs/common';
 import { ApiExtraModels, ApiTags } from '@nestjs/swagger';
 import { PermissionGuard } from '../../authorization/permission.guard';
@@ -22,6 +23,7 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Controller('categories')
 @ApiTags('categories')
+@UseInterceptors(CacheInterceptor)
 @ApiExtraModels(FindOneParams)
 @UseInterceptors(ClassSerializerInterceptor)
 export class CategoriesController {
