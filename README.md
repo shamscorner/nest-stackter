@@ -28,6 +28,7 @@
 - Out of the box Google authentication module - check out the `src/features/google-authentication` module
 - Roles and Permissions based authorization setup - check out the `src/authorization` module. For implementation, check the `src/features/categories` and `src/features/products` modules
 - In memory cache - check the `src/features/categories` module
+- Redis cache setup out of the box - check the `src/features/posts.module.ts` module
 
 ## Installation
 

@@ -20,6 +20,7 @@ import awsConfig from './config/aws.config';
 import jwtConfig from './config/jwt.config';
 import emailConfig from './config/email.config';
 import googleConfig from './config/google.config';
+import redisConfig from './config/redis.config';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { CommentsModule } from './features/comments/comments.module';
 import { ProductsModule } from './features/products/products.module';
@@ -50,6 +51,7 @@ import { AuthorizationModule } from './authorization/authorization.module';
         jwtConfig,
         emailConfig,
         googleConfig,
+        redisConfig,
       ],
     }),
     ScheduleModule.forRoot(),

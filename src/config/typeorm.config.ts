@@ -32,10 +32,10 @@ class TypeOrmConfig {
 
 export const typeormModuleOptions: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
+  inject: [ConfigService],
   useFactory: async (
     configService: ConfigService,
   ): Promise<TypeOrmModuleOptions> => TypeOrmConfig.getOrmConfig(configService),
-  inject: [ConfigService],
 };
 
 export default registerAs('typeorm', () => ({

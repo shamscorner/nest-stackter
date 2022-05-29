@@ -39,3 +39,5 @@ nohup.out
 
 # Server uploaded files
 /uploadedFiles
+
+dump.rdb
