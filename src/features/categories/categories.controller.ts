@@ -7,7 +7,6 @@ import {
   Param,
   Delete,
   UseInterceptors,
-  ClassSerializerInterceptor,
   UseGuards,
   CacheInterceptor,
 } from '@nestjs/common';
@@ -25,7 +24,6 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 @ApiTags('categories')
 @UseInterceptors(CacheInterceptor)
 @ApiExtraModels(FindOneParams)
-@UseInterceptors(ClassSerializerInterceptor)
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 

@@ -1,11 +1,4 @@
-import {
-  Body,
-  ClassSerializerInterceptor,
-  Controller,
-  Post,
-  Req,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, Post, Req } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { GoogleAuthenticationService } from './google-authentication.service';
 import { Request } from 'express';
@@ -13,7 +6,6 @@ import { TokenVerificationDto } from './dto/token-verification.dto';
 
 @Controller('google-authentication')
 @ApiTags('authentication')
-@UseInterceptors(ClassSerializerInterceptor)
 export class GoogleAuthenticationController {
   constructor(
     private readonly googleAuthenticationService: GoogleAuthenticationService,

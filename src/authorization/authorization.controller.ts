@@ -1,13 +1,11 @@
 import {
   Body,
-  ClassSerializerInterceptor,
   Controller,
   HttpCode,
   Param,
   ParseIntPipe,
   Patch,
   UseGuards,
-  UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthorizationService } from './authorization.service';
@@ -18,7 +16,6 @@ import { RoleGuard } from './role.guard';
 
 @Controller('authorization')
 @ApiTags('authorization')
-@UseInterceptors(ClassSerializerInterceptor)
 @UseGuards(RoleGuard(Role.SuperAdmin))
 export class AuthorizationController {
   constructor(private readonly authorizationService: AuthorizationService) {}

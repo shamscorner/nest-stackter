@@ -1,12 +1,4 @@
-import {
-  Body,
-  ClassSerializerInterceptor,
-  Controller,
-  Post,
-  Req,
-  UseGuards,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthenticationGuard } from '../../authentication/jwt-authentication.guard';
 import { RequestWithUser } from '../../authentication/request-with-user.interface';
@@ -15,7 +7,6 @@ import { EmailConfirmationService } from './email-confirmation.service';
 
 @Controller('email-confirmation')
 @ApiTags('authentication')
-@UseInterceptors(ClassSerializerInterceptor)
 export class EmailConfirmationController {
   constructor(
     private readonly emailConfirmationService: EmailConfirmationService,

@@ -1,19 +1,16 @@
 import {
-  ClassSerializerInterceptor,
   Controller,
   Get,
   Param,
   ParseIntPipe,
   Res,
   StreamableFile,
-  UseInterceptors,
 } from '@nestjs/common';
 import { DatabaseFilesService } from './database-files.service';
 import { Readable } from 'stream';
 import { Response } from 'express';
 
 @Controller('database-files')
-@UseInterceptors(ClassSerializerInterceptor)
 export class DatabaseFilesController {
   constructor(private readonly databaseFilesService: DatabaseFilesService) {}
 

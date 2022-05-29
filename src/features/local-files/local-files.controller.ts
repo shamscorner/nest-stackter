@@ -1,12 +1,10 @@
 import {
-  ClassSerializerInterceptor,
   Controller,
   Get,
   Param,
   ParseIntPipe,
   Res,
   StreamableFile,
-  UseInterceptors,
 } from '@nestjs/common';
 import { createReadStream } from 'fs';
 import { join } from 'path';
@@ -14,7 +12,6 @@ import { Response } from 'express';
 import { LocalFilesService } from './local-files.service';
 
 @Controller('local-files')
-@UseInterceptors(ClassSerializerInterceptor)
 export class LocalFilesController {
   constructor(private readonly localFilesService: LocalFilesService) {}
 
