@@ -24,6 +24,11 @@ async function bootstrap() {
 
   app.use(cookieParser());
 
+  app.enableCors({
+    origin: configService.get('app.frontendURL'),
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
     .setTitle('NestJS Starter Template')
     .setDescription('This is a starter template where everything is set up.')

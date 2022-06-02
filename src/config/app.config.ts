@@ -22,4 +22,7 @@ export default registerAs('app', () => ({
   // two factor authentication app name
   twoFactorAuthAppName:
     process.env.TWO_FACTOR_AUTHENTICATION_APP_NAME || 'Nest_Starter_Template',
+
+  // sites that are CORS enabled
+  frontendURL: process.env.FRONTEND_URL || 'localhost',
 }));

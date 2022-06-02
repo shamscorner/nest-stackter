@@ -22,10 +22,12 @@
     "documentation:serve": "npx @compodoc/compodoc -p tsconfig.json --serve"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^8.2.1",
     "@nestjs/common": "^8.4.4",
     "@nestjs/config": "^2.0.0",
     "@nestjs/core": "^8.4.4",
     "@nestjs/cqrs": "^8.0.4",
+    "@nestjs/elasticsearch": "^8.1.0",
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/mapped-types": "^1.0.1",
     "@nestjs/passport": "^8.2.1",

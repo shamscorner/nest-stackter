@@ -41,7 +41,7 @@ services:
         - redis
 
   es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.2.1
     container_name: es01
     environment:
       - node.name=es01
@@ -61,7 +61,7 @@ services:
     networks:
       - elastic
   es02:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.2.1
     container_name: es02
     environment:
       - node.name=es02
@@ -79,7 +79,7 @@ services:
     networks:
       - elastic
   es03:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.2.1
     container_name: es03
     environment:
       - node.name=es03

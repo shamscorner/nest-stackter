@@ -1,19 +1,21 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../users/entities/user.entity';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Post } from './entities/post.entity';
 import { PostNotFoundException } from './exceptions/post-not-found.exception';
+import { PostsSearchService } from './posts-search.service';
 
 @Injectable()
 export class PostsService {
   constructor(
     @InjectRepository(Post) private postsRepository: Repository<Post>,
+    private postsSearchService: PostsSearchService,
   ) {}
 
-  async getAllPosts() {
+  async getPostsWithAuthors() {
     return this.postsRepository.find({
       relations: ['author'],
     });
@@ -49,6 +51,7 @@ export class PostsService {
       author: user,
     });
     await this.postsRepository.save(newPost);
+    this.postsSearchService.indexPost(newPost);
     return newPost;
   }
 
@@ -61,6 +64,7 @@ export class PostsService {
       relations: ['author'],
     });
     if (updatedPost) {
+      await this.postsSearchService.update(updatedPost);
       return updatedPost;
     }
     throw new PostNotFoundException(id);
@@ -71,5 +75,34 @@ export class PostsService {
     if (!deleteResponse.affected) {
       throw new PostNotFoundException(id);
     }
+    await this.postsSearchService.remove(id);
+  }
+
+  async searchForPosts(
+    text: string,
+    offset?: number,
+    limit?: number,
+    startId?: number,
+  ) {
+    const { results, count } = await this.postsSearchService.search(
+      text,
+      offset,
+      limit,
+      startId,
+    );
+    const ids = results.map((result) => result.id);
+    if (!ids.length) {
+      return {
+        items: [],
+        count,
+      };
+    }
+    const items = await this.postsRepository.find({
+      where: { id: In(ids) },
+    });
+    return {
+      items,
+      count,
+    };
   }
 }

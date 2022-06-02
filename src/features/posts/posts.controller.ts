@@ -9,6 +9,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Req,
   UseGuards,
   UseInterceptors,
@@ -21,6 +22,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PostsService } from './posts.service';
 import { HttpCacheInterceptor } from '../../utils/http-cache.interceptor';
+import { PaginationWithStartIdDto } from '../../utils/dto/pagination-with-start-id.dto';
 
 @Controller('posts')
 @ApiTags('posts')
@@ -33,8 +35,14 @@ export class PostsController {
   @CacheKey('GET_POSTS_CACHE_KEY')
   @CacheTTL(120)
   @Get()
-  getAllPosts() {
-    return this.postsService.getAllPosts();
+  getPosts(
+    @Query('search') search: string,
+    @Query() { offset, limit, startId }: PaginationWithStartIdDto,
+  ) {
+    if (search) {
+      return this.postsService.searchForPosts(search, offset, limit, startId);
+    }
+    return this.postsService.getPostsWithAuthors();
   }
 
   @Get(':id')

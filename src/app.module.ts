@@ -21,6 +21,7 @@ import jwtConfig from './config/jwt.config';
 import emailConfig from './config/email.config';
 import googleConfig from './config/google.config';
 import redisConfig from './config/redis.config';
+import elasticSearch from './config/elastic-search.config';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { CommentsModule } from './features/comments/comments.module';
 import { ProductsModule } from './features/products/products.module';
@@ -35,6 +36,7 @@ import { EmailSchedulingModule } from './features/email-scheduling/email-schedul
 import { EmailConfirmationModule } from './features/email-confirmation/email-confirmation.module';
 import { GoogleAuthenticationModule } from './features/google-authentication/google-authentication.module';
 import { AuthorizationModule } from './authorization/authorization.module';
+import { SearchModule } from './features/search/search.module';
 
 @Module({
   imports: [
@@ -52,6 +54,7 @@ import { AuthorizationModule } from './authorization/authorization.module';
         emailConfig,
         googleConfig,
         redisConfig,
+        elasticSearch,
       ],
     }),
     ScheduleModule.forRoot(),
@@ -72,6 +75,7 @@ import { AuthorizationModule } from './authorization/authorization.module';
     EmailConfirmationModule,
     GoogleAuthenticationModule,
     AuthorizationModule,
+    SearchModule,
   ],
   controllers: [AppController],
   providers: [
