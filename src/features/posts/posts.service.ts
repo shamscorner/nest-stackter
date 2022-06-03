@@ -90,6 +90,8 @@ export class PostsService {
       limit,
       startId,
     );
+
+    console.log(results);
     const ids = results.map((result) => result.id);
     if (!ids.length) {
       return {

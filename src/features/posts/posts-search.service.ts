@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ElasticsearchService } from '@nestjs/elasticsearch';
+import { WriteResponseBase } from '@elastic/elasticsearch/lib/api/types';
 import { Post } from './entities/post.entity';
 import { PostSearchDocument } from './types/post-search-document.interface';
 
@@ -9,7 +10,7 @@ export class PostsSearchService {
 
   constructor(private readonly elasticsearchService: ElasticsearchService) {}
 
-  async indexPost(post: Post) {
+  async indexPost(post: Post): Promise<WriteResponseBase> {
     return this.elasticsearchService.index<PostSearchDocument>({
       index: this.index,
       document: {
