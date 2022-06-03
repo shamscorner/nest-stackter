@@ -50,9 +50,9 @@ export class PostsService {
       ...post,
       author: user,
     });
-    await this.postsRepository.save(newPost);
-    this.postsSearchService.indexPost(newPost);
-    return newPost;
+    const savedPost = await this.postsRepository.save(newPost);
+    this.postsSearchService.indexPost(savedPost);
+    return savedPost;
   }
 
   async updatePost(id: number, post: UpdatePostDto) {
@@ -91,7 +91,6 @@ export class PostsService {
       startId,
     );
 
-    console.log(results);
     const ids = results.map((result) => result.id);
     if (!ids.length) {
       return {
