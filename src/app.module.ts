@@ -5,6 +5,9 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+import { ScheduleModule } from '@nestjs/schedule';
+import { BullModule } from '@nestjs/bull';
 import { AppController } from './app.controller';
 import { DatabaseModule } from './database/database.module';
 import { validate } from './env.validation';
@@ -22,7 +25,6 @@ import emailConfig from './config/email.config';
 import googleConfig from './config/google.config';
 import redisConfig from './config/redis.config';
 import elasticSearch from './config/elastic-search.config';
-import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { CommentsModule } from './features/comments/comments.module';
 import { ProductsModule } from './features/products/products.module';
 import { DatabaseFilesModule } from './features/database-files/database-files.module';
@@ -31,12 +33,13 @@ import { LoggerModule } from './logger/logger.module';
 import { LogsMiddleware } from './utils/logs.middleware';
 import { HealthModule } from './health/health.module';
 import { EmailModule } from './email/email.module';
-import { ScheduleModule } from '@nestjs/schedule';
 import { EmailSchedulingModule } from './features/email-scheduling/email-scheduling.module';
 import { EmailConfirmationModule } from './features/email-confirmation/email-confirmation.module';
 import { GoogleAuthenticationModule } from './features/google-authentication/google-authentication.module';
 import { AuthorizationModule } from './authorization/authorization.module';
 import { SearchModule } from './features/search/search.module';
+import { bullModuleOptions } from './config/bull.config';
+import { OptimizeModule } from './features/optimize/optimize.module';
 
 @Module({
   imports: [
@@ -76,6 +79,8 @@ import { SearchModule } from './features/search/search.module';
     GoogleAuthenticationModule,
     AuthorizationModule,
     SearchModule,
+    BullModule.forRootAsync(bullModuleOptions),
+    OptimizeModule,
   ],
   controllers: [AppController],
   providers: [
