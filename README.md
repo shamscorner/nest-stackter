@@ -29,6 +29,7 @@
 - Roles and Permissions based authorization setup - check out the `src/authorization` module. For implementation, check the `src/features/categories` and `src/features/products` modules
 - In memory cache - check the `src/features/categories` module
 - Redis cache setup out of the box - check the `src/features/posts.module.ts` module
+- ElasticSearch setup out of the box with docker-compose - check the `/src/features/search.module.ts` module and `/src/features/posts.module.ts` for implementation details
 
 ## Installation
 
