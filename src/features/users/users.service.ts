@@ -7,7 +7,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Connection, Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { FileNotFoundException } from '../files/exceptions/file-not-found.exception';
 import { FilesService } from '../files/files.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -28,7 +28,7 @@ export class UsersService {
     private readonly filesService: FilesService,
     private readonly databaseFilesService: DatabaseFilesService,
     private readonly localFilesService: LocalFilesService,
-    private connection: Connection,
+    private dataSource: DataSource,
   ) {}
 
   async setCurrentRefreshToken(refreshToken: string, userId: number) {
@@ -155,7 +155,7 @@ export class UsersService {
     imageBuffer: Buffer,
     filename: string,
   ) {
-    const queryRunner = this.connection.createQueryRunner();
+    const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.connect();
     await queryRunner.startTransaction();
@@ -223,7 +223,7 @@ export class UsersService {
   }
 
   async deleteAvatar(userId: number) {
-    const queryRunner = this.connection.createQueryRunner();
+    const queryRunner = this.dataSource.createQueryRunner();
 
     const user = await this.getById(userId);
     const fileId = user.avatarId;
