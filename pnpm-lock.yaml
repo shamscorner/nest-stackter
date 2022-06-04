@@ -50,6 +50,7 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-prettier: ^4.0.0
   googleapis: ^100.0.0
+  helmet: ^5.1.0
   jest: ^28.0.3
   nodemailer: ^6.7.5
   otplib: ^12.0.1
@@ -98,6 +99,7 @@ dependencies:
   class-validator: 0.13.2
   cookie-parser: 1.4.6
   googleapis: 100.0.0
+  helmet: 5.1.0
   nodemailer: 6.7.5
   otplib: 12.0.1
   passport: 0.5.3
@@ -5188,6 +5190,11 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: 1.1.1
+
+  /helmet/5.1.0:
+    resolution: {integrity: sha512-klsunXs8rgNSZoaUrNeuCiWUxyc+wzucnEnFejUg3/A+CaF589k9qepLZZ1Jehnzig7YbD4hEuscGXuBY3fq+g==}
+    engines: {node: '>=12.0.0'}
+    dev: false
 
   /hexoid/1.0.0:
     resolution: {integrity: sha512-QFLV0taWQOZtvIRIAdBChesmogZrtuXvVWsFHZTk2SU+anspqZ2vMnoLg7IE1+Uk16N19APic1BuF8bC8c2m5g==}
