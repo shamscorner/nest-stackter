@@ -133,8 +133,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/features/local-files/local-files.controller.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="19"
+                            class="link-to-prism">src/features/local-files/local-files.controller.ts:19</a></div>
                 </td>
             </tr>
 
@@ -199,14 +199,12 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  ClassSerializerInterceptor,
   Controller,
   Get,
   Param,
   ParseIntPipe,
   Res,
   StreamableFile,
-  UseInterceptors,
 } from &#x27;@nestjs/common&#x27;;
 import { createReadStream } from &#x27;fs&#x27;;
 import { join } from &#x27;path&#x27;;
@@ -214,7 +212,6 @@ import { Response } from &#x27;express&#x27;;
 import { LocalFilesService } from &#x27;./local-files.service&#x27;;
 
 @Controller(&#x27;local-files&#x27;)
-@UseInterceptors(ClassSerializerInterceptor)
 export class LocalFilesController {
   constructor(private readonly localFilesService: LocalFilesService) {}
 

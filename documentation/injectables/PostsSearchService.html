@@ -40,7 +40,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li >PostsService</li>
+  <li >PostsSearchService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -58,7 +58,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/features/posts/posts.service.ts</code>
+            <code>src/features/posts/posts-search.service.ts</code>
         </p>
 
 
@@ -69,6 +69,20 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#index" >index</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -80,31 +94,23 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#createPost" >createPost</a>
+                                <a href="#count" >count</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#deletePost" >deletePost</a>
+                                <a href="#indexPost" >indexPost</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#getPostById" >getPostById</a>
+                                <a href="#remove" >remove</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#getPostsWithAuthors" >getPostsWithAuthors</a>
+                                <a href="#search" >search</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#getPostsWithParagraph" >getPostsWithParagraph</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#searchForPosts" >searchForPosts</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#updatePost" >updatePost</a>
+                                <a href="#update" >update</a>
                             </li>
                         </ul>
                     </td>
@@ -124,12 +130,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(postsRepository: <a href="../entitys/Post.html" target="_self">Repository&lt;Post&gt;</a>, postsSearchService: <a href="../injectables/PostsSearchService.html" target="_self">PostsSearchService</a>)</code>
+<code>constructor(elasticsearchService: ElasticsearchService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/features/posts/posts.service.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/features/posts/posts-search.service.ts:9</a></div>
                             </td>
                         </tr>
 
@@ -147,22 +153,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>postsRepository</td>
+                                                        <td>elasticsearchService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../entitys/Post.html" target="_self" >Repository&lt;Post&gt;</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>postsSearchService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/PostsSearchService.html" target="_self" >PostsSearchService</a></code>
+                                                                    <code>ElasticsearchService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -188,26 +182,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createPost"></a>
+                    <a name="count"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
-                        <span ><b>createPost</b></span>
-                        <a href="#createPost"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>count</b></span>
+                        <a href="#count"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>createPost(post: <a href="../classes/CreatePostDto.html" target="_self">CreatePostDto</a>, user: <a href="../entitys/User.html" target="_self">User</a>)</code>
+                    <code>count(query: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, fields: string[])</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/features/posts/posts.service.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/features/posts/posts-search.service.ts:25</a></div>
                 </td>
             </tr>
 
@@ -228,9 +222,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>post</td>
+                                    <td>query</td>
                                     <td>
-                                                <code><a href="../classes/CreatePostDto.html" target="_self" >CreatePostDto</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
 
                                     <td>
@@ -240,9 +234,9 @@
 
                                 </tr>
                                 <tr>
-                                    <td>user</td>
+                                    <td>fields</td>
                                     <td>
-                                                <code><a href="../entitys/User.html" target="_self" >User</a></code>
+                                            <code>string[]</code>
                                     </td>
 
                                     <td>
@@ -271,26 +265,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="deletePost"></a>
+                    <a name="indexPost"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
-                        <span ><b>deletePost</b></span>
-                        <a href="#deletePost"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>indexPost</b></span>
+                        <a href="#indexPost"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>deletePost(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    <code>indexPost(post: <a href="../entitys/Post.html" target="_self">Post</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="73"
-                            class="link-to-prism">src/features/posts/posts.service.ts:73</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="13"
+                            class="link-to-prism">src/features/posts/posts-search.service.ts:13</a></div>
                 </td>
             </tr>
 
@@ -311,7 +305,78 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>id</td>
+                                    <td>post</td>
+                                    <td>
+                                                <code><a href="../entitys/Post.html" target="_self" >Post</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;WriteResponseBase&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="remove"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>remove</b></span>
+                        <a href="#remove"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>remove(postId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="77"
+                            class="link-to-prism">src/features/posts/posts-search.service.ts:77</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>postId</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
                                     </td>
@@ -342,26 +407,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getPostById"></a>
+                    <a name="search"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
-                        <span ><b>getPostById</b></span>
-                        <a href="#getPostById"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>search</b></span>
+                        <a href="#search"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getPostById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    <code>search(text: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, offset?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, limit?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, startId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/features/posts/posts.service.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">src/features/posts/posts-search.service.ts:40</a></div>
                 </td>
             </tr>
 
@@ -378,187 +443,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>unknown</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getPostsWithAuthors"></a>
-                    <span class="name">
-                        <span class="modifier">Async</span>
-                        <span ><b>getPostsWithAuthors</b></span>
-                        <a href="#getPostsWithAuthors"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getPostsWithAuthors()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">src/features/posts/posts.service.ts:18</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>unknown</code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getPostsWithParagraph"></a>
-                    <span class="name">
-                        <span class="modifier">Async</span>
-                        <span ><b>getPostsWithParagraph</b></span>
-                        <a href="#getPostsWithParagraph"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getPostsWithParagraph(paragraph: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">src/features/posts/posts.service.ts:37</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>paragraph</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>unknown</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="searchForPosts"></a>
-                    <span class="name">
-                        <span class="modifier">Async</span>
-                        <span ><b>searchForPosts</b></span>
-                        <a href="#searchForPosts"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>searchForPosts(text: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, offset?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, limit?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, startId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="81"
-                            class="link-to-prism">src/features/posts/posts.service.ts:81</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
+                                    <td>Default value</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -572,6 +457,8 @@
                                         No
                                     </td>
 
+                                    <td>
+                                    </td>
 
                                 </tr>
                                 <tr>
@@ -584,6 +471,8 @@
                                         Yes
                                     </td>
 
+                                    <td>
+                                    </td>
 
                                 </tr>
                                 <tr>
@@ -596,6 +485,8 @@
                                         Yes
                                     </td>
 
+                                    <td>
+                                    </td>
 
                                 </tr>
                                 <tr>
@@ -605,9 +496,12 @@
                                     </td>
 
                                     <td>
-                                        Yes
+                                        No
                                     </td>
 
+                                    <td>
+                                        <code>0</code>
+                                    </td>
 
                                 </tr>
                             </tbody>
@@ -630,26 +524,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updatePost"></a>
+                    <a name="update"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
-                        <span ><b>updatePost</b></span>
-                        <a href="#updatePost"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>update</b></span>
+                        <a href="#update"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updatePost(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, post: <a href="../classes/UpdatePostDto.html" target="_self">UpdatePostDto</a>)</code>
+                    <code>update(post: <a href="../entitys/Post.html" target="_self">Post</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="58"
-                            class="link-to-prism">src/features/posts/posts.service.ts:58</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">src/features/posts/posts-search.service.ts:88</a></div>
                 </td>
             </tr>
 
@@ -670,21 +564,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>id</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
                                     <td>post</td>
                                     <td>
-                                                <code><a href="../classes/UpdatePostDto.html" target="_self" >UpdatePostDto</a></code>
+                                                <code><a href="../entitys/Post.html" target="_self" >Post</a></code>
                                     </td>
 
                                     <td>
@@ -710,118 +592,161 @@
         </tbody>
     </table>
 </section>
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="index"></a>
+                    <span class="name">
+                        <span ><b>index</b></span>
+                        <a href="#index"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;posts&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/features/posts/posts-search.service.ts:9</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, NotFoundException } from &#x27;@nestjs/common&#x27;;
-import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
-import { User } from &#x27;../users/entities/user.entity&#x27;;
-import { In, Repository } from &#x27;typeorm&#x27;;
-import { CreatePostDto } from &#x27;./dto/create-post.dto&#x27;;
-import { UpdatePostDto } from &#x27;./dto/update-post.dto&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+import { ElasticsearchService } from &#x27;@nestjs/elasticsearch&#x27;;
+import { WriteResponseBase } from &#x27;@elastic/elasticsearch/lib/api/types&#x27;;
 import { Post } from &#x27;./entities/post.entity&#x27;;
-import { PostNotFoundException } from &#x27;./exceptions/post-not-found.exception&#x27;;
-import { PostsSearchService } from &#x27;./posts-search.service&#x27;;
+import { PostSearchDocument } from &#x27;./types/post-search-document.interface&#x27;;
 
 @Injectable()
-export class PostsService {
-  constructor(
-    @InjectRepository(Post) private postsRepository: Repository&lt;Post&gt;,
-    private postsSearchService: PostsSearchService,
-  ) {}
+export class PostsSearchService {
+  index &#x3D; &#x27;posts&#x27;;
 
-  async getPostsWithAuthors() {
-    return this.postsRepository.find({
-      relations: [&#x27;author&#x27;],
-    });
-  }
+  constructor(private readonly elasticsearchService: ElasticsearchService) {}
 
-  async getPostById(id: number) {
-    const post &#x3D; await this.postsRepository.findOne({
-      where: {
-        id,
+  async indexPost(post: Post): Promise&lt;WriteResponseBase&gt; {
+    return this.elasticsearchService.index&lt;PostSearchDocument&gt;({
+      index: this.index,
+      document: {
+        id: post.id,
+        title: post.title,
+        paragraphs: post.paragraphs,
+        authorId: post.author.id,
       },
-      relations: [&#x27;author&#x27;],
     });
-    if (post) {
-      return post;
-    }
-    throw new PostNotFoundException(id);
   }
 
-  async getPostsWithParagraph(paragraph: string) {
-    const posts &#x3D; await this.postsRepository.query(
-      &#x27;SELECT * FROM post WHERE $1 &#x3D; ANY(paragraphs)&#x27;,
-      [paragraph],
-    );
-    if (posts) {
-      return posts;
-    }
-    throw new NotFoundException(&#x27;Post with the paragraph is not found!&#x27;);
-  }
-
-  async createPost(post: CreatePostDto, user: User) {
-    const newPost &#x3D; await this.postsRepository.create({
-      ...post,
-      author: user,
-    });
-    const savedPost &#x3D; await this.postsRepository.save(newPost);
-    this.postsSearchService.indexPost(savedPost);
-    return savedPost;
-  }
-
-  async updatePost(id: number, post: UpdatePostDto) {
-    await this.postsRepository.update(id, post);
-    const updatedPost &#x3D; await this.postsRepository.findOne({
-      where: {
-        id,
+  async count(query: string, fields: string[]) {
+    const { count } &#x3D; await this.elasticsearchService.count({
+      index: this.index,
+      body: {
+        query: {
+          multi_match: {
+            query,
+            fields,
+          },
+        },
       },
-      relations: [&#x27;author&#x27;],
     });
-    if (updatedPost) {
-      await this.postsSearchService.update(updatedPost);
-      return updatedPost;
-    }
-    throw new PostNotFoundException(id);
+    return count;
   }
 
-  async deletePost(id: number) {
-    const deleteResponse &#x3D; await this.postsRepository.delete(id);
-    if (!deleteResponse.affected) {
-      throw new PostNotFoundException(id);
+  async search(text: string, offset?: number, limit?: number, startId &#x3D; 0) {
+    let separateCount &#x3D; 0;
+    if (startId) {
+      separateCount &#x3D; await this.count(text, [&#x27;title&#x27;, &#x27;paragraphs&#x27;]);
     }
-    await this.postsSearchService.remove(id);
-  }
-
-  async searchForPosts(
-    text: string,
-    offset?: number,
-    limit?: number,
-    startId?: number,
-  ) {
-    const { results, count } &#x3D; await this.postsSearchService.search(
-      text,
-      offset,
-      limit,
-      startId,
+    const { hits } &#x3D; await this.elasticsearchService.search&lt;PostSearchDocument&gt;(
+      {
+        index: this.index,
+        from: offset,
+        size: limit,
+        query: {
+          bool: {
+            should: {
+              multi_match: {
+                query: text,
+                fields: [&#x27;title&#x27;, &#x27;paragraphs&#x27;],
+              },
+            },
+            filter: {
+              range: {
+                id: {
+                  gt: startId,
+                },
+              },
+            },
+          },
+        },
+      },
     );
-
-    const ids &#x3D; results.map((result) &#x3D;&gt; result.id);
-    if (!ids.length) {
-      return {
-        items: [],
-        count,
-      };
-    }
-    const items &#x3D; await this.postsRepository.find({
-      where: { id: In(ids) },
-    });
+    const count &#x3D; hits.total;
+    const results &#x3D; hits.hits.map((item) &#x3D;&gt; item._source);
     return {
-      items,
-      count,
+      count: startId ? separateCount : count,
+      results,
     };
+  }
+
+  async remove(postId: number) {
+    this.elasticsearchService.deleteByQuery({
+      index: this.index,
+      query: {
+        match: {
+          id: postId,
+        },
+      },
+    });
+  }
+
+  async update(post: Post) {
+    const newDocument: PostSearchDocument &#x3D; {
+      id: post.id,
+      title: post.title,
+      paragraphs: post.paragraphs,
+      authorId: post.author.id,
+    };
+
+    const script &#x3D; Object.entries(newDocument).reduce(
+      (result, [key, value]) &#x3D;&gt; {
+        return &#x60;${result} ctx._source.${key}&#x3D;&#x27;${value}&#x27;;&#x60;;
+      },
+      &#x27;&#x27;,
+    );
+
+    return this.elasticsearchService.updateByQuery({
+      index: this.index,
+      script: {
+        source: script,
+      },
+      query: {
+        match: {
+          id: post.id,
+        },
+      },
+    });
   }
 }
 </code></pre>
@@ -867,7 +792,7 @@ export class PostsService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'PostsService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'PostsSearchService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

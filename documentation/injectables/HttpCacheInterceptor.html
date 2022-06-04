@@ -28,16 +28,19 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content controller">
+               <div class="content injectable">
                    <div class="content-data">
 
 
 
 
 
+
+
+
 <ol class="breadcrumb">
-  <li>Controllers</li>
-  <li >GoogleAuthenticationController</li>
+  <li>Injectables</li>
+  <li >HttpCacheInterceptor</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -55,19 +58,17 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/features/google-authentication/google-authentication.controller.ts</code>
+            <code>src/utils/http-cache.interceptor.ts</code>
         </p>
 
+
+
             <p class="comment">
-                <h3>Prefix</h3>
+                <h3>Extends</h3>
             </p>
             <p class="comment">
-                <code>google-authentication</code>
+                    <code>CacheInterceptor</code>
             </p>
-
-
-
-
 
 
             <section>
@@ -84,8 +85,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#authenticate" >authenticate</a>
+                                <a href="#trackBy" >trackBy</a>
                             </li>
                         </ul>
                     </td>
@@ -99,6 +99,7 @@
     </table>
 </section>
 
+
             <section>
     
     <h3 id="methods">
@@ -108,33 +109,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="authenticate"></a>
+                    <a name="trackBy"></a>
                     <span class="name">
-                        <span class="modifier">Async</span>
-                        <span ><b>authenticate</b></span>
-                        <a href="#authenticate"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>trackBy</b></span>
+                        <a href="#trackBy"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>authenticate(tokenData: <a href="../classes/TokenVerificationDto.html" target="_self">TokenVerificationDto</a>, request: Request)</code>
+<code>trackBy(context: ExecutionContext)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Post()<br /></code>
-                </td>
-            </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">src/features/google-authentication/google-authentication.controller.ts:15</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="10"
+                            class="link-to-prism">src/utils/http-cache.interceptor.ts:10</a></div>
                 </td>
             </tr>
 
@@ -155,21 +147,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>tokenData</td>
+                                    <td>context</td>
                                     <td>
-                                                <code><a href="../classes/TokenVerificationDto.html" target="_self" >TokenVerificationDto</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>request</td>
-                                    <td>
-                                            <code>Request</code>
+                                            <code>ExecutionContext</code>
                                     </td>
 
                                     <td>
@@ -184,7 +164,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>unknown</code>
+                        <b>Returns : </b>    <code>string | undefined</code>
 
                     </div>
                     <div class="io-description">
@@ -194,45 +174,39 @@
             </tr>
         </tbody>
     </table>
-</section>    </div>
+</section>
+
+    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Post, Req } from &#x27;@nestjs/common&#x27;;
-import { ApiTags } from &#x27;@nestjs/swagger&#x27;;
-import { GoogleAuthenticationService } from &#x27;./google-authentication.service&#x27;;
-import { Request } from &#x27;express&#x27;;
-import { TokenVerificationDto } from &#x27;./dto/token-verification.dto&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  CACHE_KEY_METADATA,
+  CacheInterceptor,
+  ExecutionContext,
+  Injectable,
+} from &#x27;@nestjs/common&#x27;;
 
-@Controller(&#x27;google-authentication&#x27;)
-@ApiTags(&#x27;authentication&#x27;)
-export class GoogleAuthenticationController {
-  constructor(
-    private readonly googleAuthenticationService: GoogleAuthenticationService,
-  ) {}
+@Injectable()
+export class HttpCacheInterceptor extends CacheInterceptor {
+  trackBy(context: ExecutionContext): string | undefined {
+    const cacheKey &#x3D; this.reflector.get(
+      CACHE_KEY_METADATA,
+      context.getHandler(),
+    );
 
-  @Post()
-  async authenticate(
-    @Body() tokenData: TokenVerificationDto,
-    @Req() request: Request,
-  ) {
-    const { accessTokenCookie, refreshTokenCookie, user } &#x3D;
-      await this.googleAuthenticationService.authenticate(tokenData.token);
+    if (cacheKey) {
+      const request &#x3D; context.switchToHttp().getRequest();
+      return &#x60;${cacheKey}-${request._parsedUrl.query}&#x60;;
+    }
 
-    request.res.setHeader(&#x27;Set-Cookie&#x27;, [
-      accessTokenCookie,
-      refreshTokenCookie,
-    ]);
-
-    return user;
+    return super.trackBy(context);
   }
 }
 </code></pre>
     </div>
+
 </div>
-
-
-
 
 
 
@@ -271,8 +245,8 @@ export class GoogleAuthenticationController {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
-            var COMPODOC_CURRENT_PAGE_URL = 'GoogleAuthenticationController.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'HttpCacheInterceptor.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

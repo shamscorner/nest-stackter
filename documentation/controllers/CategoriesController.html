@@ -610,8 +610,8 @@
   Param,
   Delete,
   UseInterceptors,
-  ClassSerializerInterceptor,
   UseGuards,
+  CacheInterceptor,
 } from &#x27;@nestjs/common&#x27;;
 import { ApiExtraModels, ApiTags } from &#x27;@nestjs/swagger&#x27;;
 import { PermissionGuard } from &#x27;../../authorization/permission.guard&#x27;;
@@ -625,8 +625,8 @@ import { UpdateCategoryDto } from &#x27;./dto/update-category.dto&#x27;;
 
 @Controller(&#x27;categories&#x27;)
 @ApiTags(&#x27;categories&#x27;)
+@UseInterceptors(CacheInterceptor)
 @ApiExtraModels(FindOneParams)
-@UseInterceptors(ClassSerializerInterceptor)
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 

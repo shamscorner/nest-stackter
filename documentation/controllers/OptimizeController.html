@@ -37,7 +37,7 @@
 
 <ol class="breadcrumb">
   <li>Controllers</li>
-  <li >AuthorizationController</li>
+  <li >OptimizeController</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -55,14 +55,14 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/authorization/authorization.controller.ts</code>
+            <code>src/features/optimize/optimize.controller.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Prefix</h3>
             </p>
             <p class="comment">
-                <code>authorization</code>
+                <code>optimize</code>
             </p>
 
 
@@ -84,10 +84,12 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#updatePermission" >updatePermission</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#getJobResult" >getJobResult</a>
                             </li>
                             <li>
-                                <a href="#updateRole" >updateRole</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#processImage" >processImage</a>
                             </li>
                         </ul>
                     </td>
@@ -110,16 +112,18 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updatePermission"></a>
+                    <a name="getJobResult"></a>
                     <span class="name">
-                        <span ><b>updatePermission</b></span>
-                        <a href="#updatePermission"><span class="icon ion-ios-link"></span></a>
+                        <span class="modifier">Async</span>
+                        <span ><b>getJobResult</b></span>
+                        <a href="#getJobResult"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>updatePermission(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, updatePermissionsDto: <a href="../classes/UpdatePermissionsDto.html" target="_self">UpdatePermissionsDto</a>)</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getJobResult(response: Response, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -127,14 +131,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Patch(&#x27;:userId/permissions&#x27;)<br />@HttpCode(204)<br /></code>
+                    <code>@Get(&#x27;image/:id&#x27;)<br />@ApiParam({name: &#x27;id&#x27;, required: true, description: &#x27;Should be a valid job id&#x27;, type: String})<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="34"
-                            class="link-to-prism">src/authorization/authorization.controller.ts:34</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/features/optimize/optimize.controller.ts:56</a></div>
                 </td>
             </tr>
 
@@ -155,9 +159,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>userId</td>
+                                    <td>response</td>
                                     <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            <code>Response</code>
                                     </td>
 
                                     <td>
@@ -167,9 +171,9 @@
 
                                 </tr>
                                 <tr>
-                                    <td>updatePermissionsDto</td>
+                                    <td>id</td>
                                     <td>
-                                                <code><a href="../classes/UpdatePermissionsDto.html" target="_self" >UpdatePermissionsDto</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
 
                                     <td>
@@ -184,7 +188,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Returns : </b>    <code>unknown</code>
 
                     </div>
                     <div class="io-description">
@@ -198,16 +202,18 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateRole"></a>
+                    <a name="processImage"></a>
                     <span class="name">
-                        <span ><b>updateRole</b></span>
-                        <a href="#updateRole"><span class="icon ion-ios-link"></span></a>
+                        <span class="modifier">Async</span>
+                        <span ><b>processImage</b></span>
+                        <a href="#processImage"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>updateRole(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, updateRoleDto: <a href="../classes/UpdateRoleDto.html" target="_self">UpdateRoleDto</a>)</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processImage(files: Express.Multer.File[])</code>
                 </td>
             </tr>
 
@@ -215,14 +221,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Patch(&#x27;:userId/role&#x27;)<br />@HttpCode(204)<br /></code>
+                    <code>@Post(&#x27;image&#x27;)<br />@ApiConsumes(&#x27;multipart/form-data&#x27;)<br />@ApiBody({description: &#x27;Upload images&#x27;, type: ImagesUploadDto})<br />@ApiCreatedResponse({description: &#x27;Images have been uploaded successfully!&#x27;})<br />@UseInterceptors(undefined)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/authorization/authorization.controller.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">src/features/optimize/optimize.controller.ts:39</a></div>
                 </td>
             </tr>
 
@@ -243,21 +249,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>userId</td>
+                                    <td>files</td>
                                     <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>updateRoleDto</td>
-                                    <td>
-                                                <code><a href="../classes/UpdateRoleDto.html" target="_self" >UpdateRoleDto</a></code>
+                                            <code>Express.Multer.File[]</code>
                                     </td>
 
                                     <td>
@@ -272,7 +266,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Returns : </b>    <code>unknown</code>
 
                     </div>
                     <div class="io-description">
@@ -286,47 +280,78 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  Body,
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectQueue } from &#x27;@nestjs/bull&#x27;;
+import {
   Controller,
-  HttpCode,
+  Get,
   Param,
-  ParseIntPipe,
-  Patch,
-  UseGuards,
+  Post,
+  Res,
+  UploadedFiles,
+  UseInterceptors,
 } from &#x27;@nestjs/common&#x27;;
-import { ApiTags } from &#x27;@nestjs/swagger&#x27;;
-import { AuthorizationService } from &#x27;./authorization.service&#x27;;
-import { UpdatePermissionsDto } from &#x27;./dto/update-permissions.dto&#x27;;
-import { UpdateRoleDto } from &#x27;./dto/update-role.dto&#x27;;
-import { Role } from &#x27;./role.enum&#x27;;
-import { RoleGuard } from &#x27;./role.guard&#x27;;
+import { FilesInterceptor } from &#x27;@nestjs/platform-express&#x27;;
+import {
+  ApiBody,
+  ApiConsumes,
+  ApiCreatedResponse,
+  ApiParam,
+  ApiTags,
+} from &#x27;@nestjs/swagger&#x27;;
+import { Queue } from &#x27;bull&#x27;;
+import { Response } from &#x27;express&#x27;;
+import { Readable } from &#x27;stream&#x27;;
+import { ImagesUploadDto } from &#x27;./dto/images-upload.dto&#x27;;
 
-@Controller(&#x27;authorization&#x27;)
-@ApiTags(&#x27;authorization&#x27;)
-@UseGuards(RoleGuard(Role.SuperAdmin))
-export class AuthorizationController {
-  constructor(private readonly authorizationService: AuthorizationService) {}
+@Controller(&#x27;optimize&#x27;)
+@ApiTags(&#x27;optimize&#x27;)
+export class OptimizeController {
+  constructor(@InjectQueue(&#x27;image&#x27;) private readonly imageQueue: Queue) {}
 
-  @Patch(&#x27;:userId/role&#x27;)
-  @HttpCode(204)
-  updateRole(
-    @Param(&#x27;userId&#x27;, ParseIntPipe) userId: number,
-    @Body() updateRoleDto: UpdateRoleDto,
-  ) {
-    return this.authorizationService.updateRole(userId, updateRoleDto);
+  @Post(&#x27;image&#x27;)
+  @ApiConsumes(&#x27;multipart/form-data&#x27;)
+  @ApiBody({
+    description: &#x27;Upload images&#x27;,
+    type: ImagesUploadDto,
+  })
+  @ApiCreatedResponse({
+    description: &#x27;Images have been uploaded successfully!&#x27;,
+  })
+  @UseInterceptors(FilesInterceptor(&#x27;files&#x27;))
+  async processImage(@UploadedFiles() files: Express.Multer.File[]) {
+    const job &#x3D; await this.imageQueue.add(&#x27;optimize&#x27;, {
+      files,
+    });
+
+    return {
+      jobId: job.id,
+    };
   }
 
-  @Patch(&#x27;:userId/permissions&#x27;)
-  @HttpCode(204)
-  updatePermission(
-    @Param(&#x27;userId&#x27;, ParseIntPipe) userId: number,
-    @Body() updatePermissionsDto: UpdatePermissionsDto,
-  ) {
-    return this.authorizationService.updatePermission(
-      userId,
-      updatePermissionsDto,
-    );
+  @Get(&#x27;image/:id&#x27;)
+  @ApiParam({
+    name: &#x27;id&#x27;,
+    required: true,
+    description: &#x27;Should be a valid job id&#x27;,
+    type: String,
+  })
+  async getJobResult(@Res() response: Response, @Param(&#x27;id&#x27;) id: string) {
+    const job &#x3D; await this.imageQueue.getJob(id);
+    if (!job) {
+      return response.sendStatus(404);
+    }
+
+    const isCompleted &#x3D; await job.isCompleted();
+
+    if (!isCompleted) {
+      return response.sendStatus(202);
+    }
+
+    const result &#x3D; Buffer.from(job.returnvalue);
+
+    const stream &#x3D; Readable.from(result);
+
+    stream.pipe(response);
   }
 }
 </code></pre>
@@ -374,7 +399,7 @@ export class AuthorizationController {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
-            var COMPODOC_CURRENT_PAGE_URL = 'AuthorizationController.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'OptimizeController.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -31,6 +31,7 @@
                <div class="content getting-started">
                    <div class="content-data">
 
+<p><strong>Under Development: Do not use this repository for production purpose!</strong></p>
 <h2 id="description">Description</h2>
 <p><a href="https://github.com/nestjs/nest">Nest</a> framework TypeScript starter repository with custom setup maintaining industry standard best practices. Just clone and start building without worrying about anything. Focus on the product not the setup.</p>
 <h2 id="overview">Overview</h2>
@@ -60,6 +61,10 @@
 <li>Sending scheduled emails with cron and Nodemailer - <code>src/features/email-scheduling</code> and check the email service in <code>src/email</code></li>
 <li>Out of the box Google authentication module - check out the <code>src/features/google-authentication</code> module</li>
 <li>Roles and Permissions based authorization setup - check out the <code>src/authorization</code> module. For implementation, check the <code>src/features/categories</code> and <code>src/features/products</code> modules</li>
+<li>In memory cache - check the <code>src/features/categories</code> module</li>
+<li>Redis cache setup out of the box - check the <code>src/features/posts.module.ts</code> module</li>
+<li>ElasticSearch setup out of the box with docker-compose - check the <code>/src/features/search.module.ts</code> module and <code>/src/features/posts.module.ts</code> for implementation details</li>
+<li>Queue setup example - check the <code>/src/features/optimize</code> module</li>
 </ul>
 <h2 id="installation">Installation</h2>
 <div><pre class="line-numbers"><code class="language-bash">$ npm install</code></pre></div><h2 id="running-the-app">Running the app</h2>

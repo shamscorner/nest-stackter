@@ -55,9 +55,6 @@ export class OptimizeController {
   })
   async getJobResult(@Res() response: Response, @Param('id') id: string) {
     const job = await this.imageQueue.getJob(id);
-
-    console.log(job);
-
     if (!job) {
       return response.sendStatus(404);
     }

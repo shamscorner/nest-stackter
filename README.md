@@ -32,6 +32,7 @@
 - In memory cache - check the `src/features/categories` module
 - Redis cache setup out of the box - check the `src/features/posts.module.ts` module
 - ElasticSearch setup out of the box with docker-compose - check the `/src/features/search.module.ts` module and `/src/features/posts.module.ts` for implementation details
+- Queue setup example - check the `/src/features/optimize` module
 
 ## Installation
 

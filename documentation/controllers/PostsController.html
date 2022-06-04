@@ -92,10 +92,10 @@
                                 <a href="#deletePost" >deletePost</a>
                             </li>
                             <li>
-                                <a href="#getAllPosts" >getAllPosts</a>
+                                <a href="#getPostById" >getPostById</a>
                             </li>
                             <li>
-                                <a href="#getPostById" >getPostById</a>
+                                <a href="#getPosts" >getPosts</a>
                             </li>
                             <li>
                                 <a href="#getPostsWithParagraph" >getPostsWithParagraph</a>
@@ -150,8 +150,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="42"
-                            class="link-to-prism">src/features/posts/posts.controller.ts:42</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/features/posts/posts.controller.ts:60</a></div>
                 </td>
             </tr>
 
@@ -240,8 +240,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="60"
-                            class="link-to-prism">src/features/posts/posts.controller.ts:60</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="78"
+                            class="link-to-prism">src/features/posts/posts.controller.ts:78</a></div>
                 </td>
             </tr>
 
@@ -292,50 +292,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getAllPosts"></a>
-                    <span class="name">
-                        <span ><b>getAllPosts</b></span>
-                        <a href="#getAllPosts"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getAllPosts()</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Get()<br /></code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="26"
-                            class="link-to-prism">src/features/posts/posts.controller.ts:26</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="getPostById"></a>
                     <span class="name">
                         <span ><b>getPostById</b></span>
@@ -359,8 +315,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="31"
-                            class="link-to-prism">src/features/posts/posts.controller.ts:31</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/features/posts/posts.controller.ts:49</a></div>
                 </td>
             </tr>
 
@@ -383,6 +339,93 @@
                                 <tr>
                                     <td>
                                                 <code><a href="../classes/FindOneParams.html" target="_self" >FindOneParams</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPosts"></a>
+                    <span class="name">
+                        <span ><b>getPosts</b></span>
+                        <a href="#getPosts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPosts(search: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, undefined: <a href="../classes/PaginationWithStartIdDto.html" target="_self">PaginationWithStartIdDto</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@UseInterceptors(HttpCacheInterceptor)<br />@CacheKey(&#x27;GET_POSTS_CACHE_KEY&#x27;)<br />@CacheTTL(120)<br />@Get()<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/features/posts/posts.controller.ts:38</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>search</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                                <code><a href="../classes/PaginationWithStartIdDto.html" target="_self" >PaginationWithStartIdDto</a></code>
                                     </td>
 
                                     <td>
@@ -434,8 +477,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="36"
-                            class="link-to-prism">src/features/posts/posts.controller.ts:36</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/features/posts/posts.controller.ts:54</a></div>
                 </td>
             </tr>
 
@@ -512,8 +555,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="51"
-                            class="link-to-prism">src/features/posts/posts.controller.ts:51</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="69"
+                            class="link-to-prism">src/features/posts/posts.controller.ts:69</a></div>
                 </td>
             </tr>
 
@@ -578,14 +621,19 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
   Body,
+  CacheKey,
+  CacheTTL,
+  // CacheInterceptor,
   Controller,
   Delete,
   Get,
   Param,
   Patch,
   Post,
+  Query,
   Req,
   UseGuards,
+  UseInterceptors,
 } from &#x27;@nestjs/common&#x27;;
 import { ApiTags } from &#x27;@nestjs/swagger&#x27;;
 import { JwtTwoFactorGuard } from &#x27;../../authentication/two-factor/jwt-two-factor.guard&#x27;;
@@ -594,15 +642,28 @@ import { FindOneParams } from &#x27;../../utils/dto/find-one-params.dto&#x27;;
 import { CreatePostDto } from &#x27;./dto/create-post.dto&#x27;;
 import { UpdatePostDto } from &#x27;./dto/update-post.dto&#x27;;
 import { PostsService } from &#x27;./posts.service&#x27;;
+import { HttpCacheInterceptor } from &#x27;../../utils/http-cache.interceptor&#x27;;
+import { PaginationWithStartIdDto } from &#x27;../../utils/dto/pagination-with-start-id.dto&#x27;;
 
 @Controller(&#x27;posts&#x27;)
 @ApiTags(&#x27;posts&#x27;)
+// @UseInterceptors(CacheInterceptor) // default cache interceptor
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
+  // custom cache interceptor
+  @UseInterceptors(HttpCacheInterceptor)
+  @CacheKey(&#x27;GET_POSTS_CACHE_KEY&#x27;)
+  @CacheTTL(120)
   @Get()
-  getAllPosts() {
-    return this.postsService.getAllPosts();
+  getPosts(
+    @Query(&#x27;search&#x27;) search: string,
+    @Query() { offset, limit, startId }: PaginationWithStartIdDto,
+  ) {
+    if (search) {
+      return this.postsService.searchForPosts(search, offset, limit, startId);
+    }
+    return this.postsService.getPostsWithAuthors();
   }
 
   @Get(&#x27;:id&#x27;)

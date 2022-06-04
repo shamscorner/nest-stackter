@@ -1,33 +1,14 @@
-import { Express } from 'express';
 import { DoneCallback, Job } from 'bull';
-import imagemin from 'imagemin';
-import imageminPngquant from 'imagemin-pngquant';
-import * as AdmZip from 'adm-zip';
+import { Logger } from '@nestjs/common';
 
 async function imageProcessor(job: Job, doneCallback: DoneCallback) {
-  const files: Express.Multer.File[] = job.data.files;
+  const logger = new Logger(job.name);
 
-  const optimizationPromises: Promise<Buffer>[] = files.map((file) => {
-    const fileBuffer = Buffer.from(file.buffer);
-    return imagemin.buffer(fileBuffer, {
-      plugins: [
-        imageminPngquant({
-          quality: [0.6, 0.8],
-        }),
-      ],
-    });
-  });
+  logger.debug('Start processing...');
+  logger.debug(job.data.files);
+  logger.debug('Processing completed');
 
-  const optimizedImages = await Promise.all(optimizationPromises);
-
-  const zip = new AdmZip();
-
-  optimizedImages.forEach((image, index) => {
-    const fileData = files[index];
-    zip.addFile(fileData.originalname, image);
-  });
-
-  doneCallback(null, zip.toBuffer());
+  doneCallback(null, job.data.files);
 }
 
 export default imageProcessor;

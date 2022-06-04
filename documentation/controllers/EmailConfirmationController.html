@@ -137,8 +137,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/features/email-confirmation/email-confirmation.controller.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="16"
+                            class="link-to-prism">src/features/email-confirmation/email-confirmation.controller.ts:16</a></div>
                 </td>
             </tr>
 
@@ -215,8 +215,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="34"
-                            class="link-to-prism">src/features/email-confirmation/email-confirmation.controller.ts:34</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/features/email-confirmation/email-confirmation.controller.ts:25</a></div>
                 </td>
             </tr>
 
@@ -268,15 +268,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  Body,
-  ClassSerializerInterceptor,
-  Controller,
-  Post,
-  Req,
-  UseGuards,
-  UseInterceptors,
-} from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Post, Req, UseGuards } from &#x27;@nestjs/common&#x27;;
 import { ApiTags } from &#x27;@nestjs/swagger&#x27;;
 import { JwtAuthenticationGuard } from &#x27;../../authentication/jwt-authentication.guard&#x27;;
 import { RequestWithUser } from &#x27;../../authentication/request-with-user.interface&#x27;;
@@ -285,7 +277,6 @@ import { EmailConfirmationService } from &#x27;./email-confirmation.service&#x27
 
 @Controller(&#x27;email-confirmation&#x27;)
 @ApiTags(&#x27;authentication&#x27;)
-@UseInterceptors(ClassSerializerInterceptor)
 export class EmailConfirmationController {
   constructor(
     private readonly emailConfirmationService: EmailConfirmationService,
