@@ -5,9 +5,10 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ScheduleModule } from '@nestjs/schedule';
 import { BullModule } from '@nestjs/bull';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { AppController } from './app.controller';
 import { DatabaseModule } from './database/database.module';
 import { validate } from './env.validation';
@@ -16,7 +17,7 @@ import { UsersModule } from './features/users/users.module';
 import { PostsModule } from './features/posts/posts.module';
 import { CategoriesModule } from './features/categories/categories.module';
 import { FilesModule } from './features/files/files.module';
-import appConfig from './config/app.config';
+import appConfig, { throttleModuleAsyncOptions } from './config/app.config';
 import databaseConfig from './config/database.config';
 import typeormConfig from './config/typeorm.config';
 import awsConfig from './config/aws.config';
@@ -43,6 +44,7 @@ import { OptimizeModule } from './features/optimize/optimize.module';
 
 @Module({
   imports: [
+    ThrottlerModule.forRootAsync(throttleModuleAsyncOptions),
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
@@ -84,6 +86,10 @@ import { OptimizeModule } from './features/optimize/optimize.module';
   ],
   controllers: [AppController],
   providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
     {
       provide: APP_PIPE,
       useClass: ValidationPipe,

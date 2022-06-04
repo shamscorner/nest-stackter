@@ -19,6 +19,7 @@ specifiers:
   '@nestjs/swagger': ^5.2.1
   '@nestjs/terminus': ^8.0.6
   '@nestjs/testing': ^8.4.4
+  '@nestjs/throttler': ^2.0.1
   '@nestjs/typeorm': ^8.0.3
   '@types/bcrypt': ^5.0.0
   '@types/bull': ^3.15.8
@@ -89,6 +90,7 @@ dependencies:
   '@nestjs/schedule': 2.0.1_ppbi2tyth2jyod2vg4y74lzsra
   '@nestjs/swagger': 5.2.1_zi4tuyx3qtp34xthrn3ho5tamm
   '@nestjs/terminus': 8.0.6_ylfx5swiot7inr3kdyigrsa54e
+  '@nestjs/throttler': 2.0.1_ppbi2tyth2jyod2vg4y74lzsra
   '@nestjs/typeorm': 8.1.2_gdtrraywlpbnswrihph2jks6ty
   aws-sdk: 2.1148.0
   bcrypt: 5.0.1
@@ -2292,6 +2294,19 @@ packages:
       tslib: 2.4.0
     dev: true
 
+  /@nestjs/throttler/2.0.1_ppbi2tyth2jyod2vg4y74lzsra:
+    resolution: {integrity: sha512-ginW73rmOjBN27USuGidetEoa8VSGzxW3kEuCquEd5mETEtBfgIm4901b9tuLDnsczttE01imCHZ53J7+AuLJg==}
+    peerDependencies:
+      '@nestjs/common': ^7.0.0 || ^8.0.0
+      '@nestjs/core': ^7.0.0 || ^8.0.0
+      reflect-metadata: ^0.1.13
+    dependencies:
+      '@nestjs/common': 8.4.6_37tgzg5iwyrf23cqcmjxlmljgu
+      '@nestjs/core': 8.4.6_suave6mfkne66p6dqupcjv2744
+      md5: 2.3.0
+      reflect-metadata: 0.1.13
+    dev: false
+
   /@nestjs/typeorm/8.1.2_gdtrraywlpbnswrihph2jks6ty:
     resolution: {integrity: sha512-LULAYHQ57vN1R4QhPO6UjbAROssvLn9sTIGjfh3Fjbnu9NT0C5oioQbX+DYe5fGr8MMygs5ZzGTFPG5NdILrpg==}
     peerDependencies:
@@ -3627,6 +3642,10 @@ packages:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
     dev: true
 
+  /charenc/0.0.2:
+    resolution: {integrity: sha512-yrLQ/yVUFXkzg7EDQsPieE/53+0RlaWTs+wBrvW36cyilJ2SaDWfl4Yj7MtLTXleV9uEKefbAGUPv2/iWSooRA==}
+    dev: false
+
   /check-disk-space/3.3.0:
     resolution: {integrity: sha512-Hvr+Nr01xSSvuCpXvJ8oZ2iXjIu4XT3uHbw3g7F/Uiw6O5xk8c/Ot7ZGFDaTRDf2Bz8AdWA4DvpAgCJVKt8arw==}
     engines: {node: '>=12'}
@@ -3953,6 +3972,10 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
     dev: true
+
+  /crypt/0.0.2:
+    resolution: {integrity: sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow==}
+    dev: false
 
   /crypto-js/4.1.1:
     resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
@@ -5442,6 +5465,10 @@ packages:
       binary-extensions: 2.2.0
     dev: true
 
+  /is-buffer/1.1.6:
+    resolution: {integrity: sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==}
+    dev: false
+
   /is-core-module/2.9.0:
     resolution: {integrity: sha512-+5FPy5PnwmO3lvfMb0AsoPaBG+5KHUI0wYFXOtYPnVVVspTFUuMZNfNaNVRt3FZadstu2c8x23vykRW/NBoU6A==}
     dependencies:
@@ -6317,6 +6344,14 @@ packages:
     engines: {node: '>= 12'}
     hasBin: true
     dev: true
+
+  /md5/2.3.0:
+    resolution: {integrity: sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==}
+    dependencies:
+      charenc: 0.0.2
+      crypt: 0.0.2
+      is-buffer: 1.1.6
+    dev: false
 
   /media-typer/0.3.0:
     resolution: {integrity: sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=}

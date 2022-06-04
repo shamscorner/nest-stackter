@@ -1,4 +1,14 @@
-import { registerAs } from '@nestjs/config';
+import { ConfigModule, ConfigService, registerAs } from '@nestjs/config';
+import { ThrottlerAsyncOptions } from '@nestjs/throttler';
+
+export const throttleModuleAsyncOptions: ThrottlerAsyncOptions = {
+  imports: [ConfigModule],
+  inject: [ConfigService],
+  useFactory: (configService: ConfigService) => ({
+    ttl: configService.get('app.throttle.ttl'),
+    limit: configService.get('app.throttle.limit'),
+  }),
+};
 
 export default registerAs('app', () => ({
   // API PORT
@@ -15,6 +25,12 @@ export default registerAs('app', () => ({
 
   // API support email address
   supportEmail: process.env.SUPPORT_EMAIL || 'support@localhost',
+
+  // throttle configurations
+  throttle: {
+    ttl: process.env.THROTTLE_TTL || 60,
+    limit: process.env.THROTTLE_LIMIT || 10000,
+  },
 
   // Server file upload destination
   fileDestination: process.env.UPLOADED_FILES_DESTINATION || './uploadedFiles',
