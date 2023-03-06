@@ -28,7 +28,7 @@ export default registerAs('app', () => ({
 
   // throttle configurations
   throttle: {
-    ttl: process.env.THROTTLE_TTL || 60,
+    ttl: process.env.THROTTLE_TTL || 60000,
     limit: process.env.THROTTLE_LIMIT || 10000,
   },
 

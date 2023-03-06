@@ -1,6 +1,7 @@
-import { CacheModule, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
+// import { CacheModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { cacheModuleOptions } from '../../config/redis.config';
+// import { cacheModuleOptions } from '../../config/redis.config';
 import { SearchModule } from '../search/search.module';
 import { Post } from './entities/post.entity';
 import { PostsSearchService } from './posts-search.service';
@@ -9,7 +10,7 @@ import { PostsService } from './posts.service';
 
 @Module({
   imports: [
-    CacheModule.registerAsync(cacheModuleOptions),
+    // CacheModule.registerAsync(cacheModuleOptions),
     TypeOrmModule.forFeature([Post]),
     SearchModule,
   ],

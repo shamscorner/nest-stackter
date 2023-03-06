@@ -8,7 +8,7 @@ import { Category } from './entities/category.entity';
   imports: [
     TypeOrmModule.forFeature([Category]),
     CacheModule.register({
-      ttl: 120,
+      ttl: 120000,
       max: 100,
     }),
   ],
